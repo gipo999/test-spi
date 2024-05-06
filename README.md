@@ -25,5 +25,7 @@ spotless
 
 - [ ] add snyk
 - [ ] add semgrep
-- [ ] add sonarqube and sonarlint
-
+- [ ] add husky hooks
+- [ ] add commitlint
+- [ ] add semantic-release
+- [ ] add lint-staged for google-java-format or spotless?
