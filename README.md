@@ -18,3 +18,12 @@ requires google-java-format to be installed
 google-java-format -i $(find . -type f -name "\*.java")
 ```
 
+# TODOs
+
+spotless
+<https://github.com/diffplug/spotless/tree/main/plugin-gradle>
+
+- [ ] add snyk
+- [ ] add semgrep
+- [ ] add sonarqube and sonarlint
+

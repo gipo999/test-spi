@@ -10,7 +10,79 @@ plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
 
+    id "com.diffplug.spotless" version "6.25.0"
+
     id 'maven-publish'
+}
+
+// formatter and linter
+// <https://github.com/diffplug/spotless/tree/main/plugin-gradle>
+apply plugin: 'groovy'
+spotless {
+
+  // optional: limit format enforcement to just the files changed by this feature branch
+  ratchetFrom 'origin/main'
+
+  format 'misc', {
+    // define the files to apply `misc` to
+    target '*.gradle', '.gitattributes', '.gitignore'
+
+    // define the steps to apply to those files
+    trimTrailingWhitespace()
+    indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+    endWithNewline()
+  }
+     groovy {
+    // Use the default importOrder configuration
+    importOrder()
+    // optional: you can specify import groups directly
+    // note: you can use an empty string for all the imports you didn't specify explicitly, and '\\#` prefix for static imports
+    importOrder('java', 'javax', 'com.acme', '', '\\#com.acme', '\\#')
+    // optional: instead of specifying import groups directly you can specify a config file
+    // export config file: https://github.com/diffplug/spotless/blob/main/ECLIPSE_SCREENSHOTS.md#creating-spotlessimportorder
+    importOrderFile('eclipse-import-order.txt') // import order file as exported from eclipse
+    // removes semicolons at the end of lines
+    removeSemicolons()
+    // the Groovy Eclipse formatter extends the Java Eclipse formatter,
+    // so it formats Java files by default (unless `excludeJava` is used).
+    greclipse() // has its own section below
+
+    licenseHeader('/* (C) $YEAR */') // or licenseHeaderFile
+
+    //---- Below is for `groovy` only ----
+
+    // excludes all Java sources within the Groovy source dirs from formatting
+    excludeJava()
+  }
+  groovyGradle {
+    target '*.gradle' // default target of groovyGradle
+    greclipse()
+  }
+  java {
+      // Use the default importOrder configuration
+      importOrder()
+      // optional: you can specify import groups directly
+      // note: you can use an empty string for all the imports you didn't specify explicitly, '|' to join group without blank line, and '\\#` prefix for static imports
+      // importOrder('java|javax', 'com.acme', '', '\\#com.acme', '\\#')
+      // optional: instead of specifying import groups directly you can specify a config file
+      // export config file: https://github.com/diffplug/spotless/blob/main/ECLIPSE_SCREENSHOTS.md#creating-spotlessimportorder
+      // importOrderFile('eclipse-import-order.txt') // import order file as exported from eclipse
+
+      removeUnusedImports()
+
+      // Cleanthat will refactor your code, but it may break your style: apply it before your formatter
+      cleanthat()          // has its own section below
+
+      // Choose one of these formatters.
+      googleJavaFormat()   // has its own section below
+      // eclipse()            // has its own section below
+      // prettier()           // has its own section below
+      // clangFormat()        // has its own section below
+
+      formatAnnotations()  // fixes formatting of type annotations, see below
+
+      licenseHeader '/* (C) $YEAR */' // or licenseHeaderFile
+    }
 }
 
 repositories {
@@ -18,12 +90,13 @@ repositories {
     mavenCentral()
 }
 
+// define the publish task
 publishing {
-
   repositories {
     maven {
       name = "OSSRH"
       url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+      // credentials are loaded from github secrets?
       credentials {
         username = System.getenv("MAVEN_USERNAME")
         password = System.getenv("MAVEN_PASSWORD")
