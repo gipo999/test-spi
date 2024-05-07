@@ -16,6 +16,12 @@ npm install
 
 # USAGE
 
+list all gradle tasks
+
+```console
+gradle tasks
+```
+
 gradle spotless lint check
 
 ```console
