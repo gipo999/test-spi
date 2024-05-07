@@ -10,17 +10,20 @@ plugins {
 	// Apply the java-library plugin for API and implementation separation.
 	id 'java-library'
 
+	// add the spotless plugin for formatting and linting
 	id 'com.diffplug.spotless' version '6.25.0'
 
+	// add the maven-publish plugin to publish to maven central
 	id 'maven-publish'
 }
 
 // formatter and linter
 // <https://github.com/diffplug/spotless/tree/main/plugin-gradle>
 apply plugin: 'groovy'
+// spotless config
 spotless {
 	// optional: limit format enforcement to just the files changed by this feature branch
-	ratchetFrom 'origin/main'
+	// ratchetFrom 'origin/main'
 
 	format 'misc', {
 		// define the files to apply `misc` to
@@ -46,6 +49,7 @@ spotless {
 		// so it formats Java files by default (unless `excludeJava` is used).
 		greclipse() // has its own section below
 
+		// Add a license header to all files
 		// licenseHeader('/* (C) $YEAR */') // or licenseHeaderFile
 
 		//---- Below is for `groovy` only ----
@@ -60,6 +64,7 @@ spotless {
 	java {
 		// Use the default importOrder configuration
 		importOrder()
+
 		// optional: you can specify import groups directly
 		// note: you can use an empty string for all the imports you didn't specify explicitly, '|' to join group without blank line, and '\\#` prefix for static imports
 		// importOrder('java|javax', 'com.acme', '', '\\#com.acme', '\\#')
@@ -70,7 +75,7 @@ spotless {
 		removeUnusedImports()
 
 		// Cleanthat will refactor your code, but it may break your style: apply it before your formatter
-		cleanthat()          // has its own section below
+		cleanthat()
 
 		// Choose one of these formatters.
 		googleJavaFormat()   // has its own section below
@@ -89,7 +94,7 @@ repositories {
 	mavenCentral()
 }
 
-// define the publish task
+// define the publish task for github actions
 publishing {
 	repositories {
 		maven {
