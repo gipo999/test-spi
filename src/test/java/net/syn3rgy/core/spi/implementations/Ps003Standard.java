@@ -5,9 +5,8 @@ import net.syn3rgy.core.spi.interfaces.PrioritizedService003;
 
 public class Ps003Standard implements PrioritizedService003 {
 
-    @Override
-    public String getServiceImplementationName () {
-        return NamedService.IMPL_STANDARD_NAME;
-    }
-
+  @Override
+  public String getServiceImplementationName() {
+    return NamedService.IMPL_STANDARD_NAME;
+  }
 }

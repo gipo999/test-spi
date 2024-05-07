@@ -5,7 +5,7 @@ import java.util.Optional;
 
 @FunctionalInterface
 public interface ImplementationsFilter {
-    
-    <T extends PrioritizedService> List<T> filter (Class<T> clazz, List<T> implementations, Optional<ImplementationParams> params);
 
+  <T extends PrioritizedService> List<T> filter(
+      Class<T> clazz, List<T> implementations, Optional<ImplementationParams> params);
 }

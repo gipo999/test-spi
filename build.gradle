@@ -7,34 +7,127 @@
  */
 
 plugins {
-    // Apply the java-library plugin for API and implementation separation.
-    id 'java-library'
+	// Apply the java-library plugin for API and implementation separation.
+	id 'java-library'
+
+	// add the spotless plugin for formatting and linting
+	id 'com.diffplug.spotless' version '6.25.0'
+
+	// add the maven-publish plugin to publish to maven central
+	id 'maven-publish'
+}
+
+// formatter and linter
+// <https://github.com/diffplug/spotless/tree/main/plugin-gradle>
+apply plugin: 'groovy'
+// spotless config
+spotless {
+	// optional: limit format enforcement to just the files changed by this feature branch
+	// ratchetFrom 'origin/main'
+
+	format 'misc', {
+		// define the files to apply `misc` to
+		target '*.gradle', '.gitattributes', '.gitignore'
+
+		// define the steps to apply to those files
+		trimTrailingWhitespace()
+		indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+		endWithNewline()
+	}
+	groovy {
+		// Use the default importOrder configuration
+		importOrder()
+		// optional: you can specify import groups directly
+		// note: you can use an empty string for all the imports you didn't specify explicitly, and '\\#` prefix for static imports
+		// importOrder('java', 'javax', 'com.acme', '', '\\#com.acme', '\\#')
+		// optional: instead of specifying import groups directly you can specify a config file
+		// export config file: https://github.com/diffplug/spotless/blob/main/ECLIPSE_SCREENSHOTS.md#creating-spotlessimportorder
+		// importOrderFile('eclipse-import-order.txt') // import order file as exported from eclipse
+		// removes semicolons at the end of lines
+		removeSemicolons()
+		// the Groovy Eclipse formatter extends the Java Eclipse formatter,
+		// so it formats Java files by default (unless `excludeJava` is used).
+		greclipse() // has its own section below
+
+		// Add a license header to all files
+		// licenseHeader('/* (C) $YEAR */') // or licenseHeaderFile
+
+		//---- Below is for `groovy` only ----
+
+		// excludes all Java sources within the Groovy source dirs from formatting
+		excludeJava()
+	}
+	groovyGradle {
+		target '*.gradle' // default target of groovyGradle
+		greclipse()
+	}
+	java {
+		// Use the default importOrder configuration
+		importOrder()
+
+		// optional: you can specify import groups directly
+		// note: you can use an empty string for all the imports you didn't specify explicitly, '|' to join group without blank line, and '\\#` prefix for static imports
+		// importOrder('java|javax', 'com.acme', '', '\\#com.acme', '\\#')
+		// optional: instead of specifying import groups directly you can specify a config file
+		// export config file: https://github.com/diffplug/spotless/blob/main/ECLIPSE_SCREENSHOTS.md#creating-spotlessimportorder
+		// importOrderFile('eclipse-import-order.txt') // import order file as exported from eclipse
+
+		removeUnusedImports()
+
+		// Cleanthat will refactor your code, but it may break your style: apply it before your formatter
+		cleanthat()
+
+		// Choose one of these formatters.
+		googleJavaFormat()   // has its own section below
+		// eclipse()            // has its own section below
+		// prettier()           // has its own section below
+		// clangFormat()        // has its own section below
+
+		formatAnnotations()  // fixes formatting of type annotations, see below
+
+		// licenseHeader '/* (C) $YEAR */' // or licenseHeaderFile
+	}
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
+	// Use Maven Central for resolving dependencies.
+	mavenCentral()
+}
+
+// define the publish task for github actions
+publishing {
+	repositories {
+		maven {
+			name = 'OSSRH'
+			url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+			// credentials are loaded from github secrets?
+			credentials {
+				username = System.getenv('MAVEN_USERNAME')
+				password = System.getenv('MAVEN_PASSWORD')
+			}
+		}
+	}
 }
 
 dependencies {
-    // Use JUnit Jupiter for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+	// Use JUnit Jupiter for testing.
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api 'org.slf4j:slf4j-api:2.0.13'
+	// This dependency is exported to consumers, that is to say found on their compile classpath.
+	api 'org.slf4j:slf4j-api:2.0.13'
 
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    //implementation 'com.google.guava:guava:31.1-jre'
+	// This dependency is used internally, and not exposed to consumers on their own compile classpath.
+	//implementation 'com.google.guava:guava:31.1-jre'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
 }
 
 tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
+	// Use JUnit Platform for unit tests.
+	useJUnitPlatform()
 }

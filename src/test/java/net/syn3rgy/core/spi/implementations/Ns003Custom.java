@@ -5,9 +5,8 @@ import net.syn3rgy.core.spi.interfaces.NamedService003;
 
 public class Ns003Custom implements NamedService003 {
 
-    @Override
-    public String getServiceImplementationName () {
-        return NamedService.IMPL_CUSTOM_NAME;
-    }
-
+  @Override
+  public String getServiceImplementationName() {
+    return NamedService.IMPL_CUSTOM_NAME;
+  }
 }

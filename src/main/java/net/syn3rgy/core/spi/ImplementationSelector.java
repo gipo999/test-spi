@@ -6,6 +6,6 @@ import java.util.Optional;
 @FunctionalInterface
 public interface ImplementationSelector {
 
-    <T extends NamedService> Optional<T> choose (Class<T> clazz, List<T> implementations, Optional<ImplementationParams> params);
-    
+  <T extends NamedService> Optional<T> choose(
+      Class<T> clazz, List<T> implementations, Optional<ImplementationParams> params);
 } // ServiceProviderChooser
