@@ -19,7 +19,8 @@
 ## google java format
 
 working command to format all java files in the project
-requires google-java-format to be installed
+requires google-java-format to be installed and find, linux only
+using gradle spotless instead
 
 ```console
 google-java-format -i $(find . -type f -name "\*.java")
@@ -36,3 +37,10 @@ spotless
 - [ ] add commitlint
 - [ ] add semantic-release
 - [ ] add lint-staged for google-java-format or spotless?
+
+## adding commitizen
+
+<https://commitizen.github.io/cz-cli/>
+<https://github.com/commitizen/cz-cli>
+<https://commitlint.js.org/guides/use-prompt.html> using the commitizen alternative
+<https://cz-git.qbb.sh/guide/>
