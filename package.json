@@ -1,7 +1,7 @@
 {
   "name": "test-spi",
   "version": "1.0.0",
-  "description": "- junit - badge su homepage <https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge> - formatting (google style) <https://peterevans.dev/posts/github-actions-how-to-automate-code-formatting-in-pull-requests/> - pit <https://4comprehension.com/integrating-pit-mutation-testing-and-github-pages-with-github-actions/> - sonarlint / sonarqube <https://community.sonarsource.com/t/how-to-block-the-merge-of-pull-requests-when-sonarqube-quality-gate-is-failed-with-github/19516/2> - dependabot <https://www.linkedin.com/posts/gradle_gradle-dependency-submission-action-for-github-ugcPost-7186736580571619329-WBos?utm_source=share&utm_medium=member_android> - check-dep-vuln <https://github.com/actions/dependency-review-action> - deploy su maven-central",
+  "description": "test-spi",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "lint-staged": "^15.2.2",
-    "npm-groovy-lint": "^14.5.0"
+    "lint-staged": "^15.2.2"
   }
 }
