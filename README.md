@@ -81,10 +81,31 @@ spotless
 
 ## adding commitizen
 
-<https://cz-git.qbb.sh/guide/>
-<https://commitlint.js.org/>
+the problem with git hooks is windows compatibility.
+hooks are meant for interpreted shells.
+some commands are not available on windows, like `sed` or `awk` or `xargs` to perform git operations.
+
+The main problems are on the `prepare-commit-msg` hook, where the commit message is prepared for the user,
+and the `pre-commit` hook, where detect-secrets is run.
+
+in the pre-commit, husky doesn't work on windows for the detect-secrets command as it requires populating the detect-secrets-hooks with the files being committed.
+in the prepare-commit-msg, we can not intercept the commit to force the user to use commitizen cli.
+
+we can ask to use npm run commit is used, which triggers the pre-commit pipeline and add commitlint to block the commit if the message is not formatted correctly.
+
+in this case, we move the pre-commit outside since it won't trigger when runnig cz.
+this will leave out pre-commit.
+
+found this undocumented cmd
+<https://github.com/commitizen/cz-cli/issues/132>
+
+with pre-commit: <https://github.com/commitizen/cz-cli/issues/801>
+
+<https://cz-git.qbb.sh/guide/> (node)
+<https://commitlint.js.org/> (node)
 
 alternatives:
-<https://commitizen.github.io/cz-cli/>
-<https://github.com/commitizen/cz-cli>
+<https://commitizen.github.io/cz-cli/> (node)
+<https://github.com/commitizen/cz-cli> (node)
+<https://github.com/commitizen-tools/commitizen> (python)
 <https://pre-commit.com/> (python)

@@ -3,6 +3,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# TODO: remove this hook, trigger pipeline from npm run commit
+
 # check [https://github.com/commitizen/cz-cli/issues/672]
 if [ -z "$2" ]; then
 	exec </dev/tty && npm run commit --hook

@@ -16,8 +16,15 @@
 # we could use it with pre-commit which passes files automatically but it won't support
 # prepare-commit-msg
 
-# TODO: windows compatibility
+# files=$(git diff --staged --name-only)
 
-# git diff --staged --name-only -z | xargs -0 detect-secrets-hook --baseline .secrets.baseline --exclude-files package-lock.json
+# TODO: windows compatibility
+git diff --staged --name-only -z | xargs -0 detect-secrets-hook --baseline .secrets.baseline --exclude-files package-lock.json
+# possible alternatives for windows?
+# detect-secrets-hook --baseline .secrets.baseline --exclude-files package-lock.json $files
+
+# files=$(git diff --cached --name-only --diff-filter=ACM -- '*.php');
+# vendor/bin/pint $files -q
+# git add $files
 
 # npm run lint-staged

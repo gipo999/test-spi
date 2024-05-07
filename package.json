@@ -2,9 +2,8 @@
   "name": "test-spi",
   "version": "1.0.0",
   "description": "test-spi",
-  "main": "index.js",
   "scripts": {
-    "commit": "git-cz",
+    "commit": "git cz",
     "prepare": "husky",
     "commitlint": "commitlint --edit"
   },
