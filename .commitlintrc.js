@@ -1,12 +1,13 @@
 // .commitlintrc.js
-// const fs = require("node:fs");
-// const path = require("node:path");
+const fs = require("node:fs");
+const path = require("node:path");
 
 // can propose scope for commit using folder names
-// const apps = fs.readdirSync(path.resolve(__dirname, "apps"));
+const apps = fs.readdirSync(path.resolve(__dirname, "src"));
 
 const { execSync } = require("child_process");
 
+// can find issues from branch name if standardized
 // @tip: git branch name = feature/issue_33   =>    auto get defaultIssues = #33
 const issue = execSync("git rev-parse --abbrev-ref HEAD")
   .toString()
@@ -23,8 +24,14 @@ module.exports = {
       2,
       "always",
       [
-        "global", // used to denote global changes
+        // used to denote global changes
+        "global",
+
+        // spread result of folder names found
         // ...apps,
+
+        // manually adding scopes examples
+        ...["app", "gradle", "npm", "git-hooks"],
       ],
     ],
   },
@@ -32,5 +39,9 @@ module.exports = {
     useEmoji: true,
     customIssuePrefixAlign: !issue ? "top" : "bottom",
     defaultIssues: !issue ? "" : `#${issue}`,
+
+    // allow defining multiple scopes with checklist
+    enableMultipleScopes: true,
+    scopeEnumSeparator: ",",
   },
 };

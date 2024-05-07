@@ -1,9 +1,44 @@
 # REQUIREMENTS
 
+- git
 - java 17
 - gradle 8.7
 - [detect-secrets](https://github.com/Yelp/detect-secrets)
 - node >= 20
+
+# SETUP
+
+```console
+git clone https://github.com/gipo999/test-spi
+cd test-spi
+npm install
+```
+
+# USAGE
+
+gradle spotless lint check
+
+```console
+gradle spotlessCheck
+```
+
+gradle spotless format
+
+```console
+gradle spotlessApply
+```
+
+gradle test
+
+```console
+gradle test
+```
+
+gradle build
+
+```console
+gradle build
+```
 
 ### test-spi
 
