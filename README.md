@@ -79,6 +79,12 @@ spotless
 - [ ] add semantic-release
 - [ ] add lint-staged for google-java-format or spotless?
 
+## using pre-commit framework
+
+<https://pre-commit.com>
+
+added 0 dependency executable with git-lfs in root folder
+
 ## adding commitizen
 
 <https://cz-git.qbb.sh/guide/>

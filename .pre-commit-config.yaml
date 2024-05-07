@@ -1,0 +1,59 @@
+# git hooks by default run on pre-commit
+# specify the stage to run the hook on
+# https://stackoverflow.com/questions/63820683/with-pre-commit-how-to-use-some-hooks-before-commit-and-others-before-push
+# https://medium.com/@iyerajiv/enforcing-conventional-commit-shift-left-5b9771cdaf47
+#
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        stages: [commit]
+      - id: end-of-file-fixer
+        stages: [commit]
+      - id: check-yaml
+        stages: [commit]
+      - id: check-added-large-files
+        stages: [commit]
+      - id: check-case-conflict
+        stages: [commit]
+      - id: check-executables-have-shebangs
+        stages: [commit]
+      # - id: check-illegal-windows-names # not working
+      - id: check-merge-conflict
+        stages: [commit]
+      - id: check-shebang-scripts-are-executable
+        stages: [commit]
+      - id: detect-private-key
+        stages: [commit]
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.16.1
+    hooks:
+      - id: gitleaks
+        stages: [commit]
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        stages: [commit]
+        args: ["--baseline", ".secrets.baseline"]
+        exclude: package.lock.json
+        # Custom hooks, local scripts
+        # https://stackoverflow.com/questions/59499061/how-to-run-custom-shell-script-file-before-pre-commit-hook
+    # TODO: choose which commmit lint to use
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.25.0
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+  - repo: local
+    hooks:
+      - id: commit-lint
+        name: commit-lint
+        entry: npm run commitlint
+        language: system
+        stages: [commit-msg]
+# Additional hooks
+# gradle

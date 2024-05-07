@@ -1,8 +1,0 @@
-#!/bin/sh
-# TODO: windows compatibility?
-. "$(dirname "$0")/_/husky.sh"
-
-# using npm script instead
-# npm run commitlint --edit "$1"
-
-npm run commitlint ${1}
