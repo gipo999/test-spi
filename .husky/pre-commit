@@ -1,7 +1,36 @@
 #!/bin/bash
+. "$(dirname -- "$0")/_/husky.sh"
+
+# this hook is fired before commiting
+# used to check the staged files for secrets
+# https://www.codewithyou.com/blog/using-husky-and-gitsecrets-to-prevent-committing-passwords-and-other-sensitive-information-to-a-git-repository
+
+# the main tools used are:
+# detect-secrets
+# git-secrets from aws
+# git-leaks
+
+# detect-secrets is a python tool that scans the files for secrets
+# has compatibility problems when using husky and windows as the pre-commit hook requires
+# xargs for passing the files to the detect-secrets-hook command
+# we could use it with pre-commit which passes files automatically but it won't support
+# prepare-commit-msg
 
 # TODO: windows compatibility
 
-git diff --staged --name-only -z | xargs -0 detect-secrets-hook --baseline .secrets.baseline --exclude-files package-lock.json
+# git diff --staged --name-only -z | xargs -0 detect-secrets-hook --baseline .secrets.baseline --exclude-files package-lock.json
 
 # npm run lint-staged
+
+# Section for git-secrets
+if ! command -v git-secrets &>/dev/null; then
+	echo "git-secrets is not installed. Please run 'brew install git-secrets' or visit https://github.com/awslabs/git-secrets#installing-git-secrets"
+	exit 1
+fi
+
+# Initialise git-secrets configuration
+git-secrets --register-aws >/dev/null
+
+echo "Running git-secrets..."
+# Scans all files that are about to be committed.
+git-secrets --pre_commit_hook -- "$@"

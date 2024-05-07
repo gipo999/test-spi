@@ -9,6 +9,8 @@ public interface PrioritizedService extends NamedService, Comparable<Prioritized
     return DEFAULT_PRIORIY;
   }
 
+  //
+
   @Override
   default int compareTo(PrioritizedService o) {
     return Integer.compare(getPriority(), o.getPriority());
