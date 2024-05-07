@@ -1,3 +1,10 @@
+# REQUIREMENTS
+
+- java 17
+- gradle 8.7
+- [detect-secrets](https://github.com/Yelp/detect-secrets)
+- node >= 20
+
 ### test-spi
 
 - junit
