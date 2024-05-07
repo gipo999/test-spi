@@ -40,7 +40,10 @@ spotless
 
 ## adding commitizen
 
+<https://cz-git.qbb.sh/guide/>
+<https://commitlint.js.org/>
+
+alternatives:
 <https://commitizen.github.io/cz-cli/>
 <https://github.com/commitizen/cz-cli>
-<https://commitlint.js.org/guides/use-prompt.html> using the commitizen alternative
-<https://cz-git.qbb.sh/guide/>
+<https://pre-commit.com/> (python)
