@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# TODO: windows compatibility
+
+git diff --staged --name-only -z | xargs -0 detect-secrets-hook --baseline .secrets.baseline --exclude-files package-lock.json
+
+# npm run lint-staged
