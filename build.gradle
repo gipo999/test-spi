@@ -24,6 +24,8 @@ plugins {
 // formatter and linter
 // https://github.com/diffplug/spotless/issues/178
 // <https://github.com/diffplug/spotless/tree/main/plugin-gradle>
+// some examples:
+// https://dev.to/ankityadav33/standardize-code-formatting-with-spotless-2bdh
 // spotless config
 spotless {
 	// optional: limit format enforcement to just the files changed by this feature branch
@@ -80,6 +82,9 @@ spotless {
 
 		// Cleanthat will refactor your code, but it may break your style: apply it before your formatter
 		cleanthat()
+
+		trimTrailingWhitespace()
+		endWithNewline()
 
 		// Choose one of these formatters.
 		googleJavaFormat()   // has its own section below
