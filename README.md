@@ -42,3 +42,33 @@ alternatives:
 <https://commitizen.github.io/cz-cli/>
 <https://github.com/commitizen/cz-cli>
 <https://pre-commit.com/> (python)
+
+## github apps
+
+**built in**
+dependabot
+code-scanning security (open-source, paid)
+
+**apps**
+renovate
+github-advanced-security (paid, includes codeQL and others)
+semgrep
+gitguardian
+snyk
+sentry (allows to track errors and link them to commit authors)
+
+## github actions
+
+**utilities**
+stale: auto-close issues and PRs <https://github.com/actions/stale>
+greetings: welcome new contributors
+
+possibly: super-linter
+
+## protected tags in settings
+
+allows blocking pushing tags from others
+
+## rulesets
+
+dev and main branches
