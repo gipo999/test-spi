@@ -1,4 +1,4 @@
-# REQUIREMENTS
+## REQUIREMENTS
 
 TODO: are java and gradle required with gradle wrapper?
 
@@ -65,10 +65,12 @@ greetings: welcome new contributors
 
 possibly: super-linter
 
-## protected tags in settings
+## github settings
+
+### protected tags in settings
 
 allows blocking pushing tags from others
 
-## rulesets
+### rulesets
 
 dev and main branches
