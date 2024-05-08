@@ -18,7 +18,7 @@ npm install
 
 ## DEVELOPMENT
 
-TODO: add CONTRIBUTING.md
+TODO: add CONTRIBUTING.md, SECURITY.md, CODE_OF_CONDUCT.md
 
 clone the repo, run `npm install`, make changes and run `npm run commit`
 This will trigger the pre-commit pipeline and enforce the commit message format
@@ -76,20 +76,10 @@ using gradle spotless instead which includes many other tools and is cross-platf
 google-java-format -i $(find . -type f -name "\*.java")
 ```
 
-# TODOs
+# NOTES
 
 spotless
 <https://github.com/diffplug/spotless/tree/main/plugin-gradle>
-
-additional tasks not mentioned:
-
-- [ ] add snyk
-- [ ] add semgrep
-- [ ] add husky hooks
-- [ ] add commitlint
-- [ ] add semantic-release
-- [ ] add spotless to pre-commit
-- [ ] add checkstyle
 
 ## using pre-commit framework
 
