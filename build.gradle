@@ -17,7 +17,9 @@ plugins {
 	id 'maven-publish'
 }
 
+
 // formatter and linter
+// https://github.com/diffplug/spotless/issues/178
 // <https://github.com/diffplug/spotless/tree/main/plugin-gradle>
 apply plugin: 'groovy'
 // spotless config
@@ -41,7 +43,7 @@ spotless {
 		// note: you can use an empty string for all the imports you didn't specify explicitly, and '\\#` prefix for static imports
 		// importOrder('java', 'javax', 'com.acme', '', '\\#com.acme', '\\#')
 		// optional: instead of specifying import groups directly you can specify a config file
-		// export config file: https://github.com/diffplug/spotless/blob/main/ECLIPSE_SCREENSHOTS.md#creating-spotlessimportorder
+		// export config file: https://github.com/diffplug/spotless/blob/main/ECLIPSE_SCREENSHOTS.md#creating-spotlessimportordergradl
 		// importOrderFile('eclipse-import-order.txt') // import order file as exported from eclipse
 		// removes semicolons at the end of lines
 		removeSemicolons()

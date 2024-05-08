@@ -1,9 +1,59 @@
 # REQUIREMENTS
 
+TODO: are java and gradle required with gradle wrapper?
+
+- python >= 3.9
+- git
 - java 17
-- gradle 8.7
-- [detect-secrets](https://github.com/Yelp/detect-secrets)
+- gradle cli 8.7
 - node >= 20
+
+# SETUP
+
+```console
+git clone https://github.com/gipo999/test-spi
+cd test-spi
+npm install
+```
+
+## DEVELOPMENT
+
+TODO: add CONTRIBUTING.md, SECURITY.md, CODE_OF_CONDUCT.md
+
+clone the repo, run `npm install`, make changes and run `npm run commit`
+This will trigger the pre-commit pipeline and enforce the commit message format
+
+# USAGE
+
+list all gradle tasks
+
+```console
+gradle tasks
+```
+
+gradle spotless lint check
+
+```console
+gradle spotlessCheck
+```
+
+gradle spotless format
+
+```console
+gradle spotlessApply
+```
+
+gradle test
+
+```console
+gradle test
+```
+
+gradle build
+
+```console
+gradle build
+```
 
 ### test-spi
 
@@ -19,20 +69,31 @@
 ## google java format
 
 working command to format all java files in the project
-requires google-java-format to be installed
+requires google-java-format to be installed and find, linux only
+using gradle spotless instead which includes many other tools and is cross-platform
 
 ```console
 google-java-format -i $(find . -type f -name "\*.java")
 ```
 
-# TODOs
+# NOTES
 
 spotless
 <https://github.com/diffplug/spotless/tree/main/plugin-gradle>
 
-- [ ] add snyk
-- [ ] add semgrep
-- [ ] add husky hooks
-- [ ] add commitlint
-- [ ] add semantic-release
-- [ ] add lint-staged for google-java-format or spotless?
+## using pre-commit framework
+
+<https://pre-commit.com>
+
+added 0 dependency executable with git-lfs in root folder
+will take care of providing the detect-secrets executable
+
+## adding commitizen
+
+<https://cz-git.qbb.sh/guide/>
+<https://commitlint.js.org/>
+
+alternatives:
+<https://commitizen.github.io/cz-cli/>
+<https://github.com/commitizen/cz-cli>
+<https://pre-commit.com/> (python)

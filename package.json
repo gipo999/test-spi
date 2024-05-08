@@ -1,17 +1,27 @@
 {
   "name": "test-spi",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "test-spi",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky"
+    "commit": "git cz",
+    "prepare": "python ./pre-commit-3.7.0.pyz install --hook-type pre-commit --hook-type pre-push --hook-type commit-msg -f && ./gradlew --refresh-dependencies",
+    "commitlint": "commitlint --edit",
+    "lint": "./gradlew spotlessCheck && ./gradlew build",
+    "fix": "./gradlew spotlessApply"
   },
   "keywords": [],
-  "author": "",
+  "author": "gipo999",
   "license": "ISC",
   "devDependencies": {
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.2"
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-git": "^1.9.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
   }
 }
