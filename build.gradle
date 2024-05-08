@@ -88,6 +88,8 @@ spotless {
 
 		// Choose one of these formatters.
 		googleJavaFormat()   // has its own section below
+		// or apply a specific version of google-java-format
+		// googleJavaFormat('1.8').aosp().reflowLongStrings().skipJavadocFormatting()
 		// eclipse()            // has its own section below
 		// prettier()           // has its own section below
 		// clangFormat()        // has its own section below
