@@ -14,26 +14,28 @@ const issue = execSync("git rev-parse --abbrev-ref HEAD")
   .trim()
   .split("_")[1];
 
+// manually adding scopes examples
+// ...["app", "gradle", "npm", "git-hooks"],
+const definedScopes = [
+  // used to denote global changes
+  "global",
+  // spread result of folder names found
+  ...apps.map((app) => `app/${app}`),
+  // "app",
+  "gradle",
+  "npm",
+  "git-hooks",
+  "db",
+  "docs",
+];
+
 // .commitlintrc.js
 /** @type {import('cz-git').UserConfig} */
 module.exports = {
   extends: ["@commitlint/config-conventional"],
   rules: {
     // @see: https://commitlint.js.org/#/reference-rules
-    "scope-enum": [
-      2,
-      "always",
-      [
-        // used to denote global changes
-        "global",
-
-        // spread result of folder names found
-        // ...apps,
-
-        // manually adding scopes examples
-        ...["app", "gradle", "npm", "git-hooks"],
-      ],
-    ],
+    "scope-enum": [2, "always", [...definedScopes]],
   },
   prompt: {
     useEmoji: true,

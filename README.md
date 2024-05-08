@@ -1,5 +1,7 @@
 # REQUIREMENTS
 
+TODO: are java and gradle required with gradle wrapper?
+
 - python >= 3.9
 - git
 - java 17
@@ -13,6 +15,13 @@ git clone https://github.com/gipo999/test-spi
 cd test-spi
 npm install
 ```
+
+## DEVELOPMENT
+
+TODO: add CONTRIBUTING.md
+
+clone the repo, run `npm install`, make changes and run `npm run commit`
+This will trigger the pre-commit pipeline and enforce the commit message format
 
 # USAGE
 

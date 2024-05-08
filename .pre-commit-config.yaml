@@ -3,9 +3,15 @@
 # https://stackoverflow.com/questions/63820683/with-pre-commit-how-to-use-some-hooks-before-commit-and-others-before-push
 # https://medium.com/@iyerajiv/enforcing-conventional-commit-shift-left-5b9771cdaf47
 #
+# Stages: [commit, commit-msg, push]
+# commit[pre-commit]: run the hook on pre-commit, before the commit is made
+# commit-msg[commit-msg]: run the hook on commit-msg, after the commit message is written but before the commit is made
+# push[pre-push]: run the hook on pre-push, before the push is made
+#
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
+  # built in hooks from pre-commit
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
@@ -28,6 +34,7 @@ repos:
         stages: [commit]
       - id: detect-private-key
         stages: [commit]
+        # gitleaks and detect-secrets hooks
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.16.1
     hooks:
@@ -40,20 +47,44 @@ repos:
         stages: [commit]
         args: ["--baseline", ".secrets.baseline"]
         exclude: package.lock.json
-        # Custom hooks, local scripts
-        # https://stackoverflow.com/questions/59499061/how-to-run-custom-shell-script-file-before-pre-commit-hook
-    # TODO: choose which commmit lint to use
-  - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.25.0
-    hooks:
-      - id: commitizen
-        stages: [commit-msg]
+  # Custom hooks, local scripts
+  # https://stackoverflow.com/questions/59499061/how-to-run-custom-shell-script-file-before-pre-commit-hook
+  # TODO: choose which commmit lint to use
   - repo: local
     hooks:
+      # lint commit messages to prevent bad commits
+      # since we aren't intercepting commits, we can't prevent bad messages
+      # It is recommended to commit by using `npm run commit` to enforce the commit message format
       - id: commit-lint
         name: commit-lint
         entry: npm run commitlint
         language: system
         stages: [commit-msg]
-# Additional hooks
-# gradle
+      # gradle - java specific hooks
+      # We could use spotlessApply to format the code automatically
+      # but it's bad practice to modify code before commit
+      # (changing the intention and content of the commit).
+      # it's better to tell the developer to run spotlessApply before commit
+      # and make sure everything is ok
+      - id: spotlessCheck
+        name: spotlessCheck
+        entry: ./gradlew spotlessCheck
+        # don't pass the files to the script since gradle will check all files
+        pass_filenames: false
+        language: system
+        stages: [commit]
+      # ---- PRE PUSH ----
+      # executes preliminary check
+      - id: gradle-check
+        name: gradle-check
+        entry: ./gradlew check
+        pass_filenames: false
+        language: system
+        stages: [push]
+      # executes the build (which includes tests)
+      - id: gradle-build
+        name: gradle-build
+        entry: ./gradlew build
+        pass_filenames: false
+        language: system
+        stages: [push]
