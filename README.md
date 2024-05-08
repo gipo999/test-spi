@@ -1,9 +1,9 @@
 # REQUIREMENTS
 
+- python >= 3.9
 - git
 - java 17
-- gradle 8.7
-- [detect-secrets](https://github.com/Yelp/detect-secrets)
+- gradle cli 8.7
 - node >= 20
 
 # SETUP
@@ -61,7 +61,7 @@ gradle build
 
 working command to format all java files in the project
 requires google-java-format to be installed and find, linux only
-using gradle spotless instead
+using gradle spotless instead which includes many other tools and is cross-platform
 
 ```console
 google-java-format -i $(find . -type f -name "\*.java")
@@ -72,18 +72,22 @@ google-java-format -i $(find . -type f -name "\*.java")
 spotless
 <https://github.com/diffplug/spotless/tree/main/plugin-gradle>
 
+additional tasks not mentioned:
+
 - [ ] add snyk
 - [ ] add semgrep
 - [ ] add husky hooks
 - [ ] add commitlint
 - [ ] add semantic-release
-- [ ] add lint-staged for google-java-format or spotless?
+- [ ] add spotless to pre-commit
+- [ ] add checkstyle
 
 ## using pre-commit framework
 
 <https://pre-commit.com>
 
 added 0 dependency executable with git-lfs in root folder
+will take care of providing the detect-secrets executable
 
 ## adding commitizen
 

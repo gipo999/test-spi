@@ -4,7 +4,7 @@
   "description": "test-spi",
   "scripts": {
     "commit": "git cz",
-    "prepare": "python ./pre-commit-3.7.0.pyz install --hook-type pre-commit --hook-type pre-push --hook-type prepare-commit-msg --hook-type commit-msg -f",
+    "prepare": "python ./pre-commit-3.7.0.pyz install --hook-type pre-commit --hook-type pre-push --hook-type commit-msg -f",
     "commitlint": "commitlint --edit"
   },
   "keywords": [],

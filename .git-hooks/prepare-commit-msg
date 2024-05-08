@@ -1,12 +1,17 @@
-sh -c "exec </dev/tty && npm run commit --hook"
-
-#!/bin/bash
-
 #!/usr/bin/env sh
+
+# this is a windows compatibility hack
+# https://stackoverflow.com/questions/71445570/running-pre-commit-python-package-in-windows-gives-executablenotfounderror-exec
+
+# IMPORTANT: those commands won't work on windows
+#
+# this is the reason pre-commit framework is used instead of husky
+# and the reason we won't intercept the commit action
+
 . "$(dirname -- "$0")/_/husky.sh"
 
 # check [https://github.com/commitizen/cz-cli/issues/672]
 if [ -z "$2" ]; then
 	exec </dev/tty && npm run commit --hook
 fi
-
+# sh -c "exec </dev/tty && npm run commit --hook"
