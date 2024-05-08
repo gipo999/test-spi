@@ -25,6 +25,7 @@ const definedScopes = [
   "gradle",
   "npm",
   "git-hooks",
+  "actions",
   "db",
   "docs",
 ];
