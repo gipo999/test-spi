@@ -18,8 +18,18 @@ plugins {
 
 	// add the maven-publish plugin to publish to maven central
 	id 'maven-publish'
+
+	// https://docs.gradle.org/current/userguide/checkstyle_plugin.html
+	// https://medium.com/@raveensr/how-to-add-checkstyle-and-findbugs-plugins-in-a-gradle-based-project-51759aa843be
+	// https://github.com/nus-cs2103-AY2021S2/forum/issues/93
+	// id 'checkstyle' // uncomment to enable checkstyle, pretty strict
+
+	// https://spotbugs.readthedocs.io/en/latest/gradle.html
+	id "com.github.spotbugs" version "6.0.14"
 }
 
+
+// https://stackoverflow.com/questions/57261461/gradle-build-failes-getting-an-error-checkstylemain-failed
 
 // formatter and linter
 // https://github.com/diffplug/spotless/issues/178

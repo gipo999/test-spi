@@ -69,21 +69,22 @@ repos:
       # (changing the intention and content of the commit).
       # it's better to tell the developer to run spotlessApply before commit
       # and make sure everything is ok
-      - id: spotlessCheck
-        name: spotlessCheck
-        entry: ./gradlew spotlessCheck
-        # don't pass the files to the script since gradle will check all files
-        pass_filenames: false
-        language: system
-        stages: [commit]
+      # this is already used by the gradle-check hook
+      # - id: spotlessCheck
+      #   name: spotlessCheck
+      #   entry: ./gradlew spotlessCheck
+      #   # don't pass the files to the script since gradle will check all files
+      #   pass_filenames: false
+      #   language: system
+      #   stages: [commit]
       # ---- PRE PUSH ----
-      # executes preliminary check
+      # executes preliminary check, checks everything (spotless, checkstyle)
       - id: gradle-check
         name: gradle-check
         entry: ./gradlew check
         pass_filenames: false
         language: system
-        stages: [push]
+        stages: [commit, push]
       # executes the build (which includes tests)
       - id: gradle-build
         name: gradle-build
