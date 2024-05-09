@@ -11,7 +11,7 @@ TODO: are java and gradle required with gradle wrapper?
 - python >= 3.9
 - git
 - java 17
-- gradle cli 8.7
+- gradle 8.7
 - node >= 20
 
 ## SETUP
@@ -24,62 +24,18 @@ npm install
 
 ## CONTRIBUTING
 
-please follow the [CONTRIBUTING.md](CONTRIBUTING.md) guidelines
+please follow the [CONTRIBUTING.md](.github/CONTRIBUTING.md) guidelines
 
 ## SECURITY
 
-if you have a security related issue, please follow the [SECURITY.md](SECURITY.md) guidelines
+if you have a security related issue, please follow the [SECURITY.md](.github/SECURITY.md) guidelines
 
-# DOC NOTES, to remove
+## SUPPORT
 
-spotless
-<https://github.com/diffplug/spotless/tree/main/plugin-gradle>
+Please refer to the [SUPPORT.md](.github/SUPPORT.md) file
 
-## using pre-commit framework
+### NOTES on cretaing this repo
 
-<https://pre-commit.com>
+_will remove_
 
-added 0 dependency executable with git-lfs in root folder
-will take care of providing the detect-secrets executable
-
-## adding commitizen
-
-<https://cz-git.qbb.sh/guide/>
-<https://commitlint.js.org/>
-
-alternatives:
-<https://commitizen.github.io/cz-cli/>
-<https://github.com/commitizen/cz-cli>
-<https://pre-commit.com/> (python)
-
-## github apps
-
-**built in**
-dependabot
-code-scanning security (open-source, paid)
-
-**apps**
-renovate
-github-advanced-security (paid, includes codeQL and others)
-semgrep
-gitguardian
-snyk
-sentry (allows to track errors and link them to commit authors)
-
-## github actions
-
-**utilities**
-stale: auto-close issues and PRs <https://github.com/actions/stale>
-greetings: welcome new contributors
-
-possibly: super-linter
-
-## github settings
-
-### protected tags in settings
-
-allows blocking pushing tags from others
-
-### rulesets
-
-dev and main branches
+Please check the [NOTES.md](NOTES.md) file for more information
