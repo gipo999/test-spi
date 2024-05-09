@@ -1,3 +1,9 @@
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
+# test-spi
+
+Intro to the project
+
 ## REQUIREMENTS
 
 TODO: are java and gradle required with gradle wrapper?
@@ -8,7 +14,7 @@ TODO: are java and gradle required with gradle wrapper?
 - gradle cli 8.7
 - node >= 20
 
-# SETUP
+## SETUP
 
 ```console
 git clone https://github.com/gipo999/test-spi
@@ -16,12 +22,15 @@ cd test-spi
 npm install
 ```
 
-## DEVELOPMENT
+## CONTRIBUTING
 
-clone the repo, run `npm install`, make changes and run `npm run commit`
-This will trigger the pre-commit pipeline and enforce the commit message format
+please follow the [CONTRIBUTING.md](CONTRIBUTING.md) guidelines
 
-# NOTES
+## SECURITY
+
+if you have a security related issue, please follow the [SECURITY.md](SECURITY.md) guidelines
+
+# DOC NOTES, to remove
 
 spotless
 <https://github.com/diffplug/spotless/tree/main/plugin-gradle>
