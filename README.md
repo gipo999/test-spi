@@ -38,4 +38,4 @@ Please refer to the [SUPPORT.md](.github/SUPPORT.md) file
 
 _will remove_
 
-Please check the [NOTES.md](NOTES.md) file for more information
+Please check the [NOTES.md](docs/NOTES.md) file for more information
