@@ -1,3 +1,9 @@
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
+# test-spi
+
+Intro to the project
+
 ## REQUIREMENTS
 
 TODO: are java and gradle required with gradle wrapper?
@@ -5,10 +11,10 @@ TODO: are java and gradle required with gradle wrapper?
 - python >= 3.9
 - git
 - java 17
-- gradle cli 8.7
+- gradle 8.7
 - node >= 20
 
-# SETUP
+## SETUP
 
 ```console
 git clone https://github.com/gipo999/test-spi
@@ -16,61 +22,20 @@ cd test-spi
 npm install
 ```
 
-## DEVELOPMENT
+## CONTRIBUTING
 
-clone the repo, run `npm install`, make changes and run `npm run commit`
-This will trigger the pre-commit pipeline and enforce the commit message format
+please follow the [CONTRIBUTING.md](.github/CONTRIBUTING.md) guidelines
 
-# NOTES
+## SECURITY
 
-spotless
-<https://github.com/diffplug/spotless/tree/main/plugin-gradle>
+if you have a security related issue, please follow the [SECURITY.md](.github/SECURITY.md) guidelines
 
-## using pre-commit framework
+## SUPPORT
 
-<https://pre-commit.com>
+Please refer to the [SUPPORT.md](.github/SUPPORT.md) file
 
-added 0 dependency executable with git-lfs in root folder
-will take care of providing the detect-secrets executable
+### NOTES on cretaing this repo
 
-## adding commitizen
+_will remove_
 
-<https://cz-git.qbb.sh/guide/>
-<https://commitlint.js.org/>
-
-alternatives:
-<https://commitizen.github.io/cz-cli/>
-<https://github.com/commitizen/cz-cli>
-<https://pre-commit.com/> (python)
-
-## github apps
-
-**built in**
-dependabot
-code-scanning security (open-source, paid)
-
-**apps**
-renovate
-github-advanced-security (paid, includes codeQL and others)
-semgrep
-gitguardian
-snyk
-sentry (allows to track errors and link them to commit authors)
-
-## github actions
-
-**utilities**
-stale: auto-close issues and PRs <https://github.com/actions/stale>
-greetings: welcome new contributors
-
-possibly: super-linter
-
-## github settings
-
-### protected tags in settings
-
-allows blocking pushing tags from others
-
-### rulesets
-
-dev and main branches
+Please check the [NOTES.md](NOTES.md) file for more information

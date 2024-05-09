@@ -1,3 +1,4 @@
+# TODO: fix failed runs
 name: Greetings
 on: [pull_request, issues]
 jobs:
