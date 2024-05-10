@@ -1,4 +1,7 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=gipo999_test-spi)](https://sonarcloud.io/summary/new_code?id=gipo999_test-spi)
+[![CodeQL](https://github.com/gipo999/test-spi/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/gipo999/test-spi/actions/workflows/github-code-scanning/codeql)
+[![Gradle Check and Build](https://github.com/gipo999/test-spi/actions/workflows/gradle-check-build.yml/badge.svg)](https://github.com/gipo999/test-spi/actions/workflows/gradle-check-build.yml)
 
 # test-spi
 
@@ -38,4 +41,4 @@ Please refer to the [SUPPORT.md](.github/SUPPORT.md) file
 
 _will remove_
 
-Please check the [NOTES.md](docs/NOTES.md) file for more information
+Please check the [NOTES.md](docs/general_notes.md) file for more information

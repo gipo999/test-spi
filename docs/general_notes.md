@@ -31,6 +31,7 @@ semgrep
 gitguardian
 snyk
 sentry (allows to track errors and link them to commit authors)
+sonarcloud
 
 ## github actions
 
