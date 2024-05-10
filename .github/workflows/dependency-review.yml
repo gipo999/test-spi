@@ -11,7 +11,7 @@ jobs:
       # dependency review after dependency submission (dep graph is generated)
       # requires a timeout to make sure the dep graph is generated
       - name: "Dependency Review"
-        uses: actions/dependency-review-action@v3
+        uses: actions/dependency-review-action@v4
         with:
           retry-on-snapshot-warnings: true
           retry-on-snapshot-warnings-timeout: 600
