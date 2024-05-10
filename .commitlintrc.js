@@ -12,7 +12,7 @@ const { execSync } = require("child_process");
 const issue = execSync("git rev-parse --abbrev-ref HEAD")
   .toString()
   .trim()
-  .split("_")[1];
+  .split("-")[0];
 
 // manually adding scopes examples
 // ...["app", "gradle", "npm", "git-hooks"],
@@ -40,7 +40,7 @@ module.exports = {
     "scope-enum": [2, "always", [...definedScopes]],
   },
   prompt: {
-    useEmoji: false,
+    useEmoji: true,
     customIssuePrefixAlign: !issue ? "top" : "bottom",
     defaultIssues: !issue ? "" : `#${issue}`,
 
