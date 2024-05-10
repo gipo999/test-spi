@@ -1,4 +1,5 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=gipo999_test-spi)](https://sonarcloud.io/summary/new_code?id=gipo999_test-spi)
 
 # test-spi
 
