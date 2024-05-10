@@ -1,0 +1,24 @@
+# https://github.com/gradle/actions/blob/main/docs/dependency-submission.md#usage-with-pull-requests-from-public-forked-repositories
+# waits for dependency submission on pr to finish
+name: Download and submit dependency graph
+on:
+  workflow_run:
+    workflows: ["Generate and save dependency graph"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: "Log level"
+        default: "warning"
+      tags:
+        description: "Test scenario tags"
+permissions:
+  contents: write
+jobs:
+  submit-dependency-graph:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download and submit dependency graph
+        uses: gradle/actions/dependency-submission@v3
+        with:
+          dependency-graph: download-and-submit # Download saved dependency-graph and submit
