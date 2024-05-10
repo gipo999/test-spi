@@ -4,6 +4,8 @@
 [![CodeQL](https://github.com/gipo999/test-spi/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/gipo999/test-spi/actions/workflows/github-code-scanning/codeql)
 [![Gradle Check and Build](https://github.com/gipo999/test-spi/actions/workflows/gradle-check-build.yml/badge.svg)](https://github.com/gipo999/test-spi/actions/workflows/gradle-check-build.yml)
 
+[![Active Development](https://img.shields.io/badge/Maintenance%20Level-Actively%20Developed-brightgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
+
 # test-spi
 
 todo:
@@ -11,8 +13,6 @@ Intro to the project
 add excalidraw graph for flow
 
 ## REQUIREMENTS
-
-TODO: are java and gradle required with gradle wrapper?
 
 - python >= 3.9
 - git
