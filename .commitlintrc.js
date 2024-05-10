@@ -46,6 +46,6 @@ module.exports = {
 
     // allow defining multiple scopes with checklist
     enableMultipleScopes: true,
-    scopeEnumSeparator: ",",
+    scopeEnumSeparator: "/",
   },
 };
