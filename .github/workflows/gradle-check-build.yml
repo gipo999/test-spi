@@ -22,11 +22,11 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v4
       #
-      # setup java is not needed here?
-      # - uses: actions/setup-java@v4
-      #   with:
-      #     distribution: temurin
-      #     java-version: 17
+      # setup java
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17.0.2
       #
       # setup gradle automatically caches dependencies
       - name: Setup Gradle
@@ -46,11 +46,11 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v4
       #
-      # setup java is not needed here?
-      # - uses: actions/setup-java@v4
-      #   with:
-      #     distribution: temurin
-      #     java-version: 17
+      # setup java
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17.0.2
       #
       # setup gradle automatically caches dependencies
       - name: Setup Gradle
