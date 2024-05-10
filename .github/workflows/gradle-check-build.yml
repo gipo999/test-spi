@@ -16,7 +16,7 @@ on:
       tags:
         description: "Test scenario tags"
 jobs:
-  build-linux:
+  linux:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -40,7 +40,7 @@ jobs:
         run: ./gradlew check
       - name: Build with Gradle Wrapper
         run: ./gradlew build
-  build-windows:
+  windows:
     runs-on: windows-latest
     steps:
       - name: Checkout sources
