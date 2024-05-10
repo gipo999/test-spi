@@ -14,8 +14,6 @@ add excalidraw graph for flow
 
 ## REQUIREMENTS
 
-TODO: are java and gradle required with gradle wrapper?
-
 - python >= 3.9
 - git
 - java 17
