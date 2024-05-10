@@ -1,11 +1,14 @@
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=gipo999_test-spi)](https://sonarcloud.io/summary/new_code?id=gipo999_test-spi)
+
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![CodeQL](https://github.com/gipo999/test-spi/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/gipo999/test-spi/actions/workflows/github-code-scanning/codeql)
 [![Gradle Check and Build](https://github.com/gipo999/test-spi/actions/workflows/gradle-check-build.yml/badge.svg)](https://github.com/gipo999/test-spi/actions/workflows/gradle-check-build.yml)
 
 # test-spi
 
+todo:
 Intro to the project
+add excalidraw graph for flow
 
 ## REQUIREMENTS
 
@@ -37,8 +40,6 @@ if you have a security related issue, please follow the [SECURITY.md](.github/SE
 
 Please refer to the [SUPPORT.md](.github/SUPPORT.md) file
 
-### NOTES on cretaing this repo
-
-_will remove_
+### NOTES on creating this repo
 
 Please check the [NOTES.md](docs/general_notes.md) file for more information
