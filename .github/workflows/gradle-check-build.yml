@@ -42,17 +42,6 @@ jobs:
         run: ./gradlew check
       - name: Build with Gradle Wrapper Step
         run: ./gradlew build
-      - name: Publish pitest report Step
-        run: ./gradlew pitest
-      - name: Deploy Pitest to GitHub Pages Step
-        uses: peaceiris/actions-gh-pages@v4
-        # If you're changing the branch from main,
-        # also change the `main` in `refs/heads/main`
-        # below accordingly.
-        if: github.ref == 'refs/heads/dev'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/reports/pitest
   build-windows:
     name: Lint and Build on Windows Job
     runs-on: windows-latest
