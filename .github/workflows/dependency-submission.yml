@@ -1,4 +1,8 @@
 # https://github.com/gradle/actions/blob/main/docs/dependency-submission.md#usage-with-pull-requests-from-public-forked-repositories
+# This dependency submission is triggered
+# by a push to the dev branch to update the dependency graph
+# It will generate a build scan to help determine the source of any dependency vulnerabilities in your project
+# Will be needed for the vulnerability check in the dependency review action
 name: Dependency Submission
 on:
   push:
