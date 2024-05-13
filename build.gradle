@@ -36,8 +36,22 @@ plugins {
 	// or
 	// https://github.com/Lucas3oo/sonarlint-gradle-plugin
 	// id "se.solrike.sonarlint" version "2.0.0"
+
+	// PIT
+	// https://github.com/szpak/gradle-pitest-plugin
+	// pit requires project.group
+	id 'info.solidsoft.pitest' version '1.15.0'
 }
 
+group = 'net.syn3rgy.core'
+version='0.0.1-alpha'
+
+pitest {
+	//adds dependency to org.pitest:pitest-junit5-plugin and sets "testPlugin" to "junit5"
+	// required to make pitest work with junit 5
+	junit5PluginVersion = '1.2.1'
+	pitestVersion = '1.15.2'
+}
 
 // https://stackoverflow.com/questions/57261461/gradle-build-failes-getting-an-error-checkstylemain-failed
 
