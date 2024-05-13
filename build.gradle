@@ -28,6 +28,9 @@ plugins {
 	id "com.github.spotbugs" version "6.0.14"
 
 	// https://plugins.gradle.org/plugin/name.remal.sonarlint
+	// https://github.com/remal-gradle-plugins/sonarlint
+	// https://plugins.gradle.org/search?term=sonarlint
+	// https://remal.gitlab.io/gradle-plugins/
 	id "name.remal.sonarlint" version "4.2.1"
 }
 
