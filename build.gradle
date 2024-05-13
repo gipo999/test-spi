@@ -31,7 +31,11 @@ plugins {
 	// https://github.com/remal-gradle-plugins/sonarlint
 	// https://plugins.gradle.org/search?term=sonarlint
 	// https://remal.gitlab.io/gradle-plugins/
-	id "name.remal.sonarlint" version "4.2.1"
+	// id "name.remal.sonarlint" version "4.2.1"
+
+	// or
+	// https://github.com/Lucas3oo/sonarlint-gradle-plugin
+	id "se.solrike.sonarlint" version "2.0.0"
 }
 
 
