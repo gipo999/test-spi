@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
       # dependency review after dependency submission (dep graph is generated)
       # requires a timeout to make sure the dep graph is generated and submitted
-      - name: Dependency Review on push Step
+      - name: Dependency Review on PR Step
         uses: actions/dependency-review-action@v4
         with:
           retry-on-snapshot-warnings: true
