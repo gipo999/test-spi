@@ -38,11 +38,7 @@ public final class Implementations {
       cacheKey = className;
     } else {
       cacheKey = params.getCacheKey();
-      cacheObject = paramsCache.get(className);
-      if (cacheObject == null) {
-        cacheObject = new HashMap<>();
-        paramsCache.put(className, cacheObject);
-      }
+      cacheObject = paramsCache.computeIfAbsent(className, k -> new HashMap<>());
     }
     if (cacheObject.containsKey(cacheKey)) {
       return (List<T>) cacheObject.get(cacheKey);

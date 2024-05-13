@@ -20,7 +20,7 @@ const definedScopes = [
   // used to denote global changes
   "global",
   // spread result of folder names found
-  ...apps.map((app) => `app/${app}`),
+  ...apps.map((app) => `app-${app}`),
   // "app",
   "gradle",
   "npm",

@@ -56,23 +56,17 @@ public final class Implementation {
       cacheKey = className;
     } else {
       cacheKey = params.getCacheKey();
-      cacheObject = paramsCache.get(className);
-      if (cacheObject == null) {
-        cacheObject = new HashMap<>();
-        paramsCache.put(className, cacheObject);
-      }
+      cacheObject = paramsCache.computeIfAbsent(className, k -> new HashMap<>());
     }
     if (cacheObject.containsKey(cacheKey)) {
       return Optional.of((T) cacheObject.get(cacheKey));
     }
     Optional<T> selected = ofNew(clazz, selector, params);
-    if (selected.isPresent()) {
-      cacheObject.put(cacheKey, selected.get());
-    }
+    selected.ifPresent(t -> cacheObject.put(cacheKey, t));
     return selected;
   }
 
-  protected static <T extends NamedService> String getClassName(Class<T> clazz) {
+  private static <T extends NamedService> String getClassName(Class<T> clazz) {
     return clazz.getCanonicalName();
   }
 
@@ -117,11 +111,10 @@ public final class Implementation {
         LOGGER.debug("\t{} : {}", impl.getServiceImplementationName(), impl.getClass().getName());
       }
     }
-    if (LOGGER.isDebugEnabled()) {
-      if (implementations.isEmpty()) {
-        LOGGER.debug("\tNo implementations found.");
-      }
+    if (LOGGER.isDebugEnabled() && implementations.isEmpty()) {
+      LOGGER.debug("\tNo implementations found.");
     }
+
     return Collections.unmodifiableList(implementations);
   }
 }

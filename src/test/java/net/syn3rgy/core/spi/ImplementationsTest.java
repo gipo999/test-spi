@@ -16,7 +16,7 @@ import net.syn3rgy.core.spi.params.StdCustParams;
 import org.junit.jupiter.api.Test;
 
 class ImplementationsTest {
-  // TODO sostituire named -> prioritized
+  // TODO sostituire named -> prioritized NOSONAR
   @Test
   void testStandardOnlyNoCache() {
     var named001 = Implementations.ofNew(PrioritizedService001.class);
