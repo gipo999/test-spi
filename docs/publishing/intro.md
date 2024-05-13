@@ -43,4 +43,6 @@
 
 <https://central.sonatype.org/publish/publish-maven/>
 
+<https://central.sonatype.org/publish/publish-guide/>
+
 # there is also bintray
