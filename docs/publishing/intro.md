@@ -34,3 +34,13 @@
 > - All artifacts published to Maven Central need to be signed with GPG/PGP.
 > - Metadata
 > - As part of your publication, you are required to submit a pom file. This file defines the Project Object Model used by Apache Maven. It must include specific metadata such as GAV coordinates, the license and information about the developer(s).
+
+# other sources
+
+<https://www.jetbrains.com/help/space/publish-artifacts-to-maven-central.html>
+
+<https://medium.com/@efthymiou.dimitrios1/how-to-publish-your-library-to-maven-central-3923139967e1>
+
+<https://central.sonatype.org/publish/publish-maven/>
+
+# there is also bintray
