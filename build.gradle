@@ -43,8 +43,7 @@ plugins {
 	id 'info.solidsoft.pitest' version '1.15.0'
 }
 
-group = 'net.syn3rgy.core'
-version='0.0.1-alpha'
+
 
 pitest {
 	//adds dependency to org.pitest:pitest-junit5-plugin and sets "testPlugin" to "junit5"
@@ -134,10 +133,23 @@ spotless {
 	}
 }
 
+// ## section for publishing to maven central
+group = 'net.syn3rgy.core'
+
+version='1.0-SNAPSHOT'
+
 repositories {
 	// Use Maven Central for resolving dependencies.
 	mavenCentral()
 }
+
+// sourceSets {
+//     main {
+//         java {
+//             srcDirs = ['src']
+//         }
+//     }
+// }
 
 // define the publish task for github actions
 publishing {
