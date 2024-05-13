@@ -3,7 +3,7 @@ package net.syn3rgy.core.spi;
 @FunctionalInterface
 public interface PrioritizedService extends NamedService, Comparable<PrioritizedService> {
 
-  public static final int DEFAULT_PRIORIY = 500;
+  int DEFAULT_PRIORIY = 500;
 
   default int getPriority() {
     return DEFAULT_PRIORIY;
