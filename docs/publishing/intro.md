@@ -45,4 +45,10 @@
 
 <https://central.sonatype.org/publish/publish-guide/>
 
+<https://medium.com/@nowshadapu/how-to-create-a-java-library-and-publish-it-to-maven-with-gradle-7-e952837a7fc9>
+
 # there is also bintray
+
+<https://medium.com/@rosolko/publish-java-library-to-jfrog-bintray-and-sonatype-with-gradle-1a3ebd5b8be8>
+
+<https://hemanthsridhar.medium.com/6-steps-to-upload-your-java-and-android-libraries-to-bintray-jcenter-using-gradle-adc033f59ba1>
