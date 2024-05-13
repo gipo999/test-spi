@@ -1,3 +1,4 @@
+# works only for PRs
 name: Dependency Review Vulnerability Check On Push Workflow
 on:
   push:
