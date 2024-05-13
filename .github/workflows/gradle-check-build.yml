@@ -32,7 +32,7 @@ jobs:
       #
       # setup gradle automatically caches dependencies
       - name: Setup Gradle Step
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v3
         with:
           # https://stackoverflow.com/questions/30054911/how-to-determine-the-version-of-gradle
           # this should be updated automatically from dependabot
@@ -58,7 +58,7 @@ jobs:
       #
       # setup gradle automatically caches dependencies
       - name: Setup Gradle Step
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v3
         with:
           # https://stackoverflow.com/questions/30054911/how-to-determine-the-version-of-gradle
           # this should be updated automatically from dependabot
