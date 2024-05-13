@@ -2,7 +2,7 @@
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![CodeQL](https://github.com/gipo999/test-spi/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/gipo999/test-spi/actions/workflows/github-code-scanning/codeql)
-[![Gradle Check and Build](https://github.com/gipo999/test-spi/actions/workflows/gradle-check-build.yml/badge.svg)](https://github.com/gipo999/test-spi/actions/workflows/gradle-check-build.yml)
+[![Gradle Check and Build Workflow](https://github.com/gipo999/test-spi/actions/workflows/gradle-check-build.yml/badge.svg)](https://github.com/gipo999/test-spi/actions/workflows/gradle-check-build.yml)
 
 [![Active Development](https://img.shields.io/badge/Maintenance%20Level-Actively%20Developed-brightgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
 
