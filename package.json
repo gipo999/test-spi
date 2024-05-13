@@ -6,7 +6,7 @@
     "commit": "git cz",
     "prepare": "python pre-commit-3.7.0.pyz install --hook-type pre-commit --hook-type pre-push --hook-type commit-msg -f && gradlew --refresh-dependencies",
     "commitlint": "commitlint --edit",
-    "lint": "gradlew spotlessCheck && gradlew build",
+    "lint": "gradlew check && gradlew build",
     "fix": "gradlew spotlessApply"
   },
   "keywords": [],
