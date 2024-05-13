@@ -4,10 +4,10 @@
 # requires to separate this from the dependency submission on pr action as PRs won't have write permissions to submit the dep graph
 #
 # The dependency review will be run after x minutes
-name: Download and submit dependency graph on pr
+name: Download and submit dependency graph on PR workflow
 on:
   workflow_run:
-    workflows: ["Generate and save dependency graph on pr"]
+    workflows: ["Dependency Submission on PR Workflow"]
     types: [completed]
   workflow_dispatch:
     inputs:
@@ -20,9 +20,10 @@ permissions:
   contents: write
 jobs:
   submit-dependency-graph:
+    name: Submit Dependency Graph job
     runs-on: ubuntu-latest
     steps:
-      - name: Download and submit dependency graph
+      - name: Download and submit dependency graph on PR step
         uses: gradle/actions/dependency-submission@v3
         with:
           dependency-graph: download-and-submit # Download saved dependency-graph and submit
