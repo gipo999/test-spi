@@ -21,7 +21,7 @@ plugins {
 
 	// https://docs.gradle.org/current/userguide/checkstyle_plugin.html
 	// https://medium.com/@raveensr/how-to-add-checkstyle-and-findbugs-plugins-in-a-gradle-based-project-51759aa843be
-	// https://github.com/nus-cs2103-AY2021S2/forum/issues/93
+	// https://github.com/nus-cs2104-AY2021S2/forum/issues/93
 	// id 'checkstyle' // uncomment to enable checkstyle, pretty strict
 
 	// https://spotbugs.readthedocs.io/en/latest/gradle.html
@@ -31,11 +31,11 @@ plugins {
 	// https://github.com/remal-gradle-plugins/sonarlint
 	// https://plugins.gradle.org/search?term=sonarlint
 	// https://remal.gitlab.io/gradle-plugins/
-	// id "name.remal.sonarlint" version "4.2.1"
+	id "name.remal.sonarlint" version "4.2.1"
 
 	// or
 	// https://github.com/Lucas3oo/sonarlint-gradle-plugin
-	id "se.solrike.sonarlint" version "2.0.0"
+	// id "se.solrike.sonarlint" version "2.0.0"
 }
 
 

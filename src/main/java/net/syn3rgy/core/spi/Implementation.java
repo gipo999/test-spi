@@ -57,12 +57,6 @@ public final class Implementation {
     } else {
       cacheKey = params.getCacheKey();
       cacheObject = paramsCache.computeIfAbsent(className, k -> new HashMap<>());
-      // triggers sonarling
-      // cacheObject = paramsCache.get(className);
-      // if (cacheObject == null) {
-      // cacheObject = new HashMap<>();
-      // paramsCache.put(className, cacheObject);
-      // }
     }
     if (cacheObject.containsKey(cacheKey)) {
       return Optional.of((T) cacheObject.get(cacheKey));
