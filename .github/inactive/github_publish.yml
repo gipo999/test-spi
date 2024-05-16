@@ -1,4 +1,17 @@
 # https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
+# https://gonzalohirsch.com/blog/semantic-release-and-branch-protection-rules/
+# IMPORTANT: actions won't be triggered by a GITHUB_TOKEN event (another workflow)
+# https://stackoverflow.com/questions/59319281/github-action-different-between-release-created-and-published
+# https://github.com/semantic-release/semantic-release/discussions/1906
+# https://github.com/marketplace/actions/action-github-app-token
+#
+# GitHub actions do not trigger other GitHub actions to avoid infinite loops.
+#
+# either use the `workflow_dispatch` event or use a PAT (Personal Access Token) or a github app
+# or put them in the same workflow file
+#
+# for now i put this in the releaser.yml file too,
+# this can be used for manual releases
 name: Publish package to GitHub Packages Workflow
 on:
   release:

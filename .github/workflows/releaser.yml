@@ -41,3 +41,41 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release@23.1.1
+  # check the github_publish.yml in inactive for comments
+  # moved it here as github actions can't trigger another workflow
+  publish-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    name: Publish release Job
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v4
+      - name: Set up JDK Step
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17.0.2"
+          distribution: "temurin"
+      - name: Setup Gradle Step
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.1.1
+      - name: Publish artifact Step
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # The GITHUB_REF tag comes in the format 'refs/tags/xxx'. In our project v0.1.0
+        # If we split on '/' and take the 3rd value,
+        # we can get the release name.
+        # We can also remove the 'v' from the version
+        # and append SNAPSHOT to the version
+        run: |
+          NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3) # v0.1.0
+          # NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | cut -d "v" -f2)-SNAPSHOT # 0.1.0-SNAPSHOT
+          # NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | cut -d "v" -f2) # 0.1.0
+          echo "New version: ${NEW_VERSION}"
+          echo "Github username: ${GITHUB_ACTOR}"
+          # overrides the version in the gradle.properties or build.gradle file
+          # we don't write to the file because we don't want to commit the change
+          # and cause conflicts on release
+          ./gradlew -Pversion=${NEW_VERSION} publish
