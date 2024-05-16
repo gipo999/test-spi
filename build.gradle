@@ -13,15 +13,52 @@ plugins {
 	// add the spotless plugin for formatting and linting
 	id 'com.diffplug.spotless' version '6.25.0'
 
+	// extends the Java plugin to add support for Groovy projects. It can deal with Groovy code, mixed Groovy and Java code, and even pure Java code
+	id 'groovy'
+
 	// add the maven-publish plugin to publish to maven central
 	id 'maven-publish'
+
+	// https://docs.gradle.org/current/userguide/checkstyle_plugin.html
+	// https://medium.com/@raveensr/how-to-add-checkstyle-and-findbugs-plugins-in-a-gradle-based-project-51759aa843be
+	// https://github.com/nus-cs2103-AY2021S2/forum/issues/93
+	// id 'checkstyle' // uncomment to enable checkstyle, pretty strict
+
+	// https://spotbugs.readthedocs.io/en/latest/gradle.html
+	id "com.github.spotbugs" version "6.0.14"
+
+	// https://plugins.gradle.org/plugin/name.remal.sonarlint
+	// https://github.com/remal-gradle-plugins/sonarlint
+	// https://plugins.gradle.org/search?term=sonarlint
+	// https://remal.gitlab.io/gradle-plugins/
+	id "name.remal.sonarlint" version "4.2.1"
+
+	// or
+	// https://github.com/Lucas3oo/sonarlint-gradle-plugin
+	// id "se.solrike.sonarlint" version "2.0.0"
+
+	// PIT
+	// https://github.com/szpak/gradle-pitest-plugin
+	// pit requires project.group
+	id 'info.solidsoft.pitest' version '1.15.0'
 }
 
+
+
+pitest {
+	//adds dependency to org.pitest:pitest-junit5-plugin and sets "testPlugin" to "junit5"
+	// required to make pitest work with junit 5
+	junit5PluginVersion = '1.2.1'
+	pitestVersion = '1.15.2'
+}
+
+// https://stackoverflow.com/questions/57261461/gradle-build-failes-getting-an-error-checkstylemain-failed
 
 // formatter and linter
 // https://github.com/diffplug/spotless/issues/178
 // <https://github.com/diffplug/spotless/tree/main/plugin-gradle>
-apply plugin: 'groovy'
+// some examples:
+// https://dev.to/ankityadav33/standardize-code-formatting-with-spotless-2bdh
 // spotless config
 spotless {
 	// optional: limit format enforcement to just the files changed by this feature branch
@@ -79,8 +116,13 @@ spotless {
 		// Cleanthat will refactor your code, but it may break your style: apply it before your formatter
 		cleanthat()
 
+		trimTrailingWhitespace()
+		endWithNewline()
+
 		// Choose one of these formatters.
 		googleJavaFormat()   // has its own section below
+		// or apply a specific version of google-java-format
+		// googleJavaFormat('1.8').aosp().reflowLongStrings().skipJavadocFormatting()
 		// eclipse()            // has its own section below
 		// prettier()           // has its own section below
 		// clangFormat()        // has its own section below
@@ -91,29 +133,78 @@ spotless {
 	}
 }
 
+
 repositories {
 	// Use Maven Central for resolving dependencies.
 	mavenCentral()
 }
 
+
+// ## section for publishing to maven central
+// ./gradlew -Pversion=${version} publish
+group = 'net.syn3rgy.core' // TODO: why group is required? what is it used for?
+
+// ## Version
+// the version is calculated automatically after a new github release is created
+// it will grab the latest git tag and override the build.gradle version while publishing using
+// cli command ./gradlew -Pversion=x.x.x publish
+// version='0.0.1-SNAPSHOT' // TODO: why snapshot is required?
+
+// sourceSets {
+//     main {
+//         java {
+//             srcDirs = ['src']
+//         }
+//     }
+// }
+
 // define the publish task for github actions
 publishing {
+	// https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
+	// https://medium.com/@shanemyrick/publishing-to-github-packages-with-gradle-and-github-actions-4ad842634c4e
+	// publications {
+	// 	// https://docs.gradle.org/current/userguide/publishing_maven.html
+	// 	maven(MavenPublication) {
+	// 		// groupId = 'net.syn3rgy.core'
+	// 		// artifactId = 'library'
+	// 		// version = 'alpha-0.0.1'
+	//
+	// 		from components.java
+	// 	}
+	// }
+	publications {
+		gpr(MavenPublication) {
+			from(components.java)
+		}
+	}
 	repositories {
 		maven {
-			name = 'OSSRH'
-			url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-			// credentials are loaded from github secrets?
+			name = "GitHubPackages"
+			url = "https://maven.pkg.github.com/gipo999/test-spi"
 			credentials {
-				username = System.getenv('MAVEN_USERNAME')
-				password = System.getenv('MAVEN_PASSWORD')
+				username = System.getenv("GITHUB_ACTOR")
+				password = System.getenv("GITHUB_TOKEN")
 			}
+			// credentials {
+			// 	username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+			// 	password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+			// }
 		}
+		// maven {
+		// 	name = 'OSSRH'
+		// 	url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+		// 	// credentials are loaded from github secrets?
+		// 	credentials {
+		// 		username = System.getenv('MAVEN_USERNAME')
+		// 		password = System.getenv('MAVEN_PASSWORD')
+		// 	}
+		// }
 	}
 }
 
 dependencies {
 	// Use JUnit Jupiter for testing.
-	testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
 
 	// This dependency is exported to consumers, that is to say found on their compile classpath.
 	api 'org.slf4j:slf4j-api:2.0.13'

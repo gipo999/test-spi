@@ -12,7 +12,7 @@ const { execSync } = require("child_process");
 const issue = execSync("git rev-parse --abbrev-ref HEAD")
   .toString()
   .trim()
-  .split("_")[1];
+  .split("-")[0];
 
 // manually adding scopes examples
 // ...["app", "gradle", "npm", "git-hooks"],
@@ -20,11 +20,13 @@ const definedScopes = [
   // used to denote global changes
   "global",
   // spread result of folder names found
-  ...apps.map((app) => `app/${app}`),
+  ...apps.map((app) => `app-${app}`),
   // "app",
   "gradle",
   "npm",
   "git-hooks",
+  "actions",
+  "github",
   "db",
   "docs",
 ];
@@ -44,6 +46,6 @@ module.exports = {
 
     // allow defining multiple scopes with checklist
     enableMultipleScopes: true,
-    scopeEnumSeparator: ",",
+    scopeEnumSeparator: "/",
   },
 };

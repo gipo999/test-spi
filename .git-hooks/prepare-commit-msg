@@ -8,6 +8,9 @@
 # this is the reason pre-commit framework is used instead of husky
 # and the reason we won't intercept the commit action
 
+# leaving them here for reference
+
+# old husky hook to intercept commit message
 . "$(dirname -- "$0")/_/husky.sh"
 
 # check [https://github.com/commitizen/cz-cli/issues/672]
