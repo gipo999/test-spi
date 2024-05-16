@@ -25,7 +25,6 @@ module.exports = {
         // development branch
         name: "dev",
         prerelease: true,
-        channel: "dev",
       },
       {
         // pre-release branch
