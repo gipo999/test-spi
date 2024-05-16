@@ -157,23 +157,32 @@ version='0.0.1-SNAPSHOT'
 publishing {
 	// https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
 	// https://medium.com/@shanemyrick/publishing-to-github-packages-with-gradle-and-github-actions-4ad842634c4e
+	// publications {
+	// 	// https://docs.gradle.org/current/userguide/publishing_maven.html
+	// 	maven(MavenPublication) {
+	// 		// groupId = 'net.syn3rgy.core'
+	// 		// artifactId = 'library'
+	// 		// version = 'alpha-0.0.1'
+	//
+	// 		from components.java
+	// 	}
+	// }
 	publications {
-		// https://docs.gradle.org/current/userguide/publishing_maven.html
-		maven(MavenPublication) {
-			// groupId = 'net.syn3rgy.core'
-			// artifactId = 'library'
-			// version = 'alpha-0.0.1'
-
-			from components.java
+		gpr(MavenPublication) {
+			from(components.java)
 		}
 	}
 	repositories {
 		maven {
 			name = "GitHubPackages"
 			url = "https://maven.pkg.github.com/gipo999/test-spi"
+			// credentials {
+			// 	username = System.getenv("GITHUB_ACTOR")
+			// 	password = System.getenv("GITHUB_TOKEN")
+			// }
 			credentials {
-				username = System.getenv("GITHUB_ACTOR")
-				password = System.getenv("GITHUB_TOKEN")
+				username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+				password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
 			}
 		}
 		// maven {
