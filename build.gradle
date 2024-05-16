@@ -153,16 +153,25 @@ repositories {
 
 // define the publish task for github actions
 publishing {
+	// https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
 	repositories {
 		maven {
-			name = 'OSSRH'
-			url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-			// credentials are loaded from github secrets?
+			name = "GitHubPackages"
+			url = "https://maven.pkg.github.com/gipo999/test-spi"
 			credentials {
-				username = System.getenv('MAVEN_USERNAME')
-				password = System.getenv('MAVEN_PASSWORD')
+				username = System.getenv("GITHUB_ACTOR")
+				password = System.getenv("GITHUB_TOKEN")
 			}
 		}
+		// maven {
+		// 	name = 'OSSRH'
+		// 	url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+		// 	// credentials are loaded from github secrets?
+		// 	credentials {
+		// 		username = System.getenv('MAVEN_USERNAME')
+		// 		password = System.getenv('MAVEN_PASSWORD')
+		// 	}
+		// }
 	}
 }
 
