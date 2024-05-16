@@ -42,6 +42,11 @@ on a 1.0.0 version:
 ./gradlew -Pversion=${version} publish
 ```
 
+<https://stackoverflow.com/questions/37073049/gradle-dynamic-calculate-version-for-publishing>
+
+the Pversion overrides the property using the cli
+if we get the version from the git tag, we can omit the version in the gradle file
+
 <https://stackoverflow.com/questions/57323260/how-to-push-to-github-package-registry-with-gradle>
 
 ```yaml
