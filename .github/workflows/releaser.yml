@@ -45,10 +45,11 @@ jobs:
   # moved it here as github actions can't trigger another workflow
   publish-release:
     runs-on: ubuntu-latest
+    name: Publish release Job
+    needs: release # wait for the first job to finish
     permissions:
       contents: read
       packages: write
-    name: Publish release Job
     steps:
       - name: Checkout latest code
         uses: actions/checkout@v4
