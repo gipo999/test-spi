@@ -53,6 +53,8 @@ jobs:
     steps:
       - name: Checkout latest code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # get all history for git tags
       - name: Set up JDK Step
         uses: actions/setup-java@v4
         with:
