@@ -4,6 +4,10 @@
 #
 # Created a github app to allow this action to bypass branch protection rules for tags
 # https://gonzalohirsch.com/blog/semantic-release-and-branch-protection-rules/
+#
+# Note: using a PAT instead of GITHUB_TOKEN to bypass branch protection rules and to trigger the release workflow
+# since github actions can't start other github actions
+# this needs to start the github_publish workflow
 name: Release Workflow
 run-name: ${{ github.actor }} is automatically releasing 🚀
 on:
@@ -27,6 +31,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # get all history for git tags
+          persist-credentials: false # <<<--- This line is needed for security
       # we don't need node
       - name: Setup Node.js Step
         uses: actions/setup-node@v4
@@ -38,6 +43,7 @@ jobs:
       #   run: npm audit signatures
       - name: Release Step
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }} # personal access token for triggering the github_publish workflow and bypassing branch protection rules
           # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release@23.1.1
