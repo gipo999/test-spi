@@ -5,6 +5,10 @@
 <https://medium.com/@luca.motta1993/semantic-version-and-how-to-integrate-semantic-release-in-a-gitlab-ci-cd-pipeline-for-a-java-235b0f91dedb>
 <https://github.com/dipien/semantic-version-gradle-plugin>
 <https://semver.org/>
+<https://github.com/semantic-release/semantic-release/blob/master/docs/usage/configuration.md#configuration>
+<https://github.com/semantic-release/semantic-release>
+<https://github.com/semantic-release/github>
+<https://semantic-release.gitbook.io/semantic-release/support/faq#making-commits-during-the-release-process-adds-significant-complexity>
 
 ## notes
 

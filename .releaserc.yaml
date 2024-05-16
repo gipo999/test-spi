@@ -1,0 +1,15 @@
+# this is for  maven with gitlab, from
+# https://medium.com/@luca.motta1993/semantic-version-and-how-to-integrate-semantic-release-in-a-gitlab-ci-cd-pipeline-for-a-java-235b0f91dedb
+plugins:
+  - "@semantic-release/commit-analyzer"
+  - "@semantic-release/release-notes-generator"
+  - - "@semantic-release/exec"
+    - verifyReleaseCmd: 'mvn versions:set -DnewVersion="${nextRelease.version}" && echo "NEXT_VERSION=${nextRelease.version}" >> build.env'
+  - "@semantic-release/gitlab"
+  - - "@semantic-release/git"
+    - assets:
+        - pom.xml
+      message: "chore(release): bump ${nextRelease.version}"
+branches:
+  - "master"
+  - "+([0-9])?(.{+([0-9]),x}).x"
