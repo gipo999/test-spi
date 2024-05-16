@@ -1,5 +1,11 @@
 # https://github.com/semantic-release/semantic-release/blob/master/docs/recipes/ci-configurations/github-actions.md
+# https://stackoverflow.com/questions/74744498/github-pushing-to-protected-branches-with-fine-grained-token
+# NOTE: requires a GitHub token with with admin rights to create protected tags
+#
+# Created a github app to allow this action to bypass branch protection rules for tags
+# https://gonzalohirsch.com/blog/semantic-release-and-branch-protection-rules/
 name: Release Workflow
+run-name: ${{ github.actor }} is automatically releasing 🚀
 on:
   push:
     branches:
@@ -19,15 +25,16 @@ jobs:
       - name: Checkout Step
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-      - name: Setup Node.js Step
-        uses: actions/setup-node@v4
-        with:
-          node-version: "lts/*"
-      - name: Install dependencies Step
-        run: npm clean-install --ignore-scripts
-      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies Step
-        run: npm audit signatures
+          fetch-depth: 0 # get all history for git tags
+      # we don't need node
+      # - name: Setup Node.js Step
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "lts/*"
+      # - name: Install dependencies Step
+      #   run: npm clean-install --ignore-scripts
+      # - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies Step
+      #   run: npm audit signatures
       - name: Release Step
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
