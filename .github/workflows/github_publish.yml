@@ -9,9 +9,9 @@ jobs:
   # publish:
   #   runs-on: ubuntu-latest
   #   name: Publish package Job
-  #   permissions:
-  #     contents: read
-  #     packages: write
+  # permissions:
+  #   contents: read
+  #   packages: write
   #   steps:
   #     - uses: actions/checkout@v4
   #     - uses: actions/setup-java@v4
@@ -29,6 +29,9 @@ jobs:
   # https://medium.com/@shanemyrick/publishing-to-github-packages-with-gradle-and-github-actions-4ad842634c4e
   publish-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     name: Publish release Job
     steps:
       - name: Checkout latest code
