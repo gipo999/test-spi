@@ -1,19 +1,21 @@
 const BREAKING_KEYWORDS = ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"];
 module.exports = {
   // choose the branch to release from
-  // release: {
-  //   // Default: ['+([0-9])?(.{+([0-9]),x}).x', 'master', 'main', 'next', 'next-major', {name: 'beta', prerelease: true}, {name: 'alpha', prerelease: true}]
-  //   branches: [
-  //     "main",
-  //     "dev",
-  //     "next",
-  //     "nightly",
-  //     "stable",
-  //     "beta",
-  //     "alpha",
-  //     "+([0-9])?(.{+([0-9]),x}).x", // e.g., 1.x, 1.2.x, 1.2.3.x
-  //   ],
-  // },
+  release: {
+    // Default: ['+([0-9])?(.{+([0-9]),x}).x', 'master', 'main', 'next', 'next-major', {name: 'beta', prerelease: true}, {name: 'alpha', prerelease: true}]
+    branches: [
+      "main",
+      // "dev",
+      // "next",
+      // "nightly",
+      // "stable",
+      // "beta",
+      // "alpha",
+      "+([0-9])?(.{+([0-9]),x}).x", // e.g., 1.x, 1.2.x, 1.2.3.x
+      { name: "next", prerelease: true },
+      { name: "dev", prerelease: "beta" },
+    ],
+  },
 
   // ## Plugins
   // by default it uses default plugins
