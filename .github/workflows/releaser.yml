@@ -31,6 +31,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # get all history for git tags
+          # https://github.com/semantic-release/github/issues/264
+          # https://github.com/orgs/community/discussions/13836
+          # https://github.com/semantic-release/semantic-release/discussions/2557
+          # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions?learn=getting_started&learnProduct=actions
+          # https://medium.com/@irfankaraman/automatic-github-token-authentication-in-github-actions-321b72e7b11c
+          #
+          # this one most importantly
+          # TODO: find alternative to PAT, either single workflow, github app or other
+          # https://github.com/semantic-release/semantic-release/blob/master/docs/recipes/ci-configurations/github-actions.md#pushing-packagejson-changes-to-your-repository
           persist-credentials: false # <<<--- This line is needed for security
       # we don't need node
       - name: Setup Node.js Step
