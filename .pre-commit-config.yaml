@@ -73,14 +73,14 @@ repos:
       # executes check, checks everything (spotless, checkstyle)
       - id: gradle-check
         name: gradle-check
-        entry: ./gradlew check
+        entry: node scripts/gradlew.cjs --lint
         pass_filenames: false
         language: system
-        stages: [commit, push]
-      # executes the build (which includes tests)
-      - id: gradle-build
-        name: gradle-build
-        entry: ./gradlew build
+        stages: [commit]
+      # executes the build (which includes tests and check)
+      - id: gradle-check-build
+        name: gradle-check-build
+        entry: node scripts/gradlew.cjs --build
         pass_filenames: false
         language: system
         stages: [push]
