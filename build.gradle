@@ -142,13 +142,13 @@ repositories {
 
 // ## section for publishing to maven central
 // ./gradlew -Pversion=${version} publish
-group = 'net.syn3rgy.core' // TODO: why group is required? what is it used for?
+group = 'net.syn3rgy.core'
 
 // ## Version
 // the version is calculated automatically after a new github release is created
 // it will grab the latest git tag and override the build.gradle version while publishing using
 // cli command ./gradlew -Pversion=x.x.x publish
-// version='0.0.1-SNAPSHOT' // TODO: why snapshot is required?
+// version='0.0.1-SNAPSHOT'
 
 // sourceSets {
 //     main {

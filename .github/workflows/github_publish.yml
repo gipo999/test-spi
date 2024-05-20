@@ -70,7 +70,7 @@ jobs:
           # NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3) # v0.1.0
           # NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | cut -d "v" -f2)-SNAPSHOT # 0.1.0-SNAPSHOT
           # NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | cut -d "v" -f2) # 0.1.0
-          # BUG: the above code cuts v1.0.0-dev.1 to 1.0.0-de
+          # the above code cuts v1.0.0-dev.1 to 1.0.0-de
           # fix: we want everything after the v: v1.0.0-dev.1
           NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | cut -d "v" -f2-) # 1.0.0-dev.1
           echo "New version: ${NEW_VERSION}"

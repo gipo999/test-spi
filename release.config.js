@@ -13,8 +13,6 @@ module.exports = {
     "+([0-9])?(.{+([0-9]),x}).x", // e.g., 1.x, 1.2.x, 1.2.3.x
 
     // those branches should publish releases with tag v0.1.1-dev.1
-    // FIXME: not working as expected
-    // not releasing when push on dev
     {
       // preparing for the next major release
       name: "next",

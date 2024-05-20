@@ -14,8 +14,6 @@ Based on the commit messages, semantic release will determine the next version n
 - It will trigger a github release
 - It will trigger a build and a push on the maven repository
 
-TODO: must handle pre-release versions with alpha, beta.
-
 ## The commit format
 
 It's based on commits following the standardized format:
