@@ -1,43 +1,41 @@
 const BREAKING_KEYWORDS = ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"];
 module.exports = {
   // choose the branch to release from
-  release: {
-    // Default: ['+([0-9])?(.{+([0-9]),x}).x', 'master', 'main', 'next', 'next-major', {name: 'beta', prerelease: true}, {name: 'alpha', prerelease: true}]
-    branches: [
-      "main",
-      // "dev",
-      // "next",
-      // "nightly",
-      // "stable",
-      // "beta",
-      // "alpha",
-      "+([0-9])?(.{+([0-9]),x}).x", // e.g., 1.x, 1.2.x, 1.2.3.x
+  // Default: ['+([0-9])?(.{+([0-9]),x}).x', 'master', 'main', 'next', 'next-major', {name: 'beta', prerelease: true}, {name: 'alpha', prerelease: true}]
+  branches: [
+    "main",
+    // "dev",
+    // "next",
+    // "nightly",
+    // "stable",
+    // "beta",
+    // "alpha",
+    "+([0-9])?(.{+([0-9]),x}).x", // e.g., 1.x, 1.2.x, 1.2.3.x
 
-      // those branches should publish releases with tag v0.1.1-dev.1
-      // FIXME: not working as expected
-      // not releasing when push on dev
-      {
-        // preparing for the next major release
-        name: "next",
-        prerelease: true,
-      },
-      {
-        // development branch
-        name: "dev",
-        prerelease: true,
-      },
-      {
-        // pre-release branch
-        name: "alpha",
-        prerelease: true,
-      },
-      {
-        // pre-release branch
-        name: "beta",
-        prerelease: true,
-      },
-    ],
-  },
+    // those branches should publish releases with tag v0.1.1-dev.1
+    // FIXME: not working as expected
+    // not releasing when push on dev
+    {
+      // preparing for the next major release
+      name: "next",
+      prerelease: true,
+    },
+    {
+      // development branch
+      name: "dev",
+      prerelease: true,
+    },
+    {
+      // pre-release branch
+      name: "alpha",
+      prerelease: true,
+    },
+    {
+      // pre-release branch
+      name: "beta",
+      prerelease: true,
+    },
+  ],
 
   // ## Plugins
   // by default it uses default plugins
