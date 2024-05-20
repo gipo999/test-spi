@@ -4,7 +4,7 @@
   "description": "test-spi",
   "scripts": {
     "commit": "git cz",
-    "prepare": "python pre-commit-3.7.0.pyz install --hook-type pre-commit --hook-type pre-push --hook-type commit-msg -f && gradlew --refresh-dependencies",
+    "prepare": "python pre-commit-3.7.0.pyz install --hook-type pre-commit --hook-type pre-push --hook-type commit-msg",
     "commitlint": "commitlint --edit",
     "lint": "gradlew check && gradlew build",
     "fix": "gradlew spotlessApply",
