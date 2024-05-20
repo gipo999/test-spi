@@ -52,7 +52,6 @@ repos:
         exclude: package.lock.json
   # Custom hooks, local scripts
   # https://stackoverflow.com/questions/59499061/how-to-run-custom-shell-script-file-before-pre-commit-hook
-  # TODO: choose which commmit lint to use
   - repo: local
     hooks:
       # lint commit messages to prevent bad commits
