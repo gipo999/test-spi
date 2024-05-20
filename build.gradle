@@ -27,7 +27,7 @@ plugins {
 	// https://docs.openrewrite.org/running-recipes/getting-started
 	// automatically format and lint your code
 	// in addition to spotless, checkStyle, findBugs and sonarling
-	id 'org.openrewrite.rewrite' version '6.13.0'
+	id 'org.openrewrite.rewrite' version '6.14.0'
 
 
 
