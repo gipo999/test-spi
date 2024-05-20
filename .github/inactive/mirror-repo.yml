@@ -3,15 +3,15 @@
 #
 # action used to mirror the repo to an alternate cloud repo
 # for backup purposes
-name: Sync Repos
+name: Mirror Repos Workflow
 on:
   push:
     branches:
       - main
       - dev
       # You can add more triggers, such as scheduled events
-      # schedule:
-      #   - cron: '0 0 * * *'
+  schedule:
+    - cron: "0 0 * * *"
 jobs:
   sync:
     runs-on: ubuntu-latest

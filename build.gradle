@@ -67,11 +67,13 @@ spotless {
 	format 'misc', {
 		// define the files to apply `misc` to
 		target '*.gradle', '.gitattributes', '.gitignore'
-
-		// define the steps to apply to those files
-		trimTrailingWhitespace()
-		indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+		trimTrailingWhitespace() // in the pre-commit hook too
+		indentWithTabs()
 		endWithNewline()
+	}
+	format 'styling', {
+		target '**/*.json', '**/*.yaml', '**/*.toml'
+		prettier(['prettier-plugin-toml': '2.0.1']).config(['plugins': ['prettier-plugin-toml']])
 	}
 	groovy {
 		// Use the default importOrder configuration
