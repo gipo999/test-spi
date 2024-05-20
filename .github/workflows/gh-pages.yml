@@ -1,7 +1,7 @@
 # https://github.com/gradle/actions/blob/main/docs/setup-gradle.md
 # we are separating the pr and push for the dependency graph
 # https://github.com/gradle/actions/blob/main/docs/setup-gradle.md#github-dependency-graph-support
-name: Pitest to GH Pages Workflow
+name: GH Pages Workflow
 on:
   push:
     branches: ["dev"]
@@ -40,6 +40,12 @@ jobs:
           gradle-version: 8.1.1
       - name: Build Pitest Report Step
         run: ./gradlew pitest
+      - name: Build javadoc Step
+        run: ./gradlew javadoc
+      - name: Move Pitest step
+        run: mv ./build/reports/pitest ./web/gh-pages
+      - name: Move javadoc step
+        run: mv ./build/docs/javadoc ./docs/gh-pages
       - name: Deploy Pitest to GitHub Pages Step
         uses: peaceiris/actions-gh-pages@v4
         # If you're changing the branch from main,
@@ -48,4 +54,4 @@ jobs:
         if: github.ref == 'refs/heads/dev'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/reports/pitest
+          publish_dir: ./docs/gh-pages

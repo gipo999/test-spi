@@ -1,17 +1,19 @@
-const { exec: execFile } = require("child_process");
+const { execSync } = require("child_process");
 
 const isWindows = process.platform === "win32";
 
 const args = process.argv.slice(2);
 
-const Cmds = {
+const cmds = {
   check: isWindows ? "gradlew check" : "./gradlew check",
-  fix: isWindows ? "gradlew spotlessApply" : "./gradlew spotlessApply",
+  fix: isWindows
+    ? "gradlew spotlessApply && gradlew rewriteRun"
+    : "./gradlew spotlessApply & ./gradlew rewriteRun",
   build: isWindows ? "gradlew build" : "./gradlew build",
 };
 
 const execCmd = (cmd) => {
-  execFile(cmd, function (error, stdout, stderr) {
+  execSync(cmd, function (error, stdout, stderr) {
     if (error) {
       console.error(error);
       process.exit(1);
@@ -22,14 +24,14 @@ const execCmd = (cmd) => {
 };
 
 if (args.includes("--format")) {
-  execCmd(Cmds.fix);
+  execCmd(cmds.fix);
 }
 if (args.includes("--lint")) {
-  execCmd(Cmds.check);
+  execCmd(cmds.check);
 }
 if (args.includes("--build")) {
-  execCmd(Cmds.build);
+  execCmd(cmds.build);
 }
 if (args.length === 0) {
-  execCmd(`${Cmds.check} && ${Cmds.build}`);
+  execCmd(`${cmds.build}`);
 }

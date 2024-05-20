@@ -24,6 +24,13 @@ plugins {
 	// https://github.com/nus-cs2103-AY2021S2/forum/issues/93
 	// id 'checkstyle' // uncomment to enable checkstyle, pretty strict
 
+	// https://docs.openrewrite.org/running-recipes/getting-started
+	// automatically format and lint your code
+	// in addition to spotless, checkStyle, findBugs and sonarling
+	id 'org.openrewrite.rewrite' version '6.13.0'
+
+
+
 	// https://spotbugs.readthedocs.io/en/latest/gradle.html
 	id "com.github.spotbugs" version "6.0.14"
 
@@ -43,6 +50,9 @@ plugins {
 	id 'info.solidsoft.pitest' version '1.15.0'
 }
 
+rewrite {
+	activeRecipe("org.openrewrite.staticanalysis.CodeCleanup")
+}
 
 
 pitest {
@@ -67,11 +77,15 @@ spotless {
 	format 'misc', {
 		// define the files to apply `misc` to
 		target '*.gradle', '.gitattributes', '.gitignore'
-
-		// define the steps to apply to those files
-		trimTrailingWhitespace()
-		indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+		trimTrailingWhitespace() // in the pre-commit hook too
+		indentWithTabs()
 		endWithNewline()
+	}
+	format 'styling', {
+		targetExclude 'node_modules/**/*'
+		target  '**/*.json', '**/*.yaml', '**/*.toml', '**/*.js', '**/*.cjs', '**/*.mjs'
+
+		prettier(['prettier-plugin-toml': '2.0.1']).config(['plugins': ['prettier-plugin-toml']])
 	}
 	groovy {
 		// Use the default importOrder configuration
@@ -94,7 +108,7 @@ spotless {
 		//---- Below is for `groovy` only ----
 
 		// excludes all Java sources within the Groovy source dirs from formatting
-		excludeJava()
+		// excludeJava()
 	}
 	groovyGradle {
 		target '*.gradle' // default target of groovyGradle
@@ -142,13 +156,13 @@ repositories {
 
 // ## section for publishing to maven central
 // ./gradlew -Pversion=${version} publish
-group = 'net.syn3rgy.core' // TODO: why group is required? what is it used for?
+group = 'net.syn3rgy.core'
 
 // ## Version
 // the version is calculated automatically after a new github release is created
 // it will grab the latest git tag and override the build.gradle version while publishing using
 // cli command ./gradlew -Pversion=x.x.x publish
-// version='0.0.1-SNAPSHOT' // TODO: why snapshot is required?
+// version='0.0.1-SNAPSHOT'
 
 // sourceSets {
 //     main {
@@ -203,6 +217,8 @@ publishing {
 }
 
 dependencies {
+	rewrite("org.openrewrite.recipe:rewrite-static-analysis:1.6.0")
+
 	// Use JUnit Jupiter for testing.
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
 

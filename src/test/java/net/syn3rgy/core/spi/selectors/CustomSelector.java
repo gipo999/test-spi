@@ -25,9 +25,9 @@ public class CustomSelector implements ImplementationSelector {
       }
     }
     String key = params.get().getCacheKey();
-    if (key.equals("s")) {
+    if ("s".equals(key)) {
       return Optional.ofNullable(standard);
-    } else if (key.equals("c")) {
+    } else if ("c".equals(key)) {
       return Optional.ofNullable(custom);
     }
     return Optional.empty();

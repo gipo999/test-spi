@@ -4,7 +4,7 @@ import net.syn3rgy.core.spi.ImplementationParams;
 
 public class StdCustParams implements ImplementationParams {
 
-  private String param;
+  private final String param;
 
   public StdCustParams(String param) {
     this.param = param;

@@ -16,11 +16,18 @@ repos:
     rev: d0293ebc40f6c0606d624ee4c638c7597f8044d2 # pragma: allowlist secret
     hooks:
       # on spotless
-      # - id: trailing-whitespace
-      #   stages: [commit]
-      - id: end-of-file-fixer
+      - id: trailing-whitespace
         stages: [commit]
+      # yaml and json in spotless too for format
       - id: check-yaml
+        stages: [commit]
+      - id: check-xml
+        stages: [commit]
+      - id: check-toml
+        stages: [commit]
+      - id: check-json
+        stages: [commit]
+      - id: end-of-file-fixer
         stages: [commit]
       - id: check-added-large-files
         stages: [commit]
@@ -52,7 +59,6 @@ repos:
         exclude: package.lock.json
   # Custom hooks, local scripts
   # https://stackoverflow.com/questions/59499061/how-to-run-custom-shell-script-file-before-pre-commit-hook
-  # TODO: choose which commmit lint to use
   - repo: local
     hooks:
       # lint commit messages to prevent bad commits
