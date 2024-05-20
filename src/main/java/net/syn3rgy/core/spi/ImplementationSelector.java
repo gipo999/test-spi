@@ -17,7 +17,5 @@ public interface ImplementationSelector {
    * @param <T> the type of the service
    */
   <T extends NamedService> Optional<T> choose(
-
-      /** The class of the service */
       Class<T> clazz, List<T> implementations, Optional<ImplementationParams> params);
 } // ServiceProviderChooser

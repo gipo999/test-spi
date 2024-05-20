@@ -12,25 +12,25 @@ import org.slf4j.Logger;
 /** Utility class for loading implementations of services. */
 public final class Implementations {
 
-  /** Prevents instantiation of this utility class. */
-  private Implementations() {}
-
   /** The logger for this class. */
   private static final Logger LOGGER = Spi.LOGGER;
 
   /** The cache for implementations. */
-  private static final Map<String, List<PrioritizedService>> cache = new HashMap<>();
+  private static final Map<String, List<PrioritizedService>> CACHE = new HashMap<>();
 
   /** The cache for implementations with parameters. */
-  private static final Map<String, Map<String, List<PrioritizedService>>> paramsCache =
+  private static final Map<String, Map<String, List<PrioritizedService>>> PARAMS_CACHE =
       new HashMap<>();
+
+  /** Prevents instantiation of this utility class. */
+  private Implementations() {}
 
   /**
    * Returns the implementations of a service.
    *
    * @param clazz the class of the service
-   * @return the implementations of the service
    * @param <T> the type of the service
+   * @return the implementations of the service
    */
   public static <T extends PrioritizedService> List<T> of(Class<T> clazz) {
     return of(clazz, null);
@@ -41,8 +41,8 @@ public final class Implementations {
    *
    * @param clazz the class of the service
    * @param filter the filter for the implementations
-   * @return the implementations of the service
    * @param <T> the type of the service
+   * @return the implementations of the service
    */
   public static <T extends PrioritizedService> List<T> of(
       Class<T> clazz, ImplementationsFilter filter) {
@@ -55,8 +55,8 @@ public final class Implementations {
    * @param clazz the class of the service
    * @param filter the filter for the implementations
    * @param params the parameters for the implementations
-   * @return the implementations of the service
    * @param <T> the type of the service
+   * @return the implementations of the service
    */
   @SuppressWarnings("unchecked")
   public static <T extends PrioritizedService> List<T> of(
@@ -69,7 +69,7 @@ public final class Implementations {
     String className = getClassName(clazz);
 
     if (params == null) {
-      cacheObject = cache;
+      cacheObject = CACHE;
 
       cacheKey = className;
 
@@ -77,7 +77,7 @@ public final class Implementations {
 
       cacheKey = params.getCacheKey();
 
-      cacheObject = paramsCache.computeIfAbsent(className, k -> new HashMap<>());
+      cacheObject = PARAMS_CACHE.computeIfAbsent(className, k -> new HashMap<>());
     }
 
     if (cacheObject.containsKey(cacheKey)) {
@@ -98,8 +98,8 @@ public final class Implementations {
    * Returns the class name of a service.
    *
    * @param clazz the class of the service
-   * @return the class name of the service
    * @param <T> the type of the service
+   * @return the class name of the service
    */
   static <T extends NamedService> String getClassName(Class<T> clazz) {
 
@@ -110,8 +110,8 @@ public final class Implementations {
    * Returns the implementations of a service.
    *
    * @param clazz the class of the service
-   * @return the implementations of the service
    * @param <T> the type of the service
+   * @return the implementations of the service
    */
   public static <T extends PrioritizedService> List<T> ofNew(Class<T> clazz) {
 
@@ -123,8 +123,8 @@ public final class Implementations {
    *
    * @param clazz the class of the service
    * @param filter the filter for the implementations
-   * @return the implementations of the service
    * @param <T> the type of the service
+   * @return the implementations of the service
    */
   public static <T extends PrioritizedService> List<T> ofNew(
       Class<T> clazz, ImplementationsFilter filter) {
@@ -138,8 +138,8 @@ public final class Implementations {
    * @param clazz the class of the service
    * @param filter the filter for the implementations
    * @param params the parameters for the implementations
-   * @return the implementations of the service
    * @param <T> the type of the service
+   * @return the implementations of the service
    */
   public static <T extends PrioritizedService> List<T> ofNew(
       Class<T> clazz, ImplementationsFilter filter, ImplementationParams params) {
@@ -186,8 +186,8 @@ public final class Implementations {
    * Loads the implementations of a service.
    *
    * @param clazz the class of the service
-   * @return the implementations of the service
    * @param <T> the type of the service
+   * @return the implementations of the service
    */
   private static <T extends PrioritizedService> List<T> loadList(Class<T> clazz) {
 

@@ -12,8 +12,8 @@ public class DefaultImplementationSelector implements ImplementationSelector {
    * @param clazz the class of the service
    * @param implementations the implementations of the service
    * @param params the parameters for choosing the implementation
-   * @return the chosen implementation
    * @param <T> the type of the service
+   * @return the chosen implementation
    */
   @Override
   public <T extends NamedService> Optional<T> choose(

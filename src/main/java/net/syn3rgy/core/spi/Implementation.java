@@ -12,20 +12,20 @@ import org.slf4j.Logger;
 /** Utility class for loading implementations of services. */
 public final class Implementation {
 
-  /** Prevents instantiation of this utility class. */
-  private Implementation() {}
-
   /** The logger for this class. */
   private static final Logger LOGGER = Spi.LOGGER;
 
   /** The cache for implementations. */
-  private static final Map<String, NamedService> cache = new HashMap<>();
+  private static final Map<String, NamedService> CACHE = new HashMap<>();
 
   /** The cache for implementations with parameters. */
-  private static final Map<String, Map<String, NamedService>> paramsCache = new HashMap<>();
+  private static final Map<String, Map<String, NamedService>> PARAMS_CACHE = new HashMap<>();
 
   /** The global implementation selector. */
   private static ImplementationSelector globalSelector;
+
+  /** Prevents instantiation of this utility class. */
+  private Implementation() {}
 
   /**
    * Sets the global implementation selector.
@@ -67,8 +67,8 @@ public final class Implementation {
    * Returns the implementation of a service.
    *
    * @param clazz the class of the service
-   * @return the implementation of the service
    * @param <T> the type of the service
+   * @return the implementation of the service
    */
   public static <T extends NamedService> Optional<T> of(Class<T> clazz) {
 
@@ -80,8 +80,8 @@ public final class Implementation {
    *
    * @param clazz the class of the service
    * @param selector the selector for the implementation
-   * @return the implementation of the service
    * @param <T> the type of the service
+   * @return the implementation of the service
    */
   public static <T extends NamedService> Optional<T> of(
       Class<T> clazz, ImplementationSelector selector) {
@@ -95,8 +95,8 @@ public final class Implementation {
    * @param clazz the class of the service
    * @param selector the selector for the implementation
    * @param params the parameters for the implementation
-   * @return the implementation of the service
    * @param <T> the type of the service
+   * @return the implementation of the service
    */
   @SuppressWarnings("unchecked")
   public static <T extends NamedService> Optional<T> of(
@@ -109,13 +109,13 @@ public final class Implementation {
     String className = getClassName(clazz);
 
     if (params == null) {
-      cacheObject = cache;
+      cacheObject = CACHE;
 
       cacheKey = className;
     } else {
       cacheKey = params.getCacheKey();
 
-      cacheObject = paramsCache.computeIfAbsent(className, k -> new HashMap<>());
+      cacheObject = PARAMS_CACHE.computeIfAbsent(className, k -> new HashMap<>());
     }
 
     if (cacheObject.containsKey(cacheKey)) {
@@ -134,8 +134,8 @@ public final class Implementation {
    * Returns the class name of a service.
    *
    * @param clazz the class of the service
-   * @return the class name of the service
    * @param <T> the type of the service
+   * @return the class name of the service
    */
   private static <T extends NamedService> String getClassName(Class<T> clazz) {
 
@@ -146,8 +146,8 @@ public final class Implementation {
    * Returns a new implementation of a service.
    *
    * @param clazz the class of the service
-   * @return the new implementation of the service
    * @param <T> the type of the service
+   * @return the new implementation of the service
    */
   public static <T extends NamedService> Optional<T> ofNew(Class<T> clazz) {
 
@@ -159,8 +159,8 @@ public final class Implementation {
    *
    * @param clazz the class of the service
    * @param selector the selector for the implementation
-   * @return the new implementation of the service
    * @param <T> the type of the service
+   * @return the new implementation of the service
    */
   public static <T extends NamedService> Optional<T> ofNew(
       Class<T> clazz, ImplementationSelector selector) {
@@ -173,8 +173,8 @@ public final class Implementation {
    * @param clazz the class of the service
    * @param selector the selector for the implementation
    * @param params the parameters for the implementation
-   * @return the new implementation of the service
    * @param <T> the type of the service
+   * @return the new implementation of the service
    */
   public static <T extends NamedService> Optional<T> ofNew(
       Class<T> clazz, ImplementationSelector selector, ImplementationParams params) {
@@ -210,8 +210,8 @@ public final class Implementation {
    * Loads the implementations of a service.
    *
    * @param clazz the class of the service
-   * @return the implementations of the service
    * @param <T> the type of the service
+   * @return the implementations of the service
    */
   private static <T extends NamedService> List<T> loadList(Class<T> clazz) {
 
