@@ -6,7 +6,9 @@ const args = process.argv.slice(2);
 
 const cmds = {
   check: isWindows ? "gradlew check" : "./gradlew check",
-  fix: isWindows ? "gradlew spotlessApply" : "./gradlew spotlessApply",
+  fix: isWindows
+    ? "gradlew spotlessApply && gradlew rewriteRun"
+    : "./gradlew spotlessApply & ./gradlew rewriteRun",
   build: isWindows ? "gradlew build" : "./gradlew build",
 };
 

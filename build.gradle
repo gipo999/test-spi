@@ -24,6 +24,13 @@ plugins {
 	// https://github.com/nus-cs2103-AY2021S2/forum/issues/93
 	// id 'checkstyle' // uncomment to enable checkstyle, pretty strict
 
+	// https://docs.openrewrite.org/running-recipes/getting-started
+	// automatically format and lint your code
+	// in addition to spotless, checkStyle, findBugs and sonarling
+	id 'org.openrewrite.rewrite' version '6.13.0'
+
+
+
 	// https://spotbugs.readthedocs.io/en/latest/gradle.html
 	id "com.github.spotbugs" version "6.0.14"
 
@@ -43,6 +50,9 @@ plugins {
 	id 'info.solidsoft.pitest' version '1.15.0'
 }
 
+rewrite {
+	activeRecipe("org.openrewrite.staticanalysis.CodeCleanup")
+}
 
 
 pitest {
@@ -207,6 +217,8 @@ publishing {
 }
 
 dependencies {
+	rewrite("org.openrewrite.recipe:rewrite-static-analysis:1.6.0")
+
 	// Use JUnit Jupiter for testing.
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
 
