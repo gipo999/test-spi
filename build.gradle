@@ -78,7 +78,7 @@ plugins {
 // 	// checkstyle "com.puppycrawl.tools:checkstyle:8.29"
 // }
 checkstyle {
-	// 	toolVersion '8.29'
+	toolVersion '10.16.0'
 	// 	config = resources.text.fromArchiveEntry(configurations.checkstyleConfig, 'google_checks.xml')
 	// 	// configFile = file('config/checkstyle/checkstyle.xml')
 	// 	// make build/check fail if we have any violations
