@@ -1,4 +1,4 @@
-const { execSync } = require("child_process");
+const { exec } = require("child_process");
 
 const isWindows = process.platform === "win32";
 
@@ -13,7 +13,7 @@ const cmds = {
 };
 
 const execCmd = (cmd) => {
-  execSync(cmd, function (error, stdout, stderr) {
+  exec(cmd, function (error, stdout, stderr) {
     if (error) {
       console.error(error);
       process.exit(1);
