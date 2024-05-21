@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /** SPI (Service Provider Interface) for the core module. */
 public final class Spi {
 
-  /** Prevents instantiation of this utility class. */
+  /** Logger for the SPI. */
   static final Logger LOGGER = LoggerFactory.getLogger(Spi.class);
 
   /** private constructor to prevent instantiation. */
