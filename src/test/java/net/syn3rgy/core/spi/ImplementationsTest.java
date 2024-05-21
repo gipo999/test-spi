@@ -23,10 +23,10 @@ class ImplementationsTest {
     assertFalse(named001.isEmpty());
     assertEquals(1, named001.size());
     assertTrue(named001.get(0).getClass().getName().endsWith("Standard"));
-    var named001_clone = Implementations.ofNew(PrioritizedService001.class);
-    assertFalse(named001_clone.isEmpty());
-    assertEquals(1, named001_clone.size());
-    assertNotSame(named001.get(0), named001_clone.get(0));
+    var named001Clone = Implementations.ofNew(PrioritizedService001.class);
+    assertFalse(named001Clone.isEmpty());
+    assertEquals(1, named001Clone.size());
+    assertNotSame(named001.get(0), named001Clone.get(0));
   }
 
   @Test
@@ -35,10 +35,10 @@ class ImplementationsTest {
     assertFalse(named002.isEmpty());
     assertEquals(1, named002.size());
     assertTrue(named002.get(0).getClass().getName().endsWith("Custom"));
-    var named002_clone = Implementations.ofNew(PrioritizedService002.class);
-    assertFalse(named002_clone.isEmpty());
-    assertEquals(1, named002_clone.size());
-    assertNotSame(named002.get(0), named002_clone.get(0));
+    var named002Clone = Implementations.ofNew(PrioritizedService002.class);
+    assertFalse(named002Clone.isEmpty());
+    assertEquals(1, named002Clone.size());
+    assertNotSame(named002.get(0), named002Clone.get(0));
   }
 
   @Test
@@ -48,11 +48,11 @@ class ImplementationsTest {
     assertEquals(2, named003.size());
     assertTrue(named003.get(0).getClass().getName().endsWith("Custom"));
     assertTrue(named003.get(1).getClass().getName().endsWith("Standard"));
-    var named003_clone = Implementations.ofNew(PrioritizedService003.class);
-    assertFalse(named003_clone.isEmpty());
-    assertEquals(2, named003_clone.size());
-    assertNotSame(named003.get(0), named003_clone.get(0));
-    assertNotSame(named003.get(1), named003_clone.get(1));
+    var named003Clone = Implementations.ofNew(PrioritizedService003.class);
+    assertFalse(named003Clone.isEmpty());
+    assertEquals(2, named003Clone.size());
+    assertNotSame(named003.get(0), named003Clone.get(0));
+    assertNotSame(named003.get(1), named003Clone.get(1));
   }
 
   @Test
@@ -69,34 +69,34 @@ class ImplementationsTest {
 
   @Test
   void testCustomSelectorWithParamsNoCache() {
-    var named003_std =
+    var named003Std =
         Implementations.ofNew(
             PrioritizedService003.class, new CustomFilter(), new StdCustParams("s"));
-    assertEquals(1, named003_std.size());
-    assertTrue(named003_std.get(0).getClass().getName().endsWith("Standard"));
-    var named003_std_clone =
+    assertEquals(1, named003Std.size());
+    assertTrue(named003Std.get(0).getClass().getName().endsWith("Standard"));
+    var named003StdClone =
         Implementations.ofNew(
             PrioritizedService003.class, new CustomFilter(), new StdCustParams("s"));
-    assertEquals(1, named003_std_clone.size());
-    assertTrue(named003_std_clone.get(0).getClass().getName().endsWith("Standard"));
-    assertNotSame(named003_std.get(0), named003_std_clone.get(0));
+    assertEquals(1, named003StdClone.size());
+    assertTrue(named003StdClone.get(0).getClass().getName().endsWith("Standard"));
+    assertNotSame(named003Std.get(0), named003StdClone.get(0));
 
-    var named003_cus =
+    var named003Cus =
         Implementations.ofNew(
             PrioritizedService003.class, new CustomFilter(), new StdCustParams("c"));
-    assertEquals(1, named003_cus.size());
-    assertTrue(named003_cus.get(0).getClass().getName().endsWith("Custom"));
-    var named003_cus_clone =
+    assertEquals(1, named003Cus.size());
+    assertTrue(named003Cus.get(0).getClass().getName().endsWith("Custom"));
+    var named003CusClone =
         Implementations.ofNew(
             PrioritizedService003.class, new CustomFilter(), new StdCustParams("c"));
-    assertEquals(1, named003_cus_clone.size());
-    assertTrue(named003_cus_clone.get(0).getClass().getName().endsWith("Custom"));
-    assertNotSame(named003_cus.get(0), named003_cus_clone.get(0));
+    assertEquals(1, named003CusClone.size());
+    assertTrue(named003CusClone.get(0).getClass().getName().endsWith("Custom"));
+    assertNotSame(named003Cus.get(0), named003CusClone.get(0));
 
-    var named003_no =
+    var named003No =
         Implementations.ofNew(
             PrioritizedService003.class, new CustomFilter(), new StdCustParams("asd"));
-    assertTrue(named003_no.isEmpty());
+    assertTrue(named003No.isEmpty());
   }
 
   @Test
@@ -105,10 +105,10 @@ class ImplementationsTest {
     assertFalse(named001.isEmpty());
     assertEquals(1, named001.size());
     assertTrue(named001.get(0).getClass().getName().endsWith("Standard"));
-    var named001_clone = Implementations.of(PrioritizedService001.class);
-    assertFalse(named001_clone.isEmpty());
-    assertEquals(1, named001_clone.size());
-    assertSame(named001.get(0), named001_clone.get(0));
+    var named001Clone = Implementations.of(PrioritizedService001.class);
+    assertFalse(named001Clone.isEmpty());
+    assertEquals(1, named001Clone.size());
+    assertSame(named001.get(0), named001Clone.get(0));
   }
 
   @Test
@@ -117,10 +117,10 @@ class ImplementationsTest {
     assertFalse(named002.isEmpty());
     assertEquals(1, named002.size());
     assertTrue(named002.get(0).getClass().getName().endsWith("Custom"));
-    var named002_clone = Implementations.of(PrioritizedService002.class);
-    assertFalse(named002_clone.isEmpty());
-    assertEquals(1, named002_clone.size());
-    assertSame(named002.get(0), named002_clone.get(0));
+    var named002Clone = Implementations.of(PrioritizedService002.class);
+    assertFalse(named002Clone.isEmpty());
+    assertEquals(1, named002Clone.size());
+    assertSame(named002.get(0), named002Clone.get(0));
   }
 
   @Test
@@ -130,11 +130,11 @@ class ImplementationsTest {
     assertEquals(2, named003.size());
     assertTrue(named003.get(0).getClass().getName().endsWith("Custom"));
     assertTrue(named003.get(1).getClass().getName().endsWith("Standard"));
-    var named003_clone = Implementations.of(PrioritizedService003.class);
-    assertFalse(named003_clone.isEmpty());
-    assertEquals(2, named003_clone.size());
-    assertSame(named003.get(0), named003_clone.get(0));
-    assertSame(named003.get(1), named003_clone.get(1));
+    var named003Clone = Implementations.of(PrioritizedService003.class);
+    assertFalse(named003Clone.isEmpty());
+    assertEquals(2, named003Clone.size());
+    assertSame(named003.get(0), named003Clone.get(0));
+    assertSame(named003.get(1), named003Clone.get(1));
   }
 
   @Test
@@ -151,29 +151,29 @@ class ImplementationsTest {
 
   @Test
   void testCustomSelectorWithParamsWithCache() {
-    var named003_std =
+    var named003Std =
         Implementations.of(PrioritizedService003.class, new CustomFilter(), new StdCustParams("s"));
-    assertEquals(1, named003_std.size());
-    assertTrue(named003_std.get(0).getClass().getName().endsWith("Standard"));
-    var named003_std_clone =
+    assertEquals(1, named003Std.size());
+    assertTrue(named003Std.get(0).getClass().getName().endsWith("Standard"));
+    var named003StdClone =
         Implementations.of(PrioritizedService003.class, new CustomFilter(), new StdCustParams("s"));
-    assertEquals(1, named003_std_clone.size());
-    assertTrue(named003_std_clone.get(0).getClass().getName().endsWith("Standard"));
-    assertSame(named003_std.get(0), named003_std_clone.get(0));
+    assertEquals(1, named003StdClone.size());
+    assertTrue(named003StdClone.get(0).getClass().getName().endsWith("Standard"));
+    assertSame(named003Std.get(0), named003StdClone.get(0));
 
-    var named003_cus =
+    var named003Cus =
         Implementations.of(PrioritizedService003.class, new CustomFilter(), new StdCustParams("c"));
-    assertEquals(1, named003_cus.size());
-    assertTrue(named003_cus.get(0).getClass().getName().endsWith("Custom"));
-    var named003_cus_clone =
+    assertEquals(1, named003Cus.size());
+    assertTrue(named003Cus.get(0).getClass().getName().endsWith("Custom"));
+    var named003CusClone =
         Implementations.of(PrioritizedService003.class, new CustomFilter(), new StdCustParams("c"));
-    assertEquals(1, named003_cus_clone.size());
-    assertTrue(named003_cus_clone.get(0).getClass().getName().endsWith("Custom"));
-    assertSame(named003_cus.get(0), named003_cus_clone.get(0));
+    assertEquals(1, named003CusClone.size());
+    assertTrue(named003CusClone.get(0).getClass().getName().endsWith("Custom"));
+    assertSame(named003Cus.get(0), named003CusClone.get(0));
 
-    var named003_no =
+    var named003No =
         Implementations.of(
             PrioritizedService003.class, new CustomFilter(), new StdCustParams("asd"));
-    assertTrue(named003_no.isEmpty());
+    assertTrue(named003No.isEmpty());
   }
 }

@@ -21,9 +21,9 @@ class ImplementationTest {
     assertTrue(named001.isPresent());
     if (named001.isPresent()) {
       assertTrue(named001.get().getClass().getName().endsWith("Standard"));
-      var named001_clone = Implementation.ofNew(NamedService001.class);
-      assertTrue(named001_clone.isPresent());
-      assertNotSame(named001.get(), named001_clone.get());
+      var named001Clone = Implementation.ofNew(NamedService001.class);
+      assertTrue(named001Clone.isPresent());
+      assertNotSame(named001.get(), named001Clone.get());
     }
   }
 
@@ -33,9 +33,9 @@ class ImplementationTest {
     assertTrue(named002.isPresent());
     if (named002.isPresent()) {
       assertTrue(named002.get().getClass().getName().endsWith("Custom"));
-      var named002_clone = Implementation.ofNew(NamedService002.class);
-      assertTrue(named002_clone.isPresent());
-      assertNotSame(named002.get(), named002_clone.get());
+      var named002Clone = Implementation.ofNew(NamedService002.class);
+      assertTrue(named002Clone.isPresent());
+      assertNotSame(named002.get(), named002Clone.get());
     }
   }
 
@@ -45,9 +45,9 @@ class ImplementationTest {
     assertTrue(named003.isPresent());
     if (named003.isPresent()) {
       assertTrue(named003.get().getClass().getName().endsWith("Custom"));
-      var named003_clone = Implementation.ofNew(NamedService003.class);
-      assertTrue(named003_clone.isPresent());
-      assertNotSame(named003.get(), named003_clone.get());
+      var named003Cone = Implementation.ofNew(NamedService003.class);
+      assertTrue(named003Cone.isPresent());
+      assertNotSame(named003.get(), named003Cone.get());
     }
   }
 
@@ -73,25 +73,25 @@ class ImplementationTest {
 
   @Test
   void testCustomSelectorWithParamsNoCache() {
-    var named003_std =
+    var named003Std =
         Implementation.ofNew(NamedService003.class, new CustomSelector(), new StdCustParams("s"));
-    assertTrue(named003_std.isPresent());
-    assertTrue(named003_std.get().getClass().getName().endsWith("Standard"));
-    var named003_std_clone =
+    assertTrue(named003Std.isPresent());
+    assertTrue(named003Std.get().getClass().getName().endsWith("Standard"));
+    var named003StdClone =
         Implementation.of(NamedService003.class, new CustomSelector(), new StdCustParams("s"));
-    assertNotSame(named003_std.get(), named003_std_clone.get());
+    assertNotSame(named003Std.get(), named003StdClone.get());
 
-    var named003_cus =
+    var named003Cus =
         Implementation.ofNew(NamedService003.class, new CustomSelector(), new StdCustParams("c"));
-    assertTrue(named003_cus.isPresent());
-    assertTrue(named003_cus.get().getClass().getName().endsWith("Custom"));
-    var named003_cus_clone =
+    assertTrue(named003Cus.isPresent());
+    assertTrue(named003Cus.get().getClass().getName().endsWith("Custom"));
+    var named003CusClone =
         Implementation.of(NamedService003.class, new CustomSelector(), new StdCustParams("c"));
-    assertNotSame(named003_cus.get(), named003_cus_clone.get());
+    assertNotSame(named003Cus.get(), named003CusClone.get());
 
-    var named003_no =
+    var named003No =
         Implementation.ofNew(NamedService003.class, new CustomSelector(), new StdCustParams("asd"));
-    assertTrue(named003_no.isEmpty());
+    assertTrue(named003No.isEmpty());
   }
 
   @Test
@@ -100,9 +100,9 @@ class ImplementationTest {
     assertTrue(named001.isPresent());
     if (named001.isPresent()) {
       assertTrue(named001.get().getClass().getName().endsWith("Standard"));
-      var named001_clone = Implementation.of(NamedService001.class);
-      assertTrue(named001_clone.isPresent());
-      assertSame(named001.get(), named001_clone.get());
+      var named001Clone = Implementation.of(NamedService001.class);
+      assertTrue(named001Clone.isPresent());
+      assertSame(named001.get(), named001Clone.get());
     }
   }
 
@@ -112,9 +112,9 @@ class ImplementationTest {
     assertTrue(named002.isPresent());
     if (named002.isPresent()) {
       assertTrue(named002.get().getClass().getName().endsWith("Custom"));
-      var named002_clone = Implementation.of(NamedService002.class);
-      assertTrue(named002_clone.isPresent());
-      assertSame(named002.get(), named002_clone.get());
+      var named002Clone = Implementation.of(NamedService002.class);
+      assertTrue(named002Clone.isPresent());
+      assertSame(named002.get(), named002Clone.get());
     }
   }
 
@@ -124,9 +124,9 @@ class ImplementationTest {
     assertTrue(named003.isPresent());
     if (named003.isPresent()) {
       assertTrue(named003.get().getClass().getName().endsWith("Custom"));
-      var named003_clone = Implementation.of(NamedService003.class);
-      assertTrue(named003_clone.isPresent());
-      assertSame(named003.get(), named003_clone.get());
+      var named003Clone = Implementation.of(NamedService003.class);
+      assertTrue(named003Clone.isPresent());
+      assertSame(named003.get(), named003Clone.get());
     }
   }
 
@@ -152,24 +152,24 @@ class ImplementationTest {
 
   @Test
   void testCustomSelectorWithParamsWithCache() {
-    var named003_std =
+    var named003Std =
         Implementation.of(NamedService003.class, new CustomSelector(), new StdCustParams("s"));
-    assertTrue(named003_std.isPresent());
-    assertTrue(named003_std.get().getClass().getName().endsWith("Standard"));
-    var named003_std_clone =
+    assertTrue(named003Std.isPresent());
+    assertTrue(named003Std.get().getClass().getName().endsWith("Standard"));
+    var named003StdClone =
         Implementation.of(NamedService003.class, new CustomSelector(), new StdCustParams("s"));
-    assertSame(named003_std.get(), named003_std_clone.get());
+    assertSame(named003Std.get(), named003StdClone.get());
 
-    var named003_cus =
+    var named003Cus =
         Implementation.of(NamedService003.class, new CustomSelector(), new StdCustParams("c"));
-    assertTrue(named003_cus.isPresent());
-    assertTrue(named003_cus.get().getClass().getName().endsWith("Custom"));
-    var named003_cus_clone =
+    assertTrue(named003Cus.isPresent());
+    assertTrue(named003Cus.get().getClass().getName().endsWith("Custom"));
+    var named003CusClone =
         Implementation.of(NamedService003.class, new CustomSelector(), new StdCustParams("c"));
-    assertSame(named003_cus.get(), named003_cus_clone.get());
+    assertSame(named003Cus.get(), named003CusClone.get());
 
-    var named003_no =
+    var named003No =
         Implementation.of(NamedService003.class, new CustomSelector(), new StdCustParams("asd"));
-    assertTrue(named003_no.isEmpty());
+    assertTrue(named003No.isEmpty());
   }
 }

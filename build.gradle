@@ -22,11 +22,19 @@ plugins {
 	// https://docs.gradle.org/current/userguide/checkstyle_plugin.html
 	// https://medium.com/@raveensr/how-to-add-checkstyle-and-findbugs-plugins-in-a-gradle-based-project-51759aa843be
 	// https://github.com/nus-cs2103-AY2021S2/forum/issues/93
-	// id 'checkstyle' // uncomment to enable checkstyle, pretty strict
+	// https://stackoverflow.com/questions/67508090/checkstyle-gradle-use-google-checks
+	// https://github.com/gradle/gradle/issues/28408
+	// https://github.com/checkstyle/checkstyle/blob/checkstyle-10.14.0/src/main/resources/google_checks.xml
+	// https://stackoverflow.com/questions/28749804/how-to-compile-project-with-google-checkstyle-rules-with-gradle <-- this one works
+	id 'checkstyle'
 
 	// https://docs.openrewrite.org/running-recipes/getting-started
 	// automatically format and lint your code
 	// in addition to spotless, checkStyle, findBugs and sonarling
+	// in addition to spotless, checkStyle, findBugs and sonarlint
+	// adds command gradlew rewriteRun
+	// added as command in npm run --format
+	// TODO: read more
 	id 'org.openrewrite.rewrite' version '6.14.0'
 
 
@@ -50,10 +58,47 @@ plugins {
 	id 'info.solidsoft.pitest' version '1.15.0'
 }
 
+// ### CHECKSTYLE
+
+// doesn't work
+// https://stackoverflow.com/questions/67508090/checkstyle-gradle-use-google-checks
+// checkstyle {
+//     def archive = configurations.checkstyle.resolve().find {
+//         it.name.startsWith("checkstyle")
+//     }
+//     config = resources.text.fromArchiveEntry(archive, "google_checks.xml")
+// }
+
+// https://stackoverflow.com/questions/28749804/how-to-compile-project-with-google-checkstyle-rules-with-gradle
+// configurations {
+// 	checkstyleConfig
+// }
+// dependencies {
+// 	checkstyleConfig("com.puppycrawl.tools:checkstyle:8.29") { transitive = false }
+// 	// checkstyle "com.puppycrawl.tools:checkstyle:8.29"
+// }
+// checkstyle {
+// 	toolVersion '8.29'
+// 	config = resources.text.fromArchiveEntry(configurations.checkstyleConfig, 'google_checks.xml')
+// 	// configFile = file('config/checkstyle/checkstyle.xml')
+// 	// make build/check fail if we have any violations
+// 	ignoreFailures = false
+// 	maxWarnings = 0
+// }
+// tasks.withType(Checkstyle) {
+// 	checkstyleClasspath = project.configurations.checkstyleOverride
+// }
+
+// ### REWRITE
+
+dependencies {
+	rewrite("org.openrewrite.recipe:rewrite-static-analysis:1.7.0")
+}
 rewrite {
 	activeRecipe("org.openrewrite.staticanalysis.CodeCleanup")
 }
 
+// ### PIT
 
 pitest {
 	//adds dependency to org.pitest:pitest-junit5-plugin and sets "testPlugin" to "junit5"
@@ -61,6 +106,9 @@ pitest {
 	junit5PluginVersion = '1.2.1'
 	pitestVersion = '1.15.2'
 }
+
+
+// ### SPOTLESS
 
 // https://stackoverflow.com/questions/57261461/gradle-build-failes-getting-an-error-checkstylemain-failed
 
@@ -80,6 +128,13 @@ spotless {
 		trimTrailingWhitespace() // in the pre-commit hook too
 		indentWithTabs()
 		endWithNewline()
+	}
+	format 'xml', {
+		target 'src/**/*.xml', 'config/**/*.xml' // must specify target
+		eclipseWtp('xml')     // must specify a type (table below)
+		// eclipseWtp('xml', '11.0') // optional version, others at https://download.eclipse.org/tools/cdt/releases/
+		// you can also specify an arbitrary number of config files
+		// eclipseWtp('xml').configFile('spotless.xml.prefs', 'spotless.common.properties'
 	}
 	format 'styling', {
 		targetExclude 'node_modules/**/*'
