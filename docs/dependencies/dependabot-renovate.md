@@ -8,3 +8,7 @@ renovate will read the alerts and create PRs
 renovate will also create PRs for non-security updates
 
 renovate groups dependency updates into a single PR
+
+use best practices instead
+
+<https://docs.renovatebot.com/upgrade-best-practices/>
