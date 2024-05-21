@@ -93,7 +93,7 @@ checkstyle {
 
 dependencies {
 	rewrite("org.openrewrite.recipe:rewrite-static-analysis:1.7.0")
-	rewrite("org.openrewrite.recipe:rewrite-java-security:2.7.0")
+	rewrite("org.openrewrite.recipe:rewrite-java-security:2.8.0")
 }
 rewrite {
 	activeRecipe("org.openrewrite.staticanalysis.CodeCleanup")
