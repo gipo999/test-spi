@@ -30,7 +30,7 @@
 		checks=".*" />
 
 	<!-- Suppress all javadoc checks for test folder: -->
-	<!-- <suppress files="[/\\]test[/\\]" checks="Javadoc.*" /> -->
+	<suppress files="[/\\]test[/\\]" checks="Javadoc.*" />
 
 	<!-- Suppress all checks for non-java files: -->
 	<suppress
