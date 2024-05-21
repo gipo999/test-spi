@@ -43,9 +43,9 @@ jobs:
       - name: Build javadoc Step
         run: ./gradlew javadoc
       - name: Move Pitest step
-        run: mv ./build/reports/pitest ./web/gh-pages
+        run: mv ./build/reports/pitest ./docs/gh-pages/pit
       - name: Move javadoc step
-        run: mv ./build/docs/javadoc ./docs/gh-pages
+        run: mv ./build/docs/javadoc ./docs/gh-pages/docs
       - name: Deploy Pitest to GitHub Pages Step
         uses: peaceiris/actions-gh-pages@v4
         # If you're changing the branch from main,
