@@ -77,14 +77,14 @@ plugins {
 // 	checkstyleConfig("com.puppycrawl.tools:checkstyle:8.29") { transitive = false }
 // 	// checkstyle "com.puppycrawl.tools:checkstyle:8.29"
 // }
-// checkstyle {
-// 	toolVersion '8.29'
-// 	config = resources.text.fromArchiveEntry(configurations.checkstyleConfig, 'google_checks.xml')
-// 	// configFile = file('config/checkstyle/checkstyle.xml')
-// 	// make build/check fail if we have any violations
-// 	ignoreFailures = false
-// 	maxWarnings = 0
-// }
+checkstyle {
+	// 	toolVersion '8.29'
+	// 	config = resources.text.fromArchiveEntry(configurations.checkstyleConfig, 'google_checks.xml')
+	// 	// configFile = file('config/checkstyle/checkstyle.xml')
+	// 	// make build/check fail if we have any violations
+	ignoreFailures = false
+	maxWarnings = 0
+}
 // tasks.withType(Checkstyle) {
 // 	checkstyleClasspath = project.configurations.checkstyleOverride
 // }
@@ -125,19 +125,21 @@ spotless {
 	format 'misc', {
 		// define the files to apply `misc` to
 		target '*.gradle', '.gitattributes', '.gitignore'
+		targetExclude 'build/**/*', 'node_modules/**/*', 'target/**/*', 'out/**/*', 'dist/**/*', 'bin/**/*'
 		trimTrailingWhitespace() // in the pre-commit hook too
 		indentWithTabs()
 		endWithNewline()
 	}
 	format 'xml', {
-		target 'src/**/*.xml', 'config/**/*.xml' // must specify target
+		target '**/*.xml' // must specify target
+		targetExclude 'build/**/*', 'node_modules/**/*', 'target/**/*', 'out/**/*', 'dist/**/*', 'bin/**/*'
 		eclipseWtp('xml')     // must specify a type (table below)
 		// eclipseWtp('xml', '11.0') // optional version, others at https://download.eclipse.org/tools/cdt/releases/
 		// you can also specify an arbitrary number of config files
 		// eclipseWtp('xml').configFile('spotless.xml.prefs', 'spotless.common.properties'
 	}
 	format 'styling', {
-		targetExclude 'node_modules/**/*'
+		targetExclude 'build/**/*', 'node_modules/**/*', 'target/**/*', 'out/**/*', 'dist/**/*', 'bin/**/*'
 		target  '**/*.json', '**/*.yaml', '**/*.toml', '**/*.js', '**/*.cjs', '**/*.mjs'
 
 		prettier(['prettier-plugin-toml': '2.0.1']).config(['plugins': ['prettier-plugin-toml']])
@@ -167,6 +169,7 @@ spotless {
 	}
 	groovyGradle {
 		target '*.gradle' // default target of groovyGradle
+		targetExclude 'build/**/*', 'node_modules/**/*', 'target/**/*', 'out/**/*', 'dist/**/*', 'bin/**/*'
 		greclipse()
 	}
 	java {
