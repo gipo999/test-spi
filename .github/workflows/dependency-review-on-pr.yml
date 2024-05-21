@@ -17,11 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository Job
-        uses: actions/checkout@v4
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
       # dependency review after dependency submission (dep graph is generated)
       # requires a timeout to make sure the dep graph is generated and submitted
       - name: Dependency Review on PR Step
-        uses: actions/dependency-review-action@v4
+        uses: actions/dependency-review-action@0c155c5e8556a497adf53f2c18edabf945ed8e70 # v4
         with:
           retry-on-snapshot-warnings: true
           retry-on-snapshot-warnings-timeout: 600 # change this timer

@@ -30,7 +30,7 @@ jobs:
       id-token: write # to enable use of OIDC for npm provenance
     steps:
       - name: Checkout Step
-        uses: actions/checkout@v4
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
         with:
           fetch-depth: 0 # get all history for git tags
           # https://github.com/semantic-release/github/issues/264
@@ -45,7 +45,7 @@ jobs:
           persist-credentials: false # <<<--- This line is needed for security
       # we don't need node
       - name: Setup Node.js Step
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
         with:
           node-version: "22.0.0"
       # - name: Install dependencies Step
