@@ -38,8 +38,9 @@ jobs:
           # this should be updated automatically from dependabot
           # https://github.com/gradle/actions/blob/main/docs/setup-gradle.md#github-dependency-graph-support
           gradle-version: 8.1.1
-      - name: Check with Gradle Wrapper Step
-        run: ./gradlew check
+      # check not needed, included in build
+      # - name: Check with Gradle Wrapper Step
+      #   run: ./gradlew check
       - name: Build with Gradle Wrapper Step
         run: ./gradlew build
   build-windows:
@@ -64,7 +65,8 @@ jobs:
           # this should be updated automatically from dependabot
           # https://github.com/gradle/actions/blob/main/docs/setup-gradle.md#github-dependency-graph-support
           gradle-version: 8.1.1
-      - name: Check with Gradle Wrapper Step
-        run: ./gradlew check
+      # check not needed, included in build
+      # - name: Check with Gradle Wrapper Step
+      #   run: ./gradlew check
       - name: Build with Gradle Wrapper Step
         run: ./gradlew build
