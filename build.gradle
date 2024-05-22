@@ -40,7 +40,7 @@ plugins {
 
 
 	// https://spotbugs.readthedocs.io/en/latest/gradle.html
-	id "com.github.spotbugs" version "6.0.14"
+	id "com.github.spotbugs" version "6.0.15"
 
 	// https://plugins.gradle.org/plugin/name.remal.sonarlint
 	// https://github.com/remal-gradle-plugins/sonarlint
