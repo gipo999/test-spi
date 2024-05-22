@@ -92,7 +92,7 @@ checkstyle {
 // ### REWRITE
 
 dependencies {
-	rewrite("org.openrewrite.recipe:rewrite-static-analysis:1.7.0")
+	rewrite("org.openrewrite.recipe:rewrite-static-analysis:1.8.0")
 	rewrite("org.openrewrite.recipe:rewrite-java-security:2.8.0")
 }
 rewrite {
@@ -281,7 +281,7 @@ publishing {
 }
 
 dependencies {
-	rewrite("org.openrewrite.recipe:rewrite-static-analysis:1.7.0")
+	rewrite("org.openrewrite.recipe:rewrite-static-analysis:1.8.0")
 
 	// Use JUnit Jupiter for testing.
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
