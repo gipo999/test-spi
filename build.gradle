@@ -35,7 +35,7 @@ plugins {
 	// adds command gradlew rewriteRun
 	// added as command in npm run --format
 	// TODO: read more
-	id 'org.openrewrite.rewrite' version '6.14.0'
+	id 'org.openrewrite.rewrite' version '6.15.0'
 
 
 
