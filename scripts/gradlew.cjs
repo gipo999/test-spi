@@ -1,30 +1,22 @@
-const { exec } = require("child_process");
+// const { exec } = require("child_process");
+const { execCmd } = require("./execCmd.cjs");
 
 const isWindows = process.platform === "win32";
 
 const args = process.argv.slice(2);
 
-const cmds = {
-  check: isWindows ? "gradlew check" : "./gradlew check",
-  fix: isWindows
-    ? "gradlew spotlessApply && gradlew rewriteRun"
-    : "./gradlew spotlessApply & ./gradlew rewriteRun",
-  build: isWindows ? "gradlew build" : "./gradlew build",
-};
+const cmd = isWindows ? "gradlew" : "./gradlew";
 
-const execCmd = (cmd) => {
-  exec(cmd, function (error, stdout, stderr) {
-    if (error) {
-      console.error(error);
-      process.exit(1);
-    }
-    console.log(stdout);
-    console.error(stderr);
-  });
+const cmds = {
+  check: `${cmd} check`,
+  spotless: `${cmd} spotlessApply`,
+  rewrite: `${cmd} rewriteRun`,
+  build: `${cmd} build`,
 };
 
 if (args.includes("--format")) {
-  execCmd(cmds.fix);
+  execCmd(cmds.spotless);
+  execCmd(cmds.rewrite);
 }
 if (args.includes("--lint")) {
   execCmd(cmds.check);
