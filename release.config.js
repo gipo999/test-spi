@@ -77,18 +77,18 @@ module.exports = {
     // and add assets to the release
     [
       "@semantic-release/github",
-      // {
-      //   assets: [
-      //     {
-      //       path: "dist/asset.min.css",
-      //       label: "CSS distribution",
-      //     },
-      //     {
-      //       path: "dist/asset.min.js",
-      //       label: "JS distribution",
-      //     },
-      //   ],
-      // },
+      {
+        assets: [
+          {
+            path: "build/docs/javadoc",
+            label: "javadoc folder added to release",
+          },
+          // {
+          //   path: "dist/asset.min.js",
+          //   label: "JS distribution",
+          // },
+        ],
+      },
     ],
 
     // we don't want to update the package.json
