@@ -11,6 +11,4 @@ public final class Spi {
 
   /** private constructor to prevent instantiation. */
   private Spi() {}
-
-  static final String API = "289312839ajkdjasdjadj89389";
 }
