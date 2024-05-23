@@ -4,7 +4,7 @@
   "description": "test-spi",
   "scripts": {
     "commit": "git cz",
-    "prepare": "python pre-commit-3.7.0.pyz install --hook-type pre-commit --hook-type pre-push --hook-type commit-msg",
+    "prepare": "node scripts/install-hooks.cjs",
     "commitlint": "commitlint --edit",
     "format": "node scripts/gradlew.cjs --format",
     "lint": "node scripts/gradlew.cjs --lint",
