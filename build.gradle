@@ -58,6 +58,22 @@ plugins {
 	id 'info.solidsoft.pitest' version '1.15.0'
 }
 
+
+dependencies {
+	rewrite("org.openrewrite.recipe:rewrite-static-analysis:1.8.1")
+	rewrite("org.openrewrite.recipe:rewrite-java-security:2.8.1")
+
+	// Use JUnit Jupiter for testing.
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+
+	// This dependency is exported to consumers, that is to say found on their compile classpath.
+	api 'org.slf4j:slf4j-api:2.0.13'
+
+	// This dependency is used internally, and not exposed to consumers on their own compile classpath.
+	//implementation 'com.google.guava:guava:31.1-jre'
+}
+
+
 // ### CHECKSTYLE
 
 // doesn't work
@@ -90,11 +106,6 @@ checkstyle {
 // }
 
 // ### REWRITE
-
-dependencies {
-	rewrite("org.openrewrite.recipe:rewrite-static-analysis:1.8.1")
-	rewrite("org.openrewrite.recipe:rewrite-java-security:2.8.1")
-}
 rewrite {
 	activeRecipe("org.openrewrite.staticanalysis.CodeCleanup")
 
@@ -280,18 +291,6 @@ publishing {
 	}
 }
 
-dependencies {
-	rewrite("org.openrewrite.recipe:rewrite-static-analysis:1.8.1")
-
-	// Use JUnit Jupiter for testing.
-	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
-
-	// This dependency is exported to consumers, that is to say found on their compile classpath.
-	api 'org.slf4j:slf4j-api:2.0.13'
-
-	// This dependency is used internally, and not exposed to consumers on their own compile classpath.
-	//implementation 'com.google.guava:guava:31.1-jre'
-}
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
