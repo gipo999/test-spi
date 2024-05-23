@@ -80,7 +80,7 @@ module.exports = {
       {
         assets: [
           {
-            path: "build/docs/javadoc",
+            path: "javadoc.zip",
             label: "javadoc folder added to release",
           },
           // {
