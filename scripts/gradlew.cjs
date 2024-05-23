@@ -5,7 +5,7 @@ const isWindows = process.platform === "win32";
 
 const args = process.argv.slice(2);
 
-const cmd = isWindows ? "gradlew" : "./gradlew";
+const cmd = isWindows ? ".\\gradlew.bat" : "./gradlew";
 
 const cmds = {
   check: `${cmd} check`,
