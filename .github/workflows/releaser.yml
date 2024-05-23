@@ -72,9 +72,9 @@ jobs:
       # - name: Check with Gradle Wrapper Step
       #   run: ./gradlew check
       - name: Build with Gradle Wrapper Step
-        run: ./gradlew build
+        run: ./gradlew javadoc
       - name: Create Zip archive Step
-        run: zip -r javadoc build/docs/javadoc
+        run: zip -r javadoc ./build/docs/javadoc
       - name: Release Step
         env:
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
