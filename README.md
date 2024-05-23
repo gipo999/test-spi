@@ -233,6 +233,12 @@ _to add maven `build.gradle` must be modified in the publishing property togethe
 ## REQUIREMENTS
 
 - python `^3.9` as command `py` _(pre-commit framework, recommended installation with [scoop](https://scoop.sh/) in windows as it requires editing the registry to add py and scoop provides clear instructions after `scoop install python` on how to do it)_
+
+```
+Allow applications and third-party installers to find python by running:
+"C:\Users\gipo1\scoop\apps\python\current\install-pep-514.reg"
+```
+
 - git
 - java `^17`
 - gradle `^8.7`
