@@ -15,6 +15,7 @@ on:
         description: "Test scenario tags"
 jobs:
   pitest-linux:
+    if: github.event.pull_request.draft == false
     permissions:
       contents: write
     name: Pitest Report and Deploy to GH Pages Job

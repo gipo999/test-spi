@@ -12,6 +12,7 @@ on:
 name: Semgrep
 jobs:
   semgrep:
+    if: github.event.pull_request.draft == false
     name: Semgrep/ci Job
     runs-on: ubuntu-22.04
     env:

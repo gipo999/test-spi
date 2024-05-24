@@ -3,6 +3,7 @@ name: Greetings
 on: [pull_request_target, issues]
 jobs:
   greeting:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     permissions:
       issues: write
