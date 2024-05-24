@@ -6,21 +6,6 @@
  * User Manual available at https://docs.gradle.org/8.1.1/userguide/building_java_projects.html
  */
 
-// ./gradlew -Pversion=${version} publish will set the version when publishing
-// instead of hardcoding the version in the build.gradle file
-group = 'io.github.gipo999'
-// group = 'net.syn3rgy.core'
-
-// required to publish to maven central
-def mavenUsername = System.getenv('MAVEN_USERNAME')
-def mavenPassword = System.getenv('MAVEN_PASSWORD') 
-// gpg rsa key, armored
-def signingKey = System.getenv('GPG_PRIVATE') 
-// password for the gpg rsa key
-def signingPassword = System.getenv('GPG_PASSWORD') 
-// env vars provided by github actions
-def githubToken = System.getenv('GITHUB_TOKEN') 
-def githubActor = System.getenv('GITHUB_ACTOR')
 
 plugins {
 	// Apply the java-library plugin for API and implementation separation.
@@ -90,6 +75,21 @@ dependencies {
 	//implementation 'com.google.guava:guava:31.1-jre'
 }
 
+// ./gradlew -Pversion=${version} publish will set the version when publishing
+// instead of hardcoding the version in the build.gradle file
+group = 'io.github.gipo999'
+// group = 'net.syn3rgy.core'
+
+// required to publish to maven central
+def mavenUsername = System.getenv('MAVEN_USERNAME')
+def mavenPassword = System.getenv('MAVEN_PASSWORD')
+// gpg rsa key, armored
+def signingKey = System.getenv('GPG_PRIVATE')
+// password for the gpg rsa key
+def signingPassword = System.getenv('GPG_PASSWORD')
+// env vars provided by github actions
+def githubToken = System.getenv('GITHUB_TOKEN')
+def githubActor = System.getenv('GITHUB_ACTOR')
 
 // ### CHECKSTYLE
 
@@ -274,7 +274,7 @@ repositories {
 signing {
 	// https://docs.gradle.org/current/userguide/signing_plugin.html#sec:signatory_credentials
 
-    useInMemoryPgpKeys(signingKey, signingPassword)
+	useInMemoryPgpKeys(signingKey, signingPassword)
 
 	// sign publishing.publications.mavenJava
 	// sign all publications
@@ -297,7 +297,7 @@ publishing {
 			from components.java
 		}
 	}
-	
+
 	repositories {
 		maven {
 			name = "GitHubPackages"
