@@ -231,7 +231,8 @@ repositories {
 
 // ## section for publishing to maven central
 // ./gradlew -Pversion=${version} publish
-group = 'net.syn3rgy.core'
+group = 'io.github.gipo999'
+// group = 'net.syn3rgy.core'
 
 // ## Version
 // the version is calculated automatically after a new github release is created
