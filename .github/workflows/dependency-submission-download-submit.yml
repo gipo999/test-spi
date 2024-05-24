@@ -22,6 +22,7 @@ jobs:
   submit-dependency-graph:
     name: Submit Dependency Graph job
     runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
     steps:
       - name: Download and submit dependency graph on PR step
         uses: gradle/actions/dependency-submission@db19848a5fa7950289d3668fb053140cf3028d43 # v3

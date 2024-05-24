@@ -17,6 +17,7 @@ on:
         description: "Test scenario tags"
 jobs:
   build-linux:
+    if: github.event.pull_request.draft == false
     name: Lint and Build on Linux Job
     runs-on: ubuntu-latest
     steps:
@@ -44,6 +45,7 @@ jobs:
       - name: Build with Gradle Wrapper Step
         run: ./gradlew build
   build-windows:
+    if: github.event.pull_request.draft == false
     name: Lint and Build on Windows Job
     runs-on: windows-latest
     steps:

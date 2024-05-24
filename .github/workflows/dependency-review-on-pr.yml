@@ -15,6 +15,7 @@ jobs:
   dependency-review:
     name: Dependency Review on PR Job
     runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
     steps:
       - name: Checkout Repository Job
         uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4

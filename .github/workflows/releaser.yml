@@ -21,6 +21,7 @@ permissions:
   contents: read # for checkout
 jobs:
   release:
+    if: github.event.pull_request.draft == false
     name: Release Job
     runs-on: ubuntu-latest
     permissions:
