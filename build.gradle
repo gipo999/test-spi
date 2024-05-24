@@ -292,9 +292,10 @@ publishing {
 		}
 		// https://docs.gradle.org/current/userguide/publishing_maven.html
 		maven(MavenPublication) {
-			// groupId = 'net.syn3rgy.core'
-			// artifactId = 'library'
-			// version = 'alpha-0.0.1'
+			// groupId = 'io.github.gipo999'
+			// artifactId is the name of the jar without version.
+			// artifactId = 'spi'
+			// version = 'alpha-0.0.1' --> will be set by github actions
 			from components.java
 		}
 	}
