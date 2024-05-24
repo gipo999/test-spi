@@ -274,6 +274,7 @@ repositories {
 signing {
 	// https://docs.gradle.org/current/userguide/signing_plugin.html#sec:signatory_credentials
 
+	// we won't provide a file, but the key directly for CI
 	useInMemoryPgpKeys(signingKey, signingPassword)
 
 	// sign publishing.publications.mavenJava
