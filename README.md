@@ -218,6 +218,10 @@ _Github secrets for actions_
 
 - `PAT` with admin rights
 - `SEMGREP_APP_TOKEN` from semgrep app
+- `MAVEN_USERNAME` for publishing on maven
+- `MAVEN_PASSWORD` for publishing on maven
+- `GPG_PRIVATE` for signing the artifact (armored base64 encoded ascii format)
+- `GPG_PASSPHRASE` for signing the artifact
 
 ### 📄 Publishing on Maven
 
