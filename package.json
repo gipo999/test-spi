@@ -19,7 +19,7 @@
     "@commitlint/config-conventional": "19.2.2",
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
-    "cz-git": "1.9.1",
+    "cz-git": "1.9.2",
     "prettier": "3.2.5",
     "prettier-plugin-toml": "2.0.1"
   },
