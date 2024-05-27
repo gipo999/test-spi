@@ -306,19 +306,19 @@ publishing {
 			from(components.java)
 		}
 		// https://docs.gradle.org/current/userguide/publishing_maven.html
-		maven(MavenPublication) {
-			// groupId = 'io.github.gipo999'
-			// artifactId is the name of the jar without version.
-			// artifactId = 'spi'
-			// version = 'alpha-0.0.1' --> will be set by github actions
-			from components.java
-		}
+		// maven(MavenPublication) {
+		// 	// groupId = 'io.github.gipo999'
+		// 	// artifactId is the name of the jar without version.
+		// 	// artifactId = 'spi'
+		// 	// version = 'alpha-0.0.1' --> will be set by github actions
+		// 	from components.java
+		// }
 	}
 
 	repositories {
 		maven {
 			name = "GitHubPackages"
-			url = "https://maven.pkg.github.com/gipo999/test-spi"
+			url = "https://maven.pkg.github.com/gipo999/smispi"
 			credentials {
 				username = githubActor
 				password = githubToken
@@ -330,15 +330,15 @@ publishing {
 		}
 
 		// https://docs.gradle.org/current/userguide/publishing_maven.html
-		maven {
-			name = 'OSSRH'
-			url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-			// credentials are loaded from github secrets?
-			credentials {
-				username = System.getenv('MAVEN_USERNAME')
-				password = System.getenv('MAVEN_PASSWORD')
-			}
-		}
+		// maven {
+		// 	name = 'OSSRH'
+		// 	url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+		// 	// credentials are loaded from github secrets?
+		// 	credentials {
+		// 		username = System.getenv('MAVEN_USERNAME')
+		// 		password = System.getenv('MAVEN_PASSWORD')
+		// 	}
+		// }
 	}
 }
 
