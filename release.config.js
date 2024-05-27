@@ -2,7 +2,7 @@ const BREAKING_KEYWORDS = ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"];
 module.exports = {
   // choose the branch to release from
   // Default: ['+([0-9])?(.{+([0-9]),x}).x', 'master', 'main', 'next', 'next-major', {name: 'beta', prerelease: true}, {name: 'alpha', prerelease: true}]
-  tagFormat: "${version}", // change tag from v1.0.0 to 1.0.0
+  // tagFormat: "${version}", // change tag from v1.0.0 to 1.0.0
   branches: [
     "main",
     // "dev",
