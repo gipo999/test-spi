@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2024 [these people](https://github.com/gipo999/test-spi/graphs/contributors)
+Copyright (c) 2024 [these people](https://github.com/gipo999/test-spi/graphs/contributors), [alex-beggiato](https://github.com/alex-beggiato)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
