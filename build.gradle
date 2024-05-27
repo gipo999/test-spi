@@ -28,7 +28,7 @@ plugins {
 	// add the maven-publish plugin to publish to maven central
 	// handled by jreleaser or vanniktech
 	// id 'signing'
-	// id 'maven-publish'
+	id 'maven-publish'
 	// id 'org.jreleaser' version '1.12.0'
 	id "com.vanniktech.maven.publish" version "0.28.0"
 
@@ -92,8 +92,8 @@ def groupID = 'io.github.gipo999'
 def githubRepository = 'smispi'
 def githubOwner = 'gipo999'
 def artifactID = 'smispi'
-def description = 'Sample lib'
-def inceptionYear = '2024'
+def projectDescription = 'Sample lib'
+def projectInceptionYear = '2024'
 def buildLicense = 'MIT'
 def licenseUrl = 'https://opensource.org/licenses/MIT'
 
@@ -111,6 +111,7 @@ def githubActor = System.getenv('GITHUB_ACTOR')
 
 
 group = groupID
+
 // ### CHECKSTYLE
 
 // doesn't work
@@ -315,7 +316,6 @@ repositories {
 // 	sign publishing.publications
 // }
 
-// publishing {
 import com.vanniktech.maven.publish.SonatypeHost
 
 mavenPublishing {
@@ -342,14 +342,15 @@ mavenPublishing {
 	signAllPublications()
 
 	// coordinates("com.example.mylibrary", "library-name", "1.0.3-SNAPSHOT")
+	// version is set by github actions when publishing with -Pversion=x.x.x
 	coordinates(groupID, artifactID, version)
 
+	// https://discuss.gradle.org/t/maven-publish-does-not-create-full-features-pom-xml/42395
 	pom {
 		name = artifactID
-		description = description
+		description = projectDescription
+		inceptionYear = projectInceptionYear
 		url = 'https://github.com/' + githubOwner + '/' + githubRepository
-		// url =
-		inceptionYear = inceptionYear
 		licenses {
 			license {
 				name = buildLicense
@@ -370,8 +371,9 @@ mavenPublishing {
 	}
 }
 
-// 	// https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
-// 	// https://medium.com/@shanemyrick/publishing-to-github-packages-with-gradle-and-github-actions-4ad842634c4e
+// publishing {
+// // 	// https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
+// // 	// https://medium.com/@shanemyrick/publishing-to-github-packages-with-gradle-and-github-actions-4ad842634c4e
 // 	publications {
 // 		// gpr(MavenPublication) {
 // 		// 	from(components.java)
@@ -418,49 +420,49 @@ mavenPublishing {
 // 		// 	from components.java
 // 		// }
 // 	}
-//
-// 	repositories {
-// 		maven {
-// 			name = "GitHubPackages"
-// 			url = "https://maven.pkg.github.com/gipo999/smispi"
-// 			// maven credentials
-// 			credentials {
-// 				username = githubActor
-// 				password = githubToken
-// 			}
-// 			// credentials {
-// 			// 	username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-// 			// 	password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-// 			// }
-// 		}
-//
-// 		// maven {
-// 		// 	// requires envs
-// 		// 	// JRELEASER_NEXUS2_MAVEN_CENTRAL_USERNAME or JRELEASER_NEXUS2_USERNAME
-// 		// 	// JRELEASER_NEXUS2_MAVEN_CENTRAL_TOKEN or JRELEASER_NEXUS2_TOKEN
-// 		// 	url = layout.buildDirectory.dir('staging-deploy')
-// 		// }
-//
-// 		// https://docs.gradle.org/current/userguide/publishing_maven.html
-// 		// https://central.sonatype.org/publish/publish-portal-api/#managing-your-credentials
-// 		maven {
-// 			name = 'OSSRH'
-// 			url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-// 			// credentials are loaded from github secrets?
-// 			credentials {
-// 				username = mavenUsername
-// 				password = mavenPassword
-// 			}
-// 		}
-// 		// maven {
-// 		// 	name = "centralManualTesting"
-// 		// 	url "https://central.sonatype.com/api/v1/publisher/deployments/download/"
-// 		// 	credentials(HttpHeaderCredentials)
-// 		// 	authentication {
-// 		// 		header(HttpHeaderAuthentication)
-// 		// 	}
-// 		// }
-// 	}
+// //
+// // 	repositories {
+// // 		maven {
+// // 			name = "GitHubPackages"
+// // 			url = "https://maven.pkg.github.com/gipo999/smispi"
+// // 			// maven credentials
+// // 			credentials {
+// // 				username = githubActor
+// // 				password = githubToken
+// // 			}
+// // 			// credentials {
+// // 			// 	username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+// // 			// 	password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+// // 			// }
+// // 		}
+// //
+// // 		// maven {
+// // 		// 	// requires envs
+// // 		// 	// JRELEASER_NEXUS2_MAVEN_CENTRAL_USERNAME or JRELEASER_NEXUS2_USERNAME
+// // 		// 	// JRELEASER_NEXUS2_MAVEN_CENTRAL_TOKEN or JRELEASER_NEXUS2_TOKEN
+// // 		// 	url = layout.buildDirectory.dir('staging-deploy')
+// // 		// }
+// //
+// // 		// https://docs.gradle.org/current/userguide/publishing_maven.html
+// // 		// https://central.sonatype.org/publish/publish-portal-api/#managing-your-credentials
+// // 		maven {
+// // 			name = 'OSSRH'
+// // 			url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+// // 			// credentials are loaded from github secrets?
+// // 			credentials {
+// // 				username = mavenUsername
+// // 				password = mavenPassword
+// // 			}
+// // 		}
+// // 		// maven {
+// // 		// 	name = "centralManualTesting"
+// // 		// 	url "https://central.sonatype.com/api/v1/publisher/deployments/download/"
+// // 		// 	credentials(HttpHeaderCredentials)
+// // 		// 	authentication {
+// // 		// 		header(HttpHeaderAuthentication)
+// // 		// 	}
+// // 		// }
+// // 	}
 // }
 
 
