@@ -12,5 +12,6 @@ requires env vars
 
 - passphrase
 - armored ascii format
+- send to registry
 
 set in github secrets
