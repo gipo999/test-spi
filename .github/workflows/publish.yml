@@ -12,7 +12,7 @@
 #
 # for now i put this in the releaser.yml file too,
 # this can be used for manual releases
-name: Publish package to GitHub Packages Workflow
+name: Publish Package Workflow
 on:
   release:
     # types: [created]
