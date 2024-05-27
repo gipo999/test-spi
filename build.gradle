@@ -369,6 +369,7 @@ publishing {
 		maven {
 			name = "GitHubPackages"
 			url = "https://maven.pkg.github.com/gipo999/smispi"
+			// maven credentials
 			credentials {
 				username = githubActor
 				password = githubToken
