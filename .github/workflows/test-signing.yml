@@ -23,4 +23,10 @@ jobs:
         with:
           gradle-version: 8.1.1
       - name: Build with Gradle Wrapper Step
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+          GPG_PRIVATE: ${{ secrets.GPG_PRIVATE }}
+          GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
         run: ./gradlew publish
