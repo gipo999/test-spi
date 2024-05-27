@@ -89,8 +89,8 @@ jobs:
           # overrides the version in the gradle.properties or build.gradle file
           # we don't write to the file because we don't want to commit the change
           # and cause conflicts on release
-          # ./gradlew -Pversion=${NEW_VERSION} publish
-          ./gradlew -Pversion=${NEW_VERSION} jreleaserFullRelease
+          ./gradlew -Pversion=${NEW_VERSION} publish
+          # ./gradlew -Pversion=${NEW_VERSION} jreleaserFullRelease
     # - name: Publish package Step
     #   run: ./gradlew publish --stacktrace
     #   env:
