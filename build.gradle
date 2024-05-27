@@ -388,6 +388,7 @@ publishing {
 		// }
 
 		// https://docs.gradle.org/current/userguide/publishing_maven.html
+		// https://central.sonatype.org/publish/publish-portal-api/#managing-your-credentials
 		maven {
 			name = 'OSSRH'
 			url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
@@ -397,6 +398,14 @@ publishing {
 				password = mavenPassword
 			}
 		}
+		// maven {
+		// 	name = "centralManualTesting"
+		// 	url "https://central.sonatype.com/api/v1/publisher/deployments/download/"
+		// 	credentials(HttpHeaderCredentials)
+		// 	authentication {
+		// 		header(HttpHeaderAuthentication)
+		// 	}
+		// }
 	}
 }
 
