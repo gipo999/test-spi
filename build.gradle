@@ -28,7 +28,7 @@ plugins {
 	// add the maven-publish plugin to publish to maven central
 	// handled by jreleaser or vanniktech
 	// id 'signing'
-	// id 'maven-publish'
+	id 'maven-publish'
 	// id 'org.jreleaser' version '1.12.0'
 	id "com.vanniktech.maven.publish" version "0.28.0"
 
@@ -88,29 +88,31 @@ dependencies {
 
 // ./gradlew -Pversion=${version} publish will set the version when publishing
 // instead of hardcoding the version in the build.gradle file
-def groupID = 'io.github.gipo999'
-def githubRepository = 'smispi'
-def githubOwner = 'gipo999'
-def artifactID = 'smispi'
-def description = 'Sample lib'
-def inceptionYear = '2024'
-def buildLicense = 'MIT'
-def licenseUrl = 'https://opensource.org/licenses/MIT'
+// NOTE: prefixing variables to prevent collisions with gradle properties
+def customGroupID = 'io.github.gipo999'
+def customGithubRepository = 'smispi'
+def customGithubOwner = 'gipo999'
+def customArtifactID = 'smispi'
+def customProjectDescription = 'Generic SPI'
+def customInceptionYear = '2024'
+def customBuildLicense = 'MIT'
+def custmoLicenseURL = 'https://opensource.org/licenses/MIT'
 
 // required to publish to maven central
-def mavenUsername = System.getenv('MAVEN_USERNAME')
-def mavenPassword = System.getenv('MAVEN_PASSWORD')
+def customMavenUsername = System.getenv('MAVEN_USERNAME')
+def customMavenPassword = System.getenv('MAVEN_PASSWORD')
 // gpg rsa key, armored
-def signingKey = System.getenv('GPG_PRIVATE')
-def signingPublicKey = System.getenv('GPG_PUBLIC')
+def customSigningKey = System.getenv('GPG_PRIVATE')
+def customSigningPublicKey = System.getenv('GPG_PUBLIC')
 // password for the gpg rsa key
-def signingPassword = System.getenv('GPG_PASSWORD')
+def customSigningPassword = System.getenv('GPG_PASSWORD')
 // env vars provided by github actions
-def githubToken = System.getenv('GITHUB_TOKEN')
-def githubActor = System.getenv('GITHUB_ACTOR')
+def customGithubToken = System.getenv('GITHUB_TOKEN')
+def customGithubActor = System.getenv('GITHUB_ACTOR')
 
 
-group = groupID
+group = customGroupID
+
 // ### CHECKSTYLE
 
 // doesn't work
@@ -315,7 +317,6 @@ repositories {
 // 	sign publishing.publications
 // }
 
-// publishing {
 import com.vanniktech.maven.publish.SonatypeHost
 
 mavenPublishing {
@@ -342,36 +343,38 @@ mavenPublishing {
 	signAllPublications()
 
 	// coordinates("com.example.mylibrary", "library-name", "1.0.3-SNAPSHOT")
-	coordinates(groupID, artifactID, version)
+	// version is set by github actions when publishing with -Pversion=x.x.x
+	coordinates(customGroupID, customArtifactID, version)
 
+	// https://discuss.gradle.org/t/maven-publish-does-not-create-full-features-pom-xml/42395
 	pom {
-		name = artifactID
-		description = description
-		url = 'https://github.com/' + githubOwner + '/' + githubRepository
-		// url =
-		inceptionYear = inceptionYear
+		name = customArtifactID
+		description = customProjectDescription
+		inceptionYear = customInceptionYear
+		url = 'https://github.com/' + customGithubOwner + '/' + customGithubRepository
 		licenses {
 			license {
-				name = buildLicense
-				url = licenseUrl
+				name = customBuildLicense
+				url = custmoLicenseURL
 			}
 		}
 		developers {
 			developer {
-				id = githubOwner
-				name = githubOwner
+				id = customGithubOwner
+				name = customGithubOwner
 			}
 		}
 		scm {
-			connection = 'scm:git:https://github.com/' + githubOwner + '/' + githubRepository + '.git'
-			developerConnection = 'scm:git:ssh://github.com/' + githubOwner + '/' + githubRepository + '.git'
-			url = 'http://github.com/' + githubOwner + '/' + githubRepository
+			connection = 'scm:git:https://github.com/' + customGithubOwner + '/' + customGithubRepository + '.git'
+			developerConnection = 'scm:git:ssh://github.com/' + customGithubOwner + '/' + customGithubRepository + '.git'
+			url = 'http://github.com/' + customGithubOwner + '/' + customGithubRepository
 		}
 	}
 }
 
-// 	// https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
-// 	// https://medium.com/@shanemyrick/publishing-to-github-packages-with-gradle-and-github-actions-4ad842634c4e
+// publishing {
+// // 	// https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
+// // 	// https://medium.com/@shanemyrick/publishing-to-github-packages-with-gradle-and-github-actions-4ad842634c4e
 // 	publications {
 // 		// gpr(MavenPublication) {
 // 		// 	from(components.java)
@@ -418,49 +421,49 @@ mavenPublishing {
 // 		// 	from components.java
 // 		// }
 // 	}
-//
-// 	repositories {
-// 		maven {
-// 			name = "GitHubPackages"
-// 			url = "https://maven.pkg.github.com/gipo999/smispi"
-// 			// maven credentials
-// 			credentials {
-// 				username = githubActor
-// 				password = githubToken
-// 			}
-// 			// credentials {
-// 			// 	username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-// 			// 	password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-// 			// }
-// 		}
-//
-// 		// maven {
-// 		// 	// requires envs
-// 		// 	// JRELEASER_NEXUS2_MAVEN_CENTRAL_USERNAME or JRELEASER_NEXUS2_USERNAME
-// 		// 	// JRELEASER_NEXUS2_MAVEN_CENTRAL_TOKEN or JRELEASER_NEXUS2_TOKEN
-// 		// 	url = layout.buildDirectory.dir('staging-deploy')
-// 		// }
-//
-// 		// https://docs.gradle.org/current/userguide/publishing_maven.html
-// 		// https://central.sonatype.org/publish/publish-portal-api/#managing-your-credentials
-// 		maven {
-// 			name = 'OSSRH'
-// 			url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-// 			// credentials are loaded from github secrets?
-// 			credentials {
-// 				username = mavenUsername
-// 				password = mavenPassword
-// 			}
-// 		}
-// 		// maven {
-// 		// 	name = "centralManualTesting"
-// 		// 	url "https://central.sonatype.com/api/v1/publisher/deployments/download/"
-// 		// 	credentials(HttpHeaderCredentials)
-// 		// 	authentication {
-// 		// 		header(HttpHeaderAuthentication)
-// 		// 	}
-// 		// }
-// 	}
+// //
+// // 	repositories {
+// // 		maven {
+// // 			name = "GitHubPackages"
+// // 			url = "https://maven.pkg.github.com/gipo999/smispi"
+// // 			// maven credentials
+// // 			credentials {
+// // 				username = githubActor
+// // 				password = githubToken
+// // 			}
+// // 			// credentials {
+// // 			// 	username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+// // 			// 	password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+// // 			// }
+// // 		}
+// //
+// // 		// maven {
+// // 		// 	// requires envs
+// // 		// 	// JRELEASER_NEXUS2_MAVEN_CENTRAL_USERNAME or JRELEASER_NEXUS2_USERNAME
+// // 		// 	// JRELEASER_NEXUS2_MAVEN_CENTRAL_TOKEN or JRELEASER_NEXUS2_TOKEN
+// // 		// 	url = layout.buildDirectory.dir('staging-deploy')
+// // 		// }
+// //
+// // 		// https://docs.gradle.org/current/userguide/publishing_maven.html
+// // 		// https://central.sonatype.org/publish/publish-portal-api/#managing-your-credentials
+// // 		maven {
+// // 			name = 'OSSRH'
+// // 			url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+// // 			// credentials are loaded from github secrets?
+// // 			credentials {
+// // 				username = mavenUsername
+// // 				password = mavenPassword
+// // 			}
+// // 		}
+// // 		// maven {
+// // 		// 	name = "centralManualTesting"
+// // 		// 	url "https://central.sonatype.com/api/v1/publisher/deployments/download/"
+// // 		// 	credentials(HttpHeaderCredentials)
+// // 		// 	authentication {
+// // 		// 		header(HttpHeaderAuthentication)
+// // 		// 	}
+// // 		// }
+// // 	}
 // }
 
 
@@ -507,8 +510,8 @@ mavenPublishing {
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
-	withJavadocJar()
-	withSourcesJar()
+	// withJavadocJar()
+	// withSourcesJar()
 
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
