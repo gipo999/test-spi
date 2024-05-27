@@ -72,3 +72,8 @@ jobs:
       #   run: ./gradlew check
       - name: Build with Gradle Wrapper Step
         run: ./gradlew build
+      # upload coverage to codecov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

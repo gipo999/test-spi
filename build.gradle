@@ -6,9 +6,12 @@
  * User Manual available at https://docs.gradle.org/8.1.1/userguide/building_java_projects.html
  */
 
+
 plugins {
 	// Apply the java-library plugin for API and implementation separation.
 	id 'java-library'
+
+	id 'jacoco'
 
 	// add the spotless plugin for formatting and linting
 	id 'com.diffplug.spotless' version '6.25.0'
@@ -18,6 +21,7 @@ plugins {
 
 	// add the maven-publish plugin to publish to maven central
 	id 'maven-publish'
+	id 'signing'
 
 	// https://docs.gradle.org/current/userguide/checkstyle_plugin.html
 	// https://medium.com/@raveensr/how-to-add-checkstyle-and-findbugs-plugins-in-a-gradle-based-project-51759aa843be
@@ -73,6 +77,21 @@ dependencies {
 	//implementation 'com.google.guava:guava:31.1-jre'
 }
 
+// ./gradlew -Pversion=${version} publish will set the version when publishing
+// instead of hardcoding the version in the build.gradle file
+group = 'io.github.gipo999'
+// group = 'net.syn3rgy.core'
+
+// required to publish to maven central
+def mavenUsername = System.getenv('MAVEN_USERNAME')
+def mavenPassword = System.getenv('MAVEN_PASSWORD')
+// gpg rsa key, armored
+def signingKey = System.getenv('GPG_PRIVATE')
+// password for the gpg rsa key
+def signingPassword = System.getenv('GPG_PASSWORD')
+// env vars provided by github actions
+def githubToken = System.getenv('GITHUB_TOKEN')
+def githubActor = System.getenv('GITHUB_ACTOR')
 
 // ### CHECKSTYLE
 
@@ -93,6 +112,7 @@ dependencies {
 // 	checkstyleConfig("com.puppycrawl.tools:checkstyle:8.29") { transitive = false }
 // 	// checkstyle "com.puppycrawl.tools:checkstyle:8.29"
 // }
+
 checkstyle {
 	toolVersion '10.17.0'
 	// 	config = resources.text.fromArchiveEntry(configurations.checkstyleConfig, 'google_checks.xml')
@@ -101,6 +121,7 @@ checkstyle {
 	ignoreFailures = false
 	maxWarnings = 0
 }
+
 // tasks.withType(Checkstyle) {
 // 	checkstyleClasspath = project.configurations.checkstyleOverride
 // }
@@ -122,6 +143,19 @@ pitest {
 	// required to make pitest work with junit 5
 	junit5PluginVersion = '1.2.1'
 	pitestVersion = '1.15.2'
+}
+
+// ## JACOCO report for test coverage and codecov
+// https://about.codecov.io/blog/setting-up-codecov-with-java-and-gradle/
+test {
+	finalizedBy jacocoTestReport // report is always generated after tests run
+}
+jacocoTestReport {
+	dependsOn test // tests are required to run before generating the report
+	reports {
+		// produces xml under build/reports/jacoco/test/jacocoTestReport.xml
+		xml.required = true
+	}
 }
 
 
@@ -147,6 +181,7 @@ spotless {
 		indentWithTabs()
 		endWithNewline()
 	}
+
 	format 'xml', {
 		target '**/*.xml' // must specify target
 		targetExclude 'build/**/*', 'node_modules/**/*', 'target/**/*', 'out/**/*', 'dist/**/*', 'bin/**/*'
@@ -155,12 +190,14 @@ spotless {
 		// you can also specify an arbitrary number of config files
 		// eclipseWtp('xml').configFile('spotless.xml.prefs', 'spotless.common.properties'
 	}
+
 	format 'styling', {
 		targetExclude 'build/**/*', 'node_modules/**/*', 'target/**/*', 'out/**/*', 'dist/**/*', 'bin/**/*'
 		target  '**/*.json', '**/*.yaml', '**/*.toml', '**/*.js', '**/*.cjs', '**/*.mjs'
 
 		prettier(['prettier-plugin-toml': '2.0.1']).config(['plugins': ['prettier-plugin-toml']])
 	}
+
 	groovy {
 		// Use the default importOrder configuration
 		importOrder()
@@ -184,11 +221,13 @@ spotless {
 		// excludes all Java sources within the Groovy source dirs from formatting
 		// excludeJava()
 	}
+
 	groovyGradle {
 		target '*.gradle' // default target of groovyGradle
 		targetExclude 'build/**/*', 'node_modules/**/*', 'target/**/*', 'out/**/*', 'dist/**/*', 'bin/**/*'
 		greclipse()
 	}
+
 	java {
 		// Use the default importOrder configuration
 		importOrder()
@@ -224,15 +263,13 @@ spotless {
 
 
 repositories {
+
 	// Use Maven Central for resolving dependencies.
 	mavenCentral()
 }
 
 
 // ## section for publishing to maven central
-// ./gradlew -Pversion=${version} publish
-group = 'io.github.gipo999'
-// group = 'net.syn3rgy.core'
 
 // ## Version
 // the version is calculated automatically after a new github release is created
@@ -249,46 +286,59 @@ group = 'io.github.gipo999'
 // }
 
 // define the publish task for github actions
+signing {
+	// https://docs.gradle.org/current/userguide/signing_plugin.html#sec:signatory_credentials
+
+	// we won't provide a file, but the key directly for CI
+	useInMemoryPgpKeys(signingKey, signingPassword)
+
+	// sign publishing.publications.mavenJava
+	// sign all publications
+	sign publishing.publications
+}
+
 publishing {
+
 	// https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
 	// https://medium.com/@shanemyrick/publishing-to-github-packages-with-gradle-and-github-actions-4ad842634c4e
-	// publications {
-	// 	// https://docs.gradle.org/current/userguide/publishing_maven.html
-	// 	maven(MavenPublication) {
-	// 		// groupId = 'net.syn3rgy.core'
-	// 		// artifactId = 'library'
-	// 		// version = 'alpha-0.0.1'
-	//
-	// 		from components.java
-	// 	}
-	// }
 	publications {
 		gpr(MavenPublication) {
 			from(components.java)
 		}
+		// https://docs.gradle.org/current/userguide/publishing_maven.html
+		maven(MavenPublication) {
+			// groupId = 'io.github.gipo999'
+			// artifactId is the name of the jar without version.
+			// artifactId = 'spi'
+			// version = 'alpha-0.0.1' --> will be set by github actions
+			from components.java
+		}
 	}
+
 	repositories {
 		maven {
 			name = "GitHubPackages"
 			url = "https://maven.pkg.github.com/gipo999/test-spi"
 			credentials {
-				username = System.getenv("GITHUB_ACTOR")
-				password = System.getenv("GITHUB_TOKEN")
+				username = githubActor
+				password = githubToken
 			}
 			// credentials {
 			// 	username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
 			// 	password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
 			// }
 		}
-		// maven {
-		// 	name = 'OSSRH'
-		// 	url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-		// 	// credentials are loaded from github secrets?
-		// 	credentials {
-		// 		username = System.getenv('MAVEN_USERNAME')
-		// 		password = System.getenv('MAVEN_PASSWORD')
-		// 	}
-		// }
+
+		// https://docs.gradle.org/current/userguide/publishing_maven.html
+		maven {
+			name = 'OSSRH'
+			url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+			// credentials are loaded from github secrets?
+			credentials {
+				username = System.getenv('MAVEN_USERNAME')
+				password = System.getenv('MAVEN_PASSWORD')
+			}
+		}
 	}
 }
 
