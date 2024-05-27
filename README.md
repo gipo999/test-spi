@@ -2,6 +2,7 @@
 
 [![CodeQL](https://github.com/gipo999/test-spi/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/gipo999/test-spi/actions/workflows/github-code-scanning/codeql)
 [![Gradle Check and Build](https://github.com/gipo999/test-spi/actions/workflows/gradle-check-build.yml/badge.svg)](https://github.com/gipo999/test-spi/actions/workflows/gradle-check-build.yml)
+[![codecov](https://codecov.io/gh/gipo999/smispi/graph/badge.svg?token=E8EMVN7YWB)](https://codecov.io/gh/gipo999/smispi)
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Semantic-release: Commmitizen](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
