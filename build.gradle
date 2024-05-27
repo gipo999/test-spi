@@ -20,8 +20,16 @@ plugins {
 	id 'groovy'
 
 	// add the maven-publish plugin to publish to maven central
+	// handled by jreleaser
+	// id 'signing'
+	// https://jreleaser.org/guide/latest/tools/jreleaser-gradle.html
+	// https://jreleaser.org/guide/latest/examples/maven/maven-central.html#_portal_publisher_api
+	// https://jreleaser.org/guide/latest/reference/deploy/maven/maven-central.html
+	// https://jreleaser.org/guide/latest/reference/deploy/maven/github.html
+	// https://jreleaser.org/guide/latest/reference/signing.html
 	id 'maven-publish'
-	id 'signing'
+	id 'org.jreleaser' version '1.12.0'
+
 
 	// https://docs.gradle.org/current/userguide/checkstyle_plugin.html
 	// https://medium.com/@raveensr/how-to-add-checkstyle-and-findbugs-plugins-in-a-gradle-based-project-51759aa843be
@@ -79,20 +87,29 @@ dependencies {
 
 // ./gradlew -Pversion=${version} publish will set the version when publishing
 // instead of hardcoding the version in the build.gradle file
-group = 'io.github.gipo999'
-// group = 'net.syn3rgy.core'
+def groupID = 'io.github.gipo999'
+def githubRepository = 'smispi'
+def githubOwner = 'gipo999'
+def artifactID = 'smispi'
+def description = 'Sample lib'
+def inceptionYear = '2024'
+def buildLicense = 'MIT'
+def licenseUrl = 'https://opensource.org/licenses/MIT'
 
 // required to publish to maven central
 def mavenUsername = System.getenv('MAVEN_USERNAME')
 def mavenPassword = System.getenv('MAVEN_PASSWORD')
 // gpg rsa key, armored
 def signingKey = System.getenv('GPG_PRIVATE')
+def signingPublicKey = System.getenv('GPG_PUBLIC')
 // password for the gpg rsa key
 def signingPassword = System.getenv('GPG_PASSWORD')
 // env vars provided by github actions
 def githubToken = System.getenv('GITHUB_TOKEN')
 def githubActor = System.getenv('GITHUB_ACTOR')
 
+
+group = groupID
 // ### CHECKSTYLE
 
 // doesn't work
@@ -150,6 +167,7 @@ pitest {
 test {
 	finalizedBy jacocoTestReport // report is always generated after tests run
 }
+
 jacocoTestReport {
 	dependsOn test // tests are required to run before generating the report
 	reports {
@@ -269,7 +287,6 @@ repositories {
 }
 
 
-// ## section for publishing to maven central
 
 // ## Version
 // the version is calculated automatically after a new github release is created
@@ -286,25 +303,58 @@ repositories {
 // }
 
 // define the publish task for github actions
-signing {
-	// https://docs.gradle.org/current/userguide/signing_plugin.html#sec:signatory_credentials
-
-	// we won't provide a file, but the key directly for CI
-	useInMemoryPgpKeys(signingKey, signingPassword)
-
-	// sign publishing.publications.mavenJava
-	// sign all publications
-	sign publishing.publications
-}
+// signing {
+// 	// https://docs.gradle.org/current/userguide/signing_plugin.html#sec:signatory_credentials
+//
+// 	// we won't provide a file, but the key directly for CI
+// 	useInMemoryPgpKeys(signingKey, signingPassword)
+//
+// 	// sign publishing.publications.mavenJava
+// 	// sign all publications
+// 	sign publishing.publications
+// }
 
 publishing {
 
 	// https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
 	// https://medium.com/@shanemyrick/publishing-to-github-packages-with-gradle-and-github-actions-4ad842634c4e
 	publications {
-		gpr(MavenPublication) {
-			from(components.java)
+		// gpr(MavenPublication) {
+		// 	from(components.java)
+		// }
+		maven(MavenPublication) {
+			groupId = groupID
+			artifactID = artifactID
+
+			from components.java
+
+			pom {
+				name = artifactID
+				description = description
+				url = 'https://github.com/' + githubOwner + '/' + githubRepository
+				// url =
+				inceptionYear = inceptionYear
+				licenses {
+					license {
+						name = buildLicense
+						url = licenseUrl
+					}
+				}
+				developers {
+					developer {
+						id = githubOwner
+						name = githubOwner
+					}
+				}
+				scm {
+					connection = 'scm:git:https://github.com/' + githubOwner + '/' + githubRepository + '.git'
+					developerConnection = 'scm:git:ssh://github.com/' + githubOwner + '/' + githubRepository + '.git'
+					url = 'http://github.com/' + githubOwner + '/' + githubRepository
+				}
+			}
 		}
+
+
 		// https://docs.gradle.org/current/userguide/publishing_maven.html
 		// maven(MavenPublication) {
 		// 	// groupId = 'io.github.gipo999'
@@ -329,6 +379,13 @@ publishing {
 			// }
 		}
 
+		maven {
+			// requires envs
+			// JRELEASER_NEXUS2_MAVEN_CENTRAL_USERNAME or JRELEASER_NEXUS2_USERNAME
+			// JRELEASER_NEXUS2_MAVEN_CENTRAL_TOKEN or JRELEASER_NEXUS2_TOKEN
+			url = layout.buildDirectory.dir('staging-deploy')
+		}
+
 		// https://docs.gradle.org/current/userguide/publishing_maven.html
 		// maven {
 		// 	name = 'OSSRH'
@@ -343,8 +400,53 @@ publishing {
 }
 
 
+// ## section for publishing to maven central
+jreleaser {
+	signing {
+		active = 'ALWAYS'
+		armored = true
+		// # The passphrase required to read secret keys.
+		passphrase= signingPassword
+
+		// # The public GPG (ascii armored) used to sign files and commits.
+		// # Required when mode = `MEMORY` || `FILE`.
+		publicKey= signingPublicKey
+
+		// # The private GPG (ascii armored) used to sign files and commits.
+		// # Required when mode = `MEMORY` || `FILE`.
+		secretKey= signingKey
+	}
+	deploy {
+		maven {
+			nexus2 {
+				'maven-central' {
+					active = 'ALWAYS'
+					url = 'https://s01.oss.sonatype.org/service/local'
+					snapshotUrl = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+					closeRepository = true
+					releaseRepository = true
+					stagingRepository('build/staging-deploy')
+				}
+			}
+			/* Portal Publisher API
+			mavenCentral {
+			sonatype {
+			active = 'ALWAYS'
+			url = 'https://central.sonatype.com/api/v1/publisher'
+			stagingRepository('target/staging-deploy')
+			}
+			}
+			 */
+		}
+	}
+}
+
+
 // Apply a specific Java toolchain to ease working on different environments.
 java {
+	withJavadocJar()
+	withSourcesJar()
+
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
