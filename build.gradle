@@ -319,9 +319,9 @@ publishing {
 	// https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
 	// https://medium.com/@shanemyrick/publishing-to-github-packages-with-gradle-and-github-actions-4ad842634c4e
 	publications {
-		gpr(MavenPublication) {
-			from(components.java)
-		}
+		// gpr(MavenPublication) {
+		// 	from(components.java)
+		// }
 		mavenJava(MavenPublication) {
 			groupId = groupID
 			artifactID = artifactID
