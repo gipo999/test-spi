@@ -218,10 +218,12 @@ _Github secrets for actions_
 
 - `PAT` with admin rights
 - `SEMGREP_APP_TOKEN` from semgrep app
+- `SNYK_TOKEN` from snyk app
+- `CODECOV_TOKEN` for codecov
 - `MAVEN_USERNAME` for publishing on maven
 - `MAVEN_PASSWORD` for publishing on maven
 - `GPG_PRIVATE` for signing the artifact (armored base64 encoded ascii format)
-- `GPG_PASSPHRASE` for signing the artifact
+- `GPG_PASSWORD` for signing the artifact
 
 ### 📄 Publishing on Maven
 
