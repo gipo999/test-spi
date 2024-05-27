@@ -19,9 +19,9 @@
 name: Snyk Security Scan Workflow
 on:
   push:
-    branches: ["main"]
+    branches: ["dev"]
   pull_request:
-    branches: ["main"]
+    branches: ["dev"]
 permissions:
   contents: read
 jobs:
@@ -42,7 +42,6 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-      - uses: ./.github/actions/ci-setup
       - name: Set up Snyk CLI to check for security issues
         # Snyk can be used to break the build when it detects security issues.
         # In this case we want to upload the SAST issues to GitHub Code Scanning
