@@ -8,7 +8,73 @@
 [![Semantic-release: Commmitizen](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 [![Active Development](https://img.shields.io/badge/Maintenance%20Level-Actively%20Developed-brightgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
 
-# test-spi
+# Smispi
+
+<!--toc:start-->
+
+- [Smispi](#test-spi)
+  - [Introduction](#introduction)
+    - [Flow](#flow)
+    - [Pre-commit](#pre-commit)
+    - [Pre-push](#pre-push)
+    - [✅ **Pre-commit framework for git hooks**](#pre-commit-framework-for-git-hooks)
+    - [✅ **Gradle tasks**](#gradle-tasks)
+    - [✅ **GitHub Actions for CI/CD**](#github-actions-for-cicd)
+    - [✅ **Github Apps for code quality and security**](#github-apps-for-code-quality-and-security)
+    - [✅ **GitHub Pages for documentation**](#github-pages-for-documentation)
+    - [✅ **GitHub Issues for tracking tasks and bugs**](#github-issues-for-tracking-tasks-and-bugs)
+    - [✅ **GitHub Projects for tracking progress and manage agile development**](#github-projects-for-tracking-progress-and-manage-agile-development)
+    - [✅ **GitHub Wiki for custom documentation**](#github-wiki-for-custom-documentation)
+    - [✅ **GitHub Discussions for community engagement**](#github-discussions-for-community-engagement)
+    - [✅ **GitHub Packages for artifact storage**](#github-packages-for-artifact-storage)
+    - [✅ **GitHub Releases to publish the changelogs**](#github-releases-to-publish-the-changelogs)
+  - [🧰 Required manual actions when cloning this repository](#🧰-required-manual-actions-when-cloning-this-repository)
+    - [📎 Updating docs](#📎-updating-docs)
+    - [⚙️ Updating the project settings](#️-updating-the-project-settings)
+    - [🍏 Adding the github apps and registering them](#🍏-adding-the-github-apps-and-registering-them)
+    - [🥷 Adding secrets](#🥷-adding-secrets)
+    - [📄 Publishing on Maven](#📄-publishing-on-maven)
+    - [🔎 Make sure static paths, names, and other things hardcoded in the project are updated to reflect the new project](#🔎-make-sure-static-paths-names-and-other-things-hardcoded-in-the-project-are-updated-to-reflect-the-new-project)
+  - [REQUIREMENTS](#requirements)
+  - [INSTALLATION](#installation)
+  - [CONTRIBUTING](#contributing)
+  - [SECURITY](#security)
+  - [SUPPORT](#support)
+  - [NOTES on creating this repo](#notes-on-creating-this-repo)
+  <!--toc:end-->
+
+<!--toc:start-->
+
+- [test-spi](#test-spi)
+  - [Introduction](#introduction)
+    - [Flow](#flow)
+    - [Pre-commit](#pre-commit)
+    - [Pre-push](#pre-push)
+    - [✅ **Pre-commit framework for git hooks**](#pre-commit-framework-for-git-hooks)
+    - [✅ **Gradle tasks**](#gradle-tasks)
+    - [✅ **GitHub Actions for CI/CD**](#github-actions-for-cicd)
+    - [✅ **Github Apps for code quality and security**](#github-apps-for-code-quality-and-security)
+    - [✅ **GitHub Pages for documentation**](#github-pages-for-documentation)
+    - [✅ **GitHub Issues for tracking tasks and bugs**](#github-issues-for-tracking-tasks-and-bugs)
+    - [✅ **GitHub Projects for tracking progress and manage agile development**](#github-projects-for-tracking-progress-and-manage-agile-development)
+    - [✅ **GitHub Wiki for custom documentation**](#github-wiki-for-custom-documentation)
+    - [✅ **GitHub Discussions for community engagement**](#github-discussions-for-community-engagement)
+    - [✅ **GitHub Packages for artifact storage**](#github-packages-for-artifact-storage)
+    - [✅ **GitHub Releases to publish the changelogs**](#github-releases-to-publish-the-changelogs)
+  - [🧰 Required manual actions when cloning this repository](#🧰-required-manual-actions-when-cloning-this-repository)
+    - [📎 Updating docs](#📎-updating-docs)
+    - [⚙️ Updating the project settings](#️-updating-the-project-settings)
+    - [🍏 Adding the github apps and registering them](#🍏-adding-the-github-apps-and-registering-them)
+    - [🥷 Adding secrets](#🥷-adding-secrets)
+    - [📄 Publishing on Maven](#📄-publishing-on-maven)
+    - [🔎 Make sure static paths, names, and other things hardcoded in the project are updated to reflect the new project](#🔎-make-sure-static-paths-names-and-other-things-hardcoded-in-the-project-are-updated-to-reflect-the-new-project)
+  - [REQUIREMENTS](#requirements)
+  - [INSTALLATION](#installation)
+  - [CONTRIBUTING](#contributing)
+  - [SECURITY](#security)
+  - [SUPPORT](#support)
+  - [NOTES on creating this repo](#notes-on-creating-this-repo)
+  <!--toc:end-->
 
 👷 **Work in progress** 👷
 
@@ -272,6 +338,8 @@ if you have a security related issue, please follow the [SECURITY.md](.github/SE
 ## SUPPORT
 
 Please refer to the [SUPPORT.md](.github/SUPPORT.md) file
+
+---
 
 ## NOTES on creating this repo
 
