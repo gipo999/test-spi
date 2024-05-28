@@ -313,3 +313,5 @@ Please refer to the [SUPPORT.md](.github/SUPPORT.md) file
 
 Additional notes taken while creating this repository can be found in the [NOTES.md](docs/general_notes.md) file
 and in the folder [docs](docs/)
+
+You can also check the branches `dev-bak*` and `husky` for previous iterations with comments
