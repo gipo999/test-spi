@@ -294,10 +294,30 @@ Allow applications and third-party installers to find python by running:
 
 ## INSTALLATION
 
+for collaborators
+
 ```console
-git clone https://github.com/gipo999/test-spi
+git clone https://github.com/gipo999/smispi
 cd test-spi
 npm install
+```
+
+for externals
+
+```console
+fork the repository
+git clone https://github.com/<your-username>/smispi
+cd smispi
+<optional> create a new branch
+npm install
+```
+
+when you are ready to commit
+
+```console
+npm run commit
+git push
+open a PR
 ```
 
 **⚠️ The below templates will have to be updated for a real project ⚠️**
