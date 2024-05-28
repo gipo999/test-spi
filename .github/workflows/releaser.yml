@@ -44,31 +44,8 @@ jobs:
           # TODO: find alternative to PAT, either single workflow, github app or other
           # https://github.com/semantic-release/semantic-release/blob/master/docs/recipes/ci-configurations/github-actions.md#pushing-packagejson-changes-to-your-repository
           persist-credentials: false # <<<--- This line is needed for security
-      # we don't need node
-      - name: Setup Node.js Step
-        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
-        with:
-          node-version: "22.0.0"
-      # setup java
-      - uses: actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9 # v4
-        # - name: Install dependencies Step
-        #   run: npm clean-install --ignore-scripts
-        # - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies Step
-        #   run: npm audit signatures
-
-        name: Setup Java Step
-        with:
-          distribution: temurin
-          java-version: 17.0.2
-      #
-      # setup gradle automatically caches dependencies
-      - name: Setup Gradle Step
-        uses: gradle/actions/setup-gradle@db19848a5fa7950289d3668fb053140cf3028d43 # v3
-        with:
-          # https://stackoverflow.com/questions/30054911/how-to-determine-the-version-of-gradle
-          # this should be updated automatically from dependabot
-          # https://github.com/gradle/actions/blob/main/docs/setup-gradle.md#github-dependency-graph-support
-          gradle-version: 8.7
+      - uses: ./.github/actions/ci-setup
+        name: Setup CI environment
       # check not needed, included in build
       # - name: Check with Gradle Wrapper Step
       #   run: ./gradlew check

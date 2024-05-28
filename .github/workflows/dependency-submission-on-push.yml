@@ -23,10 +23,8 @@ jobs:
     if: github.event.pull_request.draft == false
     steps:
       - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
-      - uses: actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9 # v4
-        with:
-          distribution: temurin
-          java-version: 17
+      - uses: ./.github/actions/ci-setup
+        name: Setup CI environment
       - name: Generate and submit dependency graph Step
         uses: gradle/actions/dependency-submission@db19848a5fa7950289d3668fb053140cf3028d43 # v3
         # can generate a develocity build scan https://scans.gradle.com/
