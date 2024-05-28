@@ -255,10 +255,17 @@ _Github secrets for actions_
 - `SEMGREP_APP_TOKEN` from semgrep app
 - `SNYK_TOKEN` from snyk app
 - `CODECOV_TOKEN` for codecov
+
+_check <https://central.sonatype.org/publish/publish-portal-gradle/> and <https://central.sonatype.com/>_
+
 - `MAVEN_USERNAME` for publishing on maven
 - `MAVEN_PASSWORD` for publishing on maven
+
+_check <https://vanniktech.github.io/gradle-maven-publish-plugin/central/>_
+
 - `GPG_PRIVATE` for signing the artifact (armored base64 encoded ascii format)
 - `GPG_PASSWORD` for signing the artifact
+- `GPG_PUBLIC` for signing the artifact
 
 ### 📄 Publishing on Maven
 
