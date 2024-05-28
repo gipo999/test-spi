@@ -47,15 +47,11 @@ def customProjectDescription = 'Generic SPI'
 def customInceptionYear = '2024'
 def customBuildLicense = 'MIT'
 def custmoLicenseURL = 'https://opensource.org/licenses/MIT'
-
 def customMavenUsername = System.getenv('MAVEN_USERNAME')
 def customMavenPassword = System.getenv('MAVEN_PASSWORD')
-
 def customSigningKey = System.getenv('GPG_PRIVATE')
 def customSigningPublicKey = System.getenv('GPG_PUBLIC')
-
 def customSigningPassword = System.getenv('GPG_PASSWORD')
-
 def customGithubToken = System.getenv('GITHUB_TOKEN')
 def customGithubActor = System.getenv('GITHUB_ACTOR')
 
@@ -91,7 +87,8 @@ pitest {
 // ## JACOCO report for test coverage and codecov
 test {
 	finalizedBy jacocoTestReport
-	userJUnitPlatform()
+
+	useJUnitPlatform()
 }
 
 jacocoTestReport {
@@ -126,6 +123,7 @@ spotless {
 
 	format 'styling', {
 		targetExclude 'build/**/*', 'node_modules/**/*', 'target/**/*', 'out/**/*', 'dist/**/*', 'bin/**/*'
+
 		target  '**/*.json', '**/*.yaml', '**/*.toml', '**/*.js', '**/*.cjs', '**/*.mjs'
 
 		prettier(['prettier-plugin-toml': '2.0.1']).config(['plugins': ['prettier-plugin-toml']])
@@ -158,18 +156,18 @@ spotless {
 		cleanthat()
 
 		trimTrailingWhitespace()
+
 		endWithNewline()
 
-		googleJavaFormat()   
+		googleJavaFormat()
 
-		formatAnnotations() 
+		formatAnnotations()
 
 		// licenseHeader '/* (C) $YEAR */' // or licenseHeaderFile
 	}
 }
 
 import com.vanniktech.maven.publish.SonatypeHost
-
 mavenPublishing {
 	publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
@@ -179,24 +177,34 @@ mavenPublishing {
 
 	pom {
 		name = customArtifactID
+
 		description = customProjectDescription
+
 		inceptionYear = customInceptionYear
+
 		url = 'https://github.com/' + customGithubOwner + '/' + customGithubRepository
+
 		licenses {
 			license {
 				name = customBuildLicense
+
 				url = custmoLicenseURL
 			}
 		}
+
 		developers {
 			developer {
 				id = customGithubOwner
+
 				name = customGithubOwner
 			}
 		}
+
 		scm {
 			connection = 'scm:git:https://github.com/' + customGithubOwner + '/' + customGithubRepository + '.git'
+
 			developerConnection = 'scm:git:ssh://github.com/' + customGithubOwner + '/' + customGithubRepository + '.git'
+
 			url = 'http://github.com/' + customGithubOwner + '/' + customGithubRepository
 		}
 	}
@@ -206,10 +214,13 @@ publishing {
 	repositories {
 		maven {
 			name = "GitHubPackages"
+
 			url = "https://maven.pkg.github.com/gipo999/smispi"
+
 			credentials {
-				username = githubActor
-				password = githubToken
+				username = customGithubActor
+
+				password = customGithubToken
 			}
 		}
 	}
@@ -220,7 +231,3 @@ java {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
-
-// tasks.named('test') {
-// 	useJUnitPlatform()
-// }

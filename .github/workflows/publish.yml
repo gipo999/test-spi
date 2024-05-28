@@ -29,3 +29,4 @@ jobs:
           echo "New version: ${NEW_VERSION}"
           echo "Github username: ${GITHUB_ACTOR}"
           ./gradlew -Pversion=${NEW_VERSION} publishAndReleaseToMavenCentral --no-configuration-cache
+          ./gradlew -Pversion=${NEW_VERSION} publishAllPublicationsToGitHubPackagesRepository
