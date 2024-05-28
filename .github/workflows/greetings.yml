@@ -1,6 +1,9 @@
 # https://github.com/actions/starter-workflows/blob/main/automation/greetings.yml
 name: Greetings
-on: [pull_request_target, issues]
+on:
+  - pull_request_target
+  - issues
+  - workflow_dispatch: {}
 jobs:
   greeting:
     if: github.event.pull_request.draft == false
