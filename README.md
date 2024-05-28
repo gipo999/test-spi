@@ -287,10 +287,8 @@ Allow applications and third-party installers to find python by running:
 "C:\Users\gipo1\scoop\apps\python\current\install-pep-514.reg"
 ```
 
-- git
-- java `^17`
-- gradle `^8.7`
-- node `^20` _(commitlint, cross-OS compatibility)_
+- java `>= 8` installed _(required for running gradle pre-commit hooks which run in the cli)_
+- node `^22` _(commitlint, cross-OS compatibility)_
 
 ## INSTALLATION
 
