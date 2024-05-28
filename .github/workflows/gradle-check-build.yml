@@ -1,20 +1,8 @@
-# https://github.com/gradle/actions/blob/main/docs/setup-gradle.md
-# we are separating the pr and push for the dependency graph
-# https://github.com/gradle/actions/blob/main/docs/setup-gradle.md#github-dependency-graph-support
 name: Gradle Check and Build Workflow
 on:
-  # push:
-  #   branches: ["dev"]
   pull_request:
     branches: ["dev"]
-  # allow manual execution of the workflow while testing
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: "Log level"
-        default: "warning"
-      tags:
-        description: "Test scenario tags"
+  workflow_dispatch: {}
 jobs:
   build-linux:
     if: github.event.pull_request.draft == false
@@ -25,12 +13,8 @@ jobs:
         uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
       - uses: ./.github/actions/ci-setup
         name: Setup CI environment
-      # check not needed, included in build
-      # - name: Check with Gradle Wrapper Step
-      #   run: ./gradlew check
       - name: Build with Gradle Wrapper Step
         run: ./gradlew build
-      # upload coverage to codecov
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@125fc84a9a348dbcf27191600683ec096ec9021c # v4.4.1
         with:
@@ -44,8 +28,5 @@ jobs:
         uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
       - uses: ./.github/actions/ci-setup
         name: Setup CI environment
-      # check not needed, included in build
-      # - name: Check with Gradle Wrapper Step
-      #   run: ./gradlew check
       - name: Build with Gradle Wrapper Step
         run: ./gradlew build

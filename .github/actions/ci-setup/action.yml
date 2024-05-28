@@ -2,33 +2,20 @@ name: Setup CI
 runs:
   using: composite
   steps:
-    # install pre-commit
-    # https://github.com/pypa/pipx/discussions/1051 when many installs cache them
-    # - name: Install pre-commit
-    #   shell: bash
-    #   run: pipx install pre-commit
-    # setup node.js
     - name: Setup Node.js 22
       uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
       with:
         node-version: 22.1.0
         cache: "npm"
-    # install dependencies
     - name: Install dependencies
       shell: bash
       run: npm ci --ignore-scripts
-      # setup java
     - uses: actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9 # v4
       name: Setup Java Step
       with:
         distribution: temurin
         java-version: 17.0.2
-    #
-    # setup gradle automatically caches dependencies
     - name: Setup Gradle Step
       uses: gradle/actions/setup-gradle@db19848a5fa7950289d3668fb053140cf3028d43 # v3
       with:
-        # https://stackoverflow.com/questions/30054911/how-to-determine-the-version-of-gradle
-        # this should be updated automatically from dependabot
-        # https://github.com/gradle/actions/blob/main/docs/setup-gradle.md#github-dependency-graph-support
-        gradle-version: 8.1.1
+        gradle-version: 8.7
