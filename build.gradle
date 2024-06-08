@@ -26,7 +26,7 @@ plugins {
 dependencies {
 	rewrite("org.openrewrite.recipe:rewrite-static-analysis:1.8.1")
 
-	rewrite("org.openrewrite.recipe:rewrite-java-security:2.8.1")
+	rewrite("org.openrewrite.recipe:rewrite-java-security:2.9.0")
 
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
 
