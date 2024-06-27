@@ -28,7 +28,7 @@ dependencies {
 
 	rewrite("org.openrewrite.recipe:rewrite-java-security:2.10.2")
 
-	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.3'
 
 	api 'org.slf4j:slf4j-api:2.0.13'
 }
