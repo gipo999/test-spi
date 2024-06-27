@@ -21,7 +21,7 @@ jobs:
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     container:
-      image: semgrep/semgrep@sha256:cffeb57efaaffe57811b7fd740e4ee6313dbfaf6b364bb5cce52a8e506d35f42
+      image: semgrep/semgrep@sha256:d543e7ad9562fefd6529ec40b880f99f8742a1105083fcdba42c186e0555ad5d
     steps:
       - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
       - run: semgrep ci --sarif > semgrep.sarif
